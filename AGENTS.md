@@ -5,7 +5,7 @@ Leer docs/PROMPT_MAESTRO.md. El usuario autorizó ejecutar fases 0 a 8 autónoma
 
 ## Estado actual
 
-Fases 0–7 implementadas y verificadas. Beta pública en Cloudflare con versión f019d7a2-bb5c-426a-97d1-9fc03ffb1393. Fase 6 Lighthouse 100, 4G 1,47–1,95 s. Fase 7 AAB y APK de GitHub Actions 42421740690, SDK 36, 89 tests y comprobación local de Android y reconexión. Regresión de carga de Pixi contenida por SceneBoundary y prueba de gracia espera el asiento. Continuar Fase 8, material Play Store y guía de lanzamiento. Ver docs/REPORTES.md, docs/ANDROID.md y docs/PENDIENTES_HUMANO.md.
+Fases 0–8 implementadas y verificadas en el alcance que admite el entorno. Beta pública en Cloudflare versión f019d7a2-bb5c-426a-97d1-9fc03ffb1393. Fase 6 Lighthouse 100 y 4G 1,47–1,95 s. Fase 7 AAB sin firma y APK debug de GitHub Actions 42421740690, SDK 36. Merge Android 15cbd52 con 89 tests y 21 escenarios Playwright verdes en 42422232155. Fase 8 material en docs/entregas/play-store/ y matriz en docs/capturas/fase-8/. Ver docs/REPORTES.md y docs/PENDIENTES_HUMANO.md. Publicación en Play Console y pruebas con cuentas y hardware dependen del humano.
 
 ## Comandos
 Node24; pnpm11.25.0; pnpm i; pnpm dev (Vite5173 y Wrangler8787); pnpm check; pnpm test; pnpm test:coverage; pnpm test:e2e; pnpm build; pnpm sim --hands 100000; pnpm deploy; pnpm android:sync; pnpm art:build; node tools/art/verify.mjs; pnpm voices:plan (sin síntesis); pnpm voices:generate (requiere Azure S0/key y pago humano).
@@ -26,10 +26,10 @@ Todo texto del producto en locales/es-UY.json. Arte original o con licencia come
 Matriz: 360x640,390x844,412x915,844x390,768x1024,1024x768,1280x720,1366x768,1920x1080,2560x1440,3440x1440.
 SwiftShader usa Canvas de Pixi; hardware usa WebGL. Mantener caché de fondo, mesa, carcasaTV, cartas y partes del rig. Tanteador separado: no reconstruir escena completa al puntuar. tools/frame-baseline.mjs, profile.mjs y render-counts.mjs perfilan un servidor local existente. No llamar aprobado al rendimiento de Android físico sin probarlo.
 
-## Próximas tareas
+## Pendientes externos
 
 La tasa de errores de beta con tráfico real depende del consentimiento, claves y participantes. La evidencia sintética está en docs/evidencia/.
 
-Fase 7: Capacitor Android API 36, ciclo de vida/App Links/haptics, callbacks AdMob SSV y RevenueCat idempotentes, AAB e instrucciones de firma. Fase 8: arte/capturas y textos de ficha, borradores IARC/Seguridad, prueba cerrada y lanzamiento. El humano configura cuentas y publica.
+Firmar, configurar proveedores y certificados, revisar con dispositivo físico, medir sesiones consentidas, generar voces finales y completar Play Console. Los pasos se mantienen en docs/PENDIENTES_HUMANO.md. No iniciar Fase 9 sin instrucción del usuario.
 
 No probar providers con datos reales sin claves y cuenta del proyecto. No alterar archivos ajenos en `.unlighthouse`. Las capturas originales se guardan por fase. Subir rama y merge a main con --no-ff tras checks verdes. En Windows el sandbox puede requerir escalación para locks Git y symlinks pnpm.

@@ -76,3 +76,13 @@ Validación local con 89 tests, 100% de líneas del motor y 99,64% de ramas. La 
 Worker público `f019d7a2-bb5c-426a-97d1-9fc03ffb1393`. Probados sesión Android con una cuenta temporal, saldo inicial 10, borrado, asociación HTTP 200 y rechazo 401 del webhook sin credencial. La respuesta de App Links queda vacía hasta cargar los certificados. Se generaron AAB sin firma y APK debug en el workflow Android 42421740690.
 
 [REVISAR] Los anuncios de prueba quedan separados del build con unidades reales. La declaración 18+ se usa solo para mostrar anuncios. El cosmético mensual del Pase es un sello del perfil. Las pruebas de dispositivo físico, la firma, los anuncios de una unidad propia, las compras de licencia y el enlace certificado quedan en `docs/PENDIENTES_HUMANO.md`.
+
+La revisión Linux de la beta corregida pasó en 42421742104. La CI de Android corregida pasó en 42421740775. El merge 15cbd52 pasó los 21 escenarios de navegador y los 89 tests en 42422232155. Build Android de main en verde en 42422232149.
+
+## Fase 8 — Material de Google Play (2026-11-07)
+
+La entrega de `docs/entregas/play-store/` contiene ícono de 512 px, imagen destacada de 1024×500, cuatro capturas de teléfono a 1080×1920 y cuatro de tablets en dos orientaciones. Textos en español de Uruguay para la ficha es-419. Borradores IARC y Seguridad de los datos, URLs públicas y guía para firma, prueba interna/cerrada y publicación. Revisión visual de todos los recursos y de menú/mesa en once tamaños en `docs/capturas/fase-8/`. Las capturas salen del build de producción en Chromium. Falta compararlas con el APK instalado en un dispositivo físico.
+
+Validación: 89 tests, lint, tipos y build en verde. La CI de main verificó los 21 escenarios Playwright sobre el código de juego. Los diez archivos gráficos cumplen medidas y formato, los tres textos respetan los límites y no aparece vocabulario prohibido en la ficha ni en el juego. Privacidad, borrado, términos y soporte respondieron HTTP 200 y mostraron su título y controles en el navegador.
+
+[REVISAR] Uruguay como mercado inicial, textos y respuestas regulatorias. El humano verifica titular/contacto, SDK activos, avisos y borrado para invitados sin acceso al dispositivo, realiza la prueba cerrada y completa Play Console. La publicación depende de cuenta, firma, validación en dispositivo y proveedores. Los pasos exactos están en `docs/PENDIENTES_HUMANO.md`.

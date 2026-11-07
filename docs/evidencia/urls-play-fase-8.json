@@ -1,0 +1,25 @@
+{
+  "origin": "https://truco-de-boliche.alexisdaleiro.workers.dev",
+  "results": [
+    {
+      "route": "/privacidad",
+      "status": 200,
+      "heading": "Privacidad"
+    },
+    {
+      "route": "/borrar-cuenta",
+      "status": 200,
+      "heading": "Borrar mi cuenta"
+    },
+    {
+      "route": "/terminos",
+      "status": 200,
+      "heading": "Términos"
+    },
+    {
+      "route": "/soporte",
+      "status": 200,
+      "heading": "Soporte"
+    }
+  ]
+}
