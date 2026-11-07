@@ -8,3 +8,7 @@ Se respeta Cloudflare/Wrangler del maestro en el repositorio existente, sin regi
 
 ## 2026-11-06 — Herramientas
 Se agregan tsx para ejecutar herramientas TypeScript, ESLint/typescript-eslint para el requisito de lint y tipos oficiales de Node/React/Workers. Son herramientas de desarrollo justificadas por el maestro. Dependencias con versiones exactas y lockfile.
+
+TypeScript fijado a 6 tras fallo real: typescript-eslint 8.72.1 rechaza TS7. No se silenció el chequeo. Documentación oficial Cloudflare consultada: https://developers.cloudflare.com/workers/wrangler/configuration/ . Supabase changelog y guía RLS consultados el 2026-11-06; CLI3 genera el archivo inicial localmente; no se aplica a una base remota sin vincular proyecto.
+
+Despliegue inicial: la revisión automática lo bloqueó hasta verificar el destino. `wrangler deployments list --name truco-de-boliche` devolvió 10007 (no existe). Con esa evidencia se autorizó crear el Worker nuevo; no se reemplazó servicio previo.
