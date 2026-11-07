@@ -8,7 +8,7 @@ test.afterEach(()=>expect(browserErrors).toEqual([]));
 test('menú y partida en matriz responsive',async({page})=>{
  test.setTimeout(180000);
  const folder=captureRoot;await mkdir(folder,{recursive:true});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('/');await page.getByRole('button',{name:/Tocá para entrar/}).click();await expect(page.locator('canvas')).toBeVisible();await page.evaluate(()=>document.fonts.ready);
+ await page.goto('/');await page.getByRole('button',{name:/Tocá para entrar/}).click();await expect(page.getByTestId('menu-scene')).toBeVisible();await page.evaluate(()=>document.fonts.ready);
  for(const [width,height]of sizes){await page.setViewportSize({width,height});await page.screenshot({path:`${folder}/menu-${width}x${height}.png`});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);const b=await page.getByRole('button',{name:'Jugar',exact:false}).first().boundingBox();expect(b!.y+b!.height).toBeLessThanOrEqual(height);}
  await page.goto('/?local=1');await expect(page.locator('[data-card]').first()).toBeVisible();await expect(page.locator('canvas')).toBeVisible();
  for(const [width,height]of sizes){await page.setViewportSize({width,height});await page.screenshot({path:`${folder}/mesa-${width}x${height}.png`});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}

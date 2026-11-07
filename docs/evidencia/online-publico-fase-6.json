@@ -1,0 +1,10 @@
+{
+  "origin": "https://truco-de-boliche.alexisdaleiro.workers.dev",
+  "websocket": true,
+  "players": 2,
+  "entryRows": [
+    1,
+    1
+  ],
+  "consoleErrors": []
+}

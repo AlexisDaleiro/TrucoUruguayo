@@ -15,9 +15,9 @@ while(hands<requested){
   const action=chooseAction(viewFor(state,seat),level,random);
   state=act(state,seat,action,action.type==='NEXT_HAND'?shuffledDeck(random):undefined);actions++;
   if(state.scores.some(n=>n<0)||new Set([...state.hands.flat(),...state.played.map(p=>p.card),state.sample,...state.deck]).size!==40)throw new Error('Estado ilegal');
-  if(state.handWinner!==null){hands++;if(hands>=requested)break;}
+  if(state.handWinner!==null||state.winner!==null){hands++;if(hands>=requested)break;}
  }
  if(state.winner!==null){matches++;if(state.winner===highTeam)highWins++;else lowWins++;}
 }
 const report={requested,hands,matches,actions,highWins,lowWins,highWinRate:highWins/Math.max(1,matches),elapsedSeconds:(Date.now()-started)/1000,seed:'0x5eed1234',note:'Barajado reproducible solo en simulador; producción usa crypto.getRandomValues. Alto vs bajo, alternando equipo y 1v1/2v2.'};
-console.log(JSON.stringify(report,null,2));await mkdir('docs/evidencia',{recursive:true});await writeFile('docs/evidencia/simulacion.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));await mkdir('docs/evidencia',{recursive:true});await writeFile('docs/evidencia/simulacion-fase-6.json',JSON.stringify(report,null,2)+'\n');

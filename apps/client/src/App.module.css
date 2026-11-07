@@ -19,3 +19,5 @@
 .profilePortrait{height:180px;display:flex;justify-content:center}.profilePortrait img{height:100%;width:auto;object-fit:contain}
 
 .resultCards{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.resultCards>span{width:62px}.resultCards svg{width:100%;display:block}
+
+.feedbackText{display:grid!important;grid-template-columns:minmax(0,1fr);justify-content:stretch!important;gap:8px;align-items:stretch!important}.feedbackText textarea{width:100%;resize:vertical;border:1px solid #8d7552;border-radius:8px;padding:12px;background:#211d18;color:#ffedc7;font:inherit}.feedbackText textarea:focus-visible{outline:3px solid #ffe095;outline-offset:3px}.offlineNotice{color:#ffe0a0;font-weight:800}

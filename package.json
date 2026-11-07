@@ -11,7 +11,7 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
-    "build": "pnpm --filter @truco/client build && node tools/budget.mjs && node tools/art/verify.mjs",
+    "build": "pnpm --filter @truco/client build && node tools/pwa-build.mjs && node tools/budget.mjs && node tools/art/verify.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "sim": "tsx packages/bots/src/sim.ts",
     "deploy": "pnpm build && wrangler deploy",

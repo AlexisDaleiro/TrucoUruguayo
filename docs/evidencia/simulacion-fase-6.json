@@ -1,0 +1,12 @@
+{
+  "requested": 100000,
+  "hands": 100000,
+  "matches": 14083,
+  "actions": 844672,
+  "highWins": 9023,
+  "lowWins": 5060,
+  "highWinRate": 0.6407015550663921,
+  "elapsedSeconds": 465.607,
+  "seed": "0x5eed1234",
+  "note": "Barajado reproducible solo en simulador; producción usa crypto.getRandomValues. Alto vs bajo, alternando equipo y 1v1/2v2."
+}

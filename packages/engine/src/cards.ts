@@ -12,17 +12,18 @@ export function pieceOf(card:Card, sample:Card):number|null {
  if(n===12 && pieces.includes(numberOf(sample) as typeof pieces[number])) return numberOf(sample);
  return pieces.includes(n as typeof pieces[number]) ? n : null;
 }
+const specialRanks:Partial<Record<Card,number>>={'1E':5,'1B':6,'7E':7,'7O':8};
+const commonRanks:Record<number,number>={3:9,2:10,1:11,12:12,11:13,10:14,7:15,6:16,5:17,4:18};
+const piecePoints:Record<number,number>={2:30,4:29,5:28,11:27,10:27};
 /** Smaller rank wins. Equal ranks are genuinely tied, irrespective of suit. */
 export function rank(card:Card,sample:Card):number {
  const piece=pieceOf(card,sample);
  if(piece!==null)return pieces.indexOf(piece as typeof pieces[number]);
- const special:Partial<Record<Card,number>>={'1E':5,'1B':6,'7E':7,'7O':8};
- if(special[card]!==undefined)return special[card];
- return ({3:9,2:10,1:11,12:12,11:13,10:14,7:15,6:16,5:17,4:18} as Record<number,number>)[numberOf(card)];
+ return specialRanks[card]??commonRanks[numberOf(card)];
 }
 export function cardPoints(card:Card,sample:Card):number {
  const p=pieceOf(card,sample);
- return p===null ? (numberOf(card)<10?numberOf(card):0) : ({2:30,4:29,5:28,11:27,10:27} as Record<number,number>)[p];
+ return p===null ? (numberOf(card)<10?numberOf(card):0) : piecePoints[p];
 }
 export function flor(hand:readonly Card[],sample:Card):number|null {
  const ps=hand.filter(c=>pieceOf(c,sample)!==null).map(c=>cardPoints(c,sample)).sort((a,b)=>b-a);

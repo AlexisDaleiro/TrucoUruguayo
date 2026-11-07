@@ -11,3 +11,5 @@ Variables públicas de build: VITE_SENTRY_DSN, VITE_POSTHOG_KEY (project token, 
 Métricas de beta: tasa de sesiones con error, duración/abandono y finalización de tutorial entre quienes consientan. Los datos de esta muestra no describen automáticamente a toda la población. No afirmar «errores<1%» con cero sesiones o solo pruebas automáticas.
 
 Fuentes primarias consultadas: [PostHog Capture API](https://posthog.com/docs/api/capture), [Sentry options](https://docs.sentry.io/platforms/javascript/configuration/options/), tipos y código del SDK11 instalado. Sentry11 usa `dataCollection`; `sendDefaultPii` ya no es una opción de BrowserOptions de esta versión.
+
+En beta, `session_error` cuenta una vez por sesión de página cuando se permite el diagnóstico. El ID anónimo coincide con `app_open` y se reinicia si se revoca el permiso. `feedback_submit` registra solo el éxito del envío. El texto del formulario queda en el almacenamiento privado del Worker.

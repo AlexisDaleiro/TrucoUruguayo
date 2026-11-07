@@ -8,13 +8,14 @@ export type Bid='E'|'R'|'F';
 export type Action={type:'PLAY_CARD';cardId:Card}|{type:'TRUCO'|'QUIERO'|'NO_QUIERO'|'MAZO'|'FLOR'|'RESTO'|'NEXT_HAND'}|{type:'ENVIDO';bid:Bid};
 export interface Pending {kind:'truco'|'envido'|'florChoose'|'florConfirm'|'resto';by:number;sequence:Bid[];}
 export interface Play {seat:number;card:Card;}
+export interface PublicTanto {seat:number;kind:'envido'|'flor';value?:number;}
 export interface GameEvent {type:string;seat?:number;value?:number;text?:string;cards?:Card[];}
 export interface State {
  config:RulesConfig;seats:2|4;dealer:number;mano:number;turn:number;lead:number;handNo:number;seq:number;
  scores:[number,number];hands:Card[][];original:Card[][];sample:Card;deck:Card[];played:Play[];trick:Play[];tricks:(Team|null)[];
  value:number;raiseTeam:Team|null;pending:Pending|null;suspended:Pending|null;envidoDone:boolean;
  florAnnounced:number[];florPaid:number[];florDone:boolean;revealSeats:number[];
- handWinner:Team|null;winner:Team|null;events:GameEvent[];
+ handWinner:Team|null;winner:Team|null;events:GameEvent[];publicTantos?:PublicTanto[];
 }
 export const team=(seat:number):Team=>(seat%2) as Team;
 export function order(start:number,count:number):number[]{return Array.from({length:count},(_,i)=>(start+i)%count);}
@@ -29,6 +30,11 @@ export function handResult(tricks:readonly (Team|null)[],manoTeam:Team):Team|nul
  if(tricks.length<3)return null;
  if(c!==null)return c;
  return a??b??manoTeam;
+}
+export function resolveTrick(plays:readonly Play[],rankCard:(card:Card)=>number):{winner:Team|null;first:number}{
+ let best=Infinity,first=-1,tied=false;
+ for(const play of plays){const n=rankCard(play.card);if(n<best){best=n;first=play.seat;tied=false;}else if(n===best&&team(play.seat)!==team(first))tied=true;}
+ return {winner:tied?null:team(first),first};
 }
 export function newMatch(seats:2|4,cards:Card[],config:Partial<RulesConfig>={},dealer=seats-1):State {
  const rules={...defaultRules,...config};
@@ -77,7 +83,7 @@ function autoFlor(s:State):void {
 }
 const validSequences=['E','EE','ER','EER','R','F','EF','EEF','ERF','EERF','RF'];
 export function envidoRaises(sequence:readonly Bid[]):Bid[]{return (['E','R','F'] as Bid[]).filter(b=>validSequences.includes([...sequence,b].join('')));}
-export function bidPoints(sequence:readonly Bid[],s:Pick<State,'scores'|'config'>):number {return sequence.includes('F')?falta(s.scores,s.config):sequence.reduce((sum,b)=>sum+(b==='E'?2:3),0);}
+export function bidPoints(sequence:readonly Bid[],s:{scores:readonly number[];config:RulesConfig}):number {return sequence.includes('F')?falta(s.scores,s.config):sequence.reduce((sum,b)=>sum+(b==='E'?2:3),0);}
 export function legalActions(s:State,seat:number):Action[]{
  if(!Number.isInteger(seat)||seat<0||seat>=s.seats||s.winner!==null)return [];
  if(s.handWinner!==null)return [{type:'NEXT_HAND'}];
@@ -102,7 +108,7 @@ function canEnvido(s:State,seat:number):boolean{return !s.envidoDone&&s.tricks.l
 function bestTanto(s:State,kind:'envido'|'flor'):number {
  const seats=order(s.mano,s.seats).filter(i=>kind==='envido'||flor(s.original[i],s.sample)!==null);
  let best=seats[0],value=-1;const teamValues=[-1,-1];
- for(const seat of seats){const n=kind==='envido'?envido(s.original[seat],s.sample):flor(s.original[seat],s.sample)!;const declares=n>teamValues[1-team(seat)];s.events.push({type:'TANTO',seat,value:declares?n:undefined,text:declares?`Tengo ${n}`:'Son buenas'});teamValues[team(seat)]=Math.max(teamValues[team(seat)],n);if(n>value){value=n;best=seat;}}
+ for(const seat of seats){const n=kind==='envido'?envido(s.original[seat],s.sample):flor(s.original[seat],s.sample)!;const declares=n>teamValues[1-team(seat)];(s.publicTantos??=[]).push({seat,kind,value:declares?n:undefined});s.events.push({type:'TANTO',seat,value:declares?n:undefined,text:declares?`Tengo ${n}`:'Son buenas'});teamValues[team(seat)]=Math.max(teamValues[team(seat)],n);if(n>value){value=n;best=seat;}}
  s.revealSeats.push(best);return best;
 }
 function tantoCards(s:State,seat:number):Card[]{return s.config.florEnabled&&flor(s.original[seat],s.sample)!==null?[...s.original[seat]]:envidoCards(s.original[seat],s.sample);}
@@ -130,9 +136,9 @@ export function act(state:State,seat:number,action:Action,nextDeck?:Card[]):Stat
  case 'PLAY_CARD':{
   s.hands[seat].splice(s.hands[seat].indexOf(action.cardId),1);const played={seat,card:action.cardId};s.trick.push(played);s.played.push(played);
   if(s.trick.length===s.seats){
-   const best=Math.min(...s.trick.map(p=>rank(p.card,s.sample)));const tops=s.trick.filter(p=>rank(p.card,s.sample)===best);const tied=tops.some(p=>team(p.seat)!==team(tops[0].seat));const result=tied?null:team(tops[0].seat);
+   const {winner:result,first}=resolveTrick(s.trick,card=>rank(card,s.sample));
    s.tricks.push(result);s.events.push({type:result===null?'PARDA':'TRICK',seat:result??undefined});
-   s.lead=result===null?(s.config.pardaLead==='mano'?s.mano:s.lead):tops[0].seat;s.turn=s.lead;s.trick=[];
+   s.lead=result===null?(s.config.pardaLead==='mano'?s.mano:s.lead):first;s.turn=s.lead;s.trick=[];
    const winner=handResult(s.tricks,team(s.mano));if(winner!==null)closeHand(s,winner,s.value);
   }else s.turn=(s.turn+1)%s.seats;
   break;
@@ -162,8 +168,8 @@ export function timeout(s:State):{seat:number;action:Action}{
 }
 export function viewFor(s:State,seat:number){
  if(!Number.isInteger(seat)||seat<0||seat>=s.seats)throw new Error('Asiento inválido');
- return {seq:s.seq,seats:s.seats,seat,config:{...s.config},dealer:s.dealer,mano:s.mano,turn:s.turn,handNo:s.handNo,scores:[...s.scores],sample:s.sample,
-  hands:s.hands.map((h,i)=>i===seat?[...h]:h.map(()=>null)),played:s.played.map(p=>({...p})),trick:s.trick.map(p=>({...p})),tricks:[...s.tricks],value:s.value,pending:s.pending?structuredClone(s.pending):null,
+ return {seq:s.seq,seats:s.seats,seat,config:{...s.config},dealer:s.dealer,mano:s.mano,turn:s.turn,lead:s.lead,handNo:s.handNo,scores:[...s.scores],sample:s.sample,
+  hands:s.hands.map((h,i)=>i===seat?[...h]:h.map(()=>null)),played:s.played.map(p=>({...p})),florAnnounced:[...s.florAnnounced],publicTantos:(s.publicTantos??[]).map(t=>({...t})),trick:s.trick.map(p=>({...p})),tricks:[...s.tricks],value:s.value,pending:s.pending?structuredClone(s.pending):null,
   winner:s.winner,handWinner:s.handWinner,events:s.events.map(e=>structuredClone(e)),legal:legalActions(s,seat),
   revealed:s.handWinner!==null||s.winner!==null?s.revealSeats.map(i=>({seat:i,cards:tantoCards(s,i)})):[]};
 }
