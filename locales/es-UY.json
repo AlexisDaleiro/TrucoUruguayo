@@ -206,5 +206,7 @@
     "COOLDOWN": "Esperá un poquito antes de repetir.",
     "ILLEGAL_ACTION": "Esa jugada ya no está disponible.",
     "ACTION_FAILED": "No pudimos validar la jugada. Volvé a intentarlo."
-  }
+  },
+  "teamA": "Equipo A",
+  "teamB": "Equipo B"
 }
