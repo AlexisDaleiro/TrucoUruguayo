@@ -208,5 +208,9 @@
     "ACTION_FAILED": "No pudimos validar la jugada. Volvé a intentarlo."
   },
   "teamA": "Equipo A",
-  "teamB": "Equipo B"
+  "teamB": "Equipo B",
+  "voicePending": "Voces pendientes de generar con Azure S0.",
+  "voiceReady": "Voces listas para probar.",
+  "voiceLine": "Elegí una frase",
+  "character": "Personaje"
 }

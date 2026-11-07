@@ -1,0 +1,1000 @@
+{
+  "version": 1,
+  "provider": "Azure AI Speech S0",
+  "profiles": {
+    "washington": {
+      "voice": "es-UY-MateoNeural",
+      "pitch": "-5%",
+      "rate": "-5%",
+      "eq": 1800
+    },
+    "marta": {
+      "voice": "es-UY-ValentinaNeural",
+      "pitch": "+1%",
+      "rate": "+1%",
+      "eq": 2400
+    },
+    "raul": {
+      "voice": "es-AR-TomasNeural",
+      "pitch": "-2%",
+      "rate": "+3%",
+      "eq": 2000
+    },
+    "elena": {
+      "voice": "es-AR-ElenaNeural",
+      "pitch": "-1%",
+      "rate": "-1%",
+      "eq": 2200
+    }
+  },
+  "lines": [
+    {
+      "id": "truco",
+      "emotion": "canto",
+      "variants": [
+        "¡Truco!",
+        "¡Truco, bo!"
+      ]
+    },
+    {
+      "id": "retruco",
+      "emotion": "canto",
+      "variants": [
+        "¡Quiero retruco!",
+        "¡Retruco!"
+      ]
+    },
+    {
+      "id": "valeCuatro",
+      "emotion": "canto",
+      "variants": [
+        "¡Quiero vale cuatro!",
+        "¡Vale cuatro!"
+      ]
+    },
+    {
+      "id": "quiero",
+      "emotion": "normal",
+      "variants": [
+        "¡Quiero!",
+        "¡Quiero, dale!"
+      ]
+    },
+    {
+      "id": "noQuiero",
+      "emotion": "normal",
+      "variants": [
+        "¡No quiero!",
+        "No te quiero."
+      ]
+    },
+    {
+      "id": "envido",
+      "emotion": "normal",
+      "variants": [
+        "¡Envido!",
+        "¡Envido, bo!"
+      ]
+    },
+    {
+      "id": "realEnvido",
+      "emotion": "normal",
+      "variants": [
+        "¡Real envido!",
+        "¡Real envido, dale!"
+      ]
+    },
+    {
+      "id": "faltaEnvido",
+      "emotion": "normal",
+      "variants": [
+        "¡Falta envido!",
+        "¡Falta envido, bo!"
+      ]
+    },
+    {
+      "id": "flor",
+      "emotion": "canto",
+      "variants": [
+        "¡Flor!",
+        "¡Tengo flor!"
+      ]
+    },
+    {
+      "id": "resto",
+      "emotion": "canto",
+      "variants": [
+        "¡Contraflor al resto!",
+        "¡Al resto!"
+      ]
+    },
+    {
+      "id": "achico",
+      "emotion": "normal",
+      "variants": [
+        "Con flor me achico.",
+        "Me achico con flor."
+      ]
+    },
+    {
+      "id": "mazo",
+      "emotion": "normal",
+      "variants": [
+        "Me voy al mazo.",
+        "Al mazo."
+      ]
+    },
+    {
+      "id": "paso",
+      "emotion": "normal",
+      "variants": [
+        "Paso.",
+        "Paso, bo."
+      ]
+    },
+    {
+      "id": "buenas",
+      "emotion": "normal",
+      "variants": [
+        "Son buenas.",
+        "Son buenas, bo."
+      ]
+    },
+    {
+      "id": "uh",
+      "emotion": "normal",
+      "variants": [
+        "¡Uh!",
+        "¡Uuuh!"
+      ]
+    },
+    {
+      "id": "risa",
+      "emotion": "normal",
+      "variants": [
+        "Ja, ja.",
+        "Je, je."
+      ]
+    },
+    {
+      "id": "suerte",
+      "emotion": "normal",
+      "variants": [
+        "¡Qué suerte, bo!",
+        "¡Qué suerte!"
+      ]
+    },
+    {
+      "id": "toma",
+      "emotion": "normal",
+      "variants": [
+        "¡Tomá!",
+        "¡Tomá, bo!"
+      ]
+    },
+    {
+      "id": "bien",
+      "emotion": "normal",
+      "variants": [
+        "Bien jugado.",
+        "Bien jugado, bo."
+      ]
+    },
+    {
+      "id": "dale",
+      "emotion": "normal",
+      "variants": [
+        "Dale que va.",
+        "¡Dale que va!"
+      ]
+    },
+    {
+      "id": "esa",
+      "emotion": "normal",
+      "variants": [
+        "¡Esa es!",
+        "¡Esa, bo!"
+      ]
+    },
+    {
+      "id": "mira",
+      "emotion": "normal",
+      "variants": [
+        "Mirá vos…",
+        "Mirá vos, bo…"
+      ]
+    },
+    {
+      "id": "increible",
+      "emotion": "normal",
+      "variants": [
+        "No te la puedo creer.",
+        "¡No te la puedo creer!"
+      ]
+    },
+    {
+      "id": "ta",
+      "emotion": "normal",
+      "variants": [
+        "¡Ta!",
+        "Ta, bo."
+      ]
+    },
+    {
+      "id": "deUna",
+      "emotion": "normal",
+      "variants": [
+        "De una.",
+        "¡De una, bo!"
+      ]
+    },
+    {
+      "id": "tengo-0",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 0.",
+        "0."
+      ]
+    },
+    {
+      "id": "mejores-0",
+      "emotion": "confidente",
+      "variants": [
+        "0 son mejores.",
+        "Tengo 0, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-1",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 1.",
+        "1."
+      ]
+    },
+    {
+      "id": "mejores-1",
+      "emotion": "confidente",
+      "variants": [
+        "1 son mejores.",
+        "Tengo 1, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-2",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 2.",
+        "2."
+      ]
+    },
+    {
+      "id": "mejores-2",
+      "emotion": "confidente",
+      "variants": [
+        "2 son mejores.",
+        "Tengo 2, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-3",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 3.",
+        "3."
+      ]
+    },
+    {
+      "id": "mejores-3",
+      "emotion": "confidente",
+      "variants": [
+        "3 son mejores.",
+        "Tengo 3, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-4",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 4.",
+        "4."
+      ]
+    },
+    {
+      "id": "mejores-4",
+      "emotion": "confidente",
+      "variants": [
+        "4 son mejores.",
+        "Tengo 4, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-5",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 5.",
+        "5."
+      ]
+    },
+    {
+      "id": "mejores-5",
+      "emotion": "confidente",
+      "variants": [
+        "5 son mejores.",
+        "Tengo 5, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-6",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 6.",
+        "6."
+      ]
+    },
+    {
+      "id": "mejores-6",
+      "emotion": "confidente",
+      "variants": [
+        "6 son mejores.",
+        "Tengo 6, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-7",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 7.",
+        "7."
+      ]
+    },
+    {
+      "id": "mejores-7",
+      "emotion": "confidente",
+      "variants": [
+        "7 son mejores.",
+        "Tengo 7, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-8",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 8.",
+        "8."
+      ]
+    },
+    {
+      "id": "mejores-8",
+      "emotion": "confidente",
+      "variants": [
+        "8 son mejores.",
+        "Tengo 8, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-9",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 9.",
+        "9."
+      ]
+    },
+    {
+      "id": "mejores-9",
+      "emotion": "confidente",
+      "variants": [
+        "9 son mejores.",
+        "Tengo 9, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-10",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 10.",
+        "10."
+      ]
+    },
+    {
+      "id": "mejores-10",
+      "emotion": "confidente",
+      "variants": [
+        "10 son mejores.",
+        "Tengo 10, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-11",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 11.",
+        "11."
+      ]
+    },
+    {
+      "id": "mejores-11",
+      "emotion": "confidente",
+      "variants": [
+        "11 son mejores.",
+        "Tengo 11, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-12",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 12.",
+        "12."
+      ]
+    },
+    {
+      "id": "mejores-12",
+      "emotion": "confidente",
+      "variants": [
+        "12 son mejores.",
+        "Tengo 12, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-13",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 13.",
+        "13."
+      ]
+    },
+    {
+      "id": "mejores-13",
+      "emotion": "confidente",
+      "variants": [
+        "13 son mejores.",
+        "Tengo 13, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-14",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 14.",
+        "14."
+      ]
+    },
+    {
+      "id": "mejores-14",
+      "emotion": "confidente",
+      "variants": [
+        "14 son mejores.",
+        "Tengo 14, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-15",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 15.",
+        "15."
+      ]
+    },
+    {
+      "id": "mejores-15",
+      "emotion": "confidente",
+      "variants": [
+        "15 son mejores.",
+        "Tengo 15, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-16",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 16.",
+        "16."
+      ]
+    },
+    {
+      "id": "mejores-16",
+      "emotion": "confidente",
+      "variants": [
+        "16 son mejores.",
+        "Tengo 16, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-17",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 17.",
+        "17."
+      ]
+    },
+    {
+      "id": "mejores-17",
+      "emotion": "confidente",
+      "variants": [
+        "17 son mejores.",
+        "Tengo 17, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-18",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 18.",
+        "18."
+      ]
+    },
+    {
+      "id": "mejores-18",
+      "emotion": "confidente",
+      "variants": [
+        "18 son mejores.",
+        "Tengo 18, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-19",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 19.",
+        "19."
+      ]
+    },
+    {
+      "id": "mejores-19",
+      "emotion": "confidente",
+      "variants": [
+        "19 son mejores.",
+        "Tengo 19, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-20",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 20.",
+        "20."
+      ]
+    },
+    {
+      "id": "mejores-20",
+      "emotion": "confidente",
+      "variants": [
+        "20 son mejores.",
+        "Tengo 20, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-21",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 21.",
+        "21."
+      ]
+    },
+    {
+      "id": "mejores-21",
+      "emotion": "confidente",
+      "variants": [
+        "21 son mejores.",
+        "Tengo 21, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-22",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 22.",
+        "22."
+      ]
+    },
+    {
+      "id": "mejores-22",
+      "emotion": "confidente",
+      "variants": [
+        "22 son mejores.",
+        "Tengo 22, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-23",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 23.",
+        "23."
+      ]
+    },
+    {
+      "id": "mejores-23",
+      "emotion": "confidente",
+      "variants": [
+        "23 son mejores.",
+        "Tengo 23, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-24",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 24.",
+        "24."
+      ]
+    },
+    {
+      "id": "mejores-24",
+      "emotion": "confidente",
+      "variants": [
+        "24 son mejores.",
+        "Tengo 24, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-25",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 25.",
+        "25."
+      ]
+    },
+    {
+      "id": "mejores-25",
+      "emotion": "confidente",
+      "variants": [
+        "25 son mejores.",
+        "Tengo 25, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-26",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 26.",
+        "26."
+      ]
+    },
+    {
+      "id": "mejores-26",
+      "emotion": "confidente",
+      "variants": [
+        "26 son mejores.",
+        "Tengo 26, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-27",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 27.",
+        "27."
+      ]
+    },
+    {
+      "id": "mejores-27",
+      "emotion": "confidente",
+      "variants": [
+        "27 son mejores.",
+        "Tengo 27, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-28",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 28.",
+        "28."
+      ]
+    },
+    {
+      "id": "mejores-28",
+      "emotion": "confidente",
+      "variants": [
+        "28 son mejores.",
+        "Tengo 28, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-29",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 29.",
+        "29."
+      ]
+    },
+    {
+      "id": "mejores-29",
+      "emotion": "confidente",
+      "variants": [
+        "29 son mejores.",
+        "Tengo 29, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-30",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 30.",
+        "30."
+      ]
+    },
+    {
+      "id": "mejores-30",
+      "emotion": "confidente",
+      "variants": [
+        "30 son mejores.",
+        "Tengo 30, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-31",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 31.",
+        "31."
+      ]
+    },
+    {
+      "id": "mejores-31",
+      "emotion": "confidente",
+      "variants": [
+        "31 son mejores.",
+        "Tengo 31, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-32",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 32.",
+        "32."
+      ]
+    },
+    {
+      "id": "mejores-32",
+      "emotion": "confidente",
+      "variants": [
+        "32 son mejores.",
+        "Tengo 32, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-33",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 33.",
+        "33."
+      ]
+    },
+    {
+      "id": "mejores-33",
+      "emotion": "confidente",
+      "variants": [
+        "33 son mejores.",
+        "Tengo 33, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-34",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 34.",
+        "34."
+      ]
+    },
+    {
+      "id": "mejores-34",
+      "emotion": "confidente",
+      "variants": [
+        "34 son mejores.",
+        "Tengo 34, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-35",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 35.",
+        "35."
+      ]
+    },
+    {
+      "id": "mejores-35",
+      "emotion": "confidente",
+      "variants": [
+        "35 son mejores.",
+        "Tengo 35, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-36",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 36.",
+        "36."
+      ]
+    },
+    {
+      "id": "mejores-36",
+      "emotion": "confidente",
+      "variants": [
+        "36 son mejores.",
+        "Tengo 36, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-37",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 37.",
+        "37."
+      ]
+    },
+    {
+      "id": "mejores-37",
+      "emotion": "confidente",
+      "variants": [
+        "37 son mejores.",
+        "Tengo 37, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-38",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 38.",
+        "38."
+      ]
+    },
+    {
+      "id": "mejores-38",
+      "emotion": "confidente",
+      "variants": [
+        "38 son mejores.",
+        "Tengo 38, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-39",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 39.",
+        "39."
+      ]
+    },
+    {
+      "id": "mejores-39",
+      "emotion": "confidente",
+      "variants": [
+        "39 son mejores.",
+        "Tengo 39, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-40",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 40.",
+        "40."
+      ]
+    },
+    {
+      "id": "mejores-40",
+      "emotion": "confidente",
+      "variants": [
+        "40 son mejores.",
+        "Tengo 40, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-41",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 41.",
+        "41."
+      ]
+    },
+    {
+      "id": "mejores-41",
+      "emotion": "confidente",
+      "variants": [
+        "41 son mejores.",
+        "Tengo 41, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-42",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 42.",
+        "42."
+      ]
+    },
+    {
+      "id": "mejores-42",
+      "emotion": "confidente",
+      "variants": [
+        "42 son mejores.",
+        "Tengo 42, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-43",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 43.",
+        "43."
+      ]
+    },
+    {
+      "id": "mejores-43",
+      "emotion": "confidente",
+      "variants": [
+        "43 son mejores.",
+        "Tengo 43, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-44",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 44.",
+        "44."
+      ]
+    },
+    {
+      "id": "mejores-44",
+      "emotion": "confidente",
+      "variants": [
+        "44 son mejores.",
+        "Tengo 44, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-45",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 45.",
+        "45."
+      ]
+    },
+    {
+      "id": "mejores-45",
+      "emotion": "confidente",
+      "variants": [
+        "45 son mejores.",
+        "Tengo 45, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-46",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 46.",
+        "46."
+      ]
+    },
+    {
+      "id": "mejores-46",
+      "emotion": "confidente",
+      "variants": [
+        "46 son mejores.",
+        "Tengo 46, son mejores."
+      ]
+    },
+    {
+      "id": "tengo-47",
+      "emotion": "confidente",
+      "variants": [
+        "Tengo 47.",
+        "47."
+      ]
+    },
+    {
+      "id": "mejores-47",
+      "emotion": "confidente",
+      "variants": [
+        "47 son mejores.",
+        "Tengo 47, son mejores."
+      ]
+    }
+  ]
+}

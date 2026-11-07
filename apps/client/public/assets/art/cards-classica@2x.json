@@ -1,0 +1,837 @@
+{
+  "frames": {
+    "classica-back.png": {
+      "frame": {
+        "x": 4,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-7O.png": {
+      "frame": {
+        "x": 206,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-7E.png": {
+      "frame": {
+        "x": 4,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-7C.png": {
+      "frame": {
+        "x": 206,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-7B.png": {
+      "frame": {
+        "x": 408,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-6O.png": {
+      "frame": {
+        "x": 408,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-6E.png": {
+      "frame": {
+        "x": 4,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-6C.png": {
+      "frame": {
+        "x": 206,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-6B.png": {
+      "frame": {
+        "x": 408,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-5O.png": {
+      "frame": {
+        "x": 610,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-5E.png": {
+      "frame": {
+        "x": 610,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-5C.png": {
+      "frame": {
+        "x": 610,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-5B.png": {
+      "frame": {
+        "x": 812,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-4O.png": {
+      "frame": {
+        "x": 812,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-4E.png": {
+      "frame": {
+        "x": 812,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-4C.png": {
+      "frame": {
+        "x": 4,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-4B.png": {
+      "frame": {
+        "x": 206,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-3O.png": {
+      "frame": {
+        "x": 408,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-3E.png": {
+      "frame": {
+        "x": 610,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-3C.png": {
+      "frame": {
+        "x": 812,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-3B.png": {
+      "frame": {
+        "x": 1014,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-2O.png": {
+      "frame": {
+        "x": 1014,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-2E.png": {
+      "frame": {
+        "x": 1014,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-2C.png": {
+      "frame": {
+        "x": 1014,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-2B.png": {
+      "frame": {
+        "x": 4,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-1O.png": {
+      "frame": {
+        "x": 206,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-1E.png": {
+      "frame": {
+        "x": 408,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-1C.png": {
+      "frame": {
+        "x": 610,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-1B.png": {
+      "frame": {
+        "x": 812,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-12O.png": {
+      "frame": {
+        "x": 1014,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-12E.png": {
+      "frame": {
+        "x": 1216,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-12C.png": {
+      "frame": {
+        "x": 1216,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-12B.png": {
+      "frame": {
+        "x": 1216,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-11O.png": {
+      "frame": {
+        "x": 1216,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-11E.png": {
+      "frame": {
+        "x": 1216,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-11C.png": {
+      "frame": {
+        "x": 1418,
+        "y": 4,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-11B.png": {
+      "frame": {
+        "x": 1418,
+        "y": 298,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-10O.png": {
+      "frame": {
+        "x": 1418,
+        "y": 592,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-10E.png": {
+      "frame": {
+        "x": 1418,
+        "y": 886,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-10C.png": {
+      "frame": {
+        "x": 1418,
+        "y": 1180,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    },
+    "classica-10B.png": {
+      "frame": {
+        "x": 4,
+        "y": 1474,
+        "w": 198,
+        "h": 290
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 1,
+        "y": 1,
+        "w": 198,
+        "h": 290
+      },
+      "sourceSize": {
+        "w": 200,
+        "h": 292
+      }
+    }
+  },
+  "animations": {},
+  "meta": {
+    "app": "http://github.com/pixijs/assetpack",
+    "version": "1.0",
+    "image": "cards-classica@2x.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1620,
+      "h": 1768
+    },
+    "scale": 2,
+    "related_multi_packs": []
+  }
+}

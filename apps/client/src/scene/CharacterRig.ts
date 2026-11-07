@@ -1,11 +1,13 @@
-import {Container,Graphics} from 'pixi.js';
+import {Container,Graphics,Sprite,type Texture} from 'pixi.js';
 const ink=0x29201d;
 const outline={color:ink,width:5,join:'round' as const};
 /** Cutout structure: final transparent PNGs can replace each named part. */
 export class CharacterRig extends Container {
+ textures:Record<string,Texture>|null=null;faceParts=new Map<string,Sprite>();nextBlink=2+Math.random()*4;blinkUntil=0;
  torso=new Container();head=new Container();eyes=new Container();brows=new Container();mouth=new Container();arms=new Container();hands=new Container();baseScale=1;blinkClosed=false;
- constructor(public character:'washington'|'marta'='washington',back=false,color=0x487a76){
+ constructor(public character:'washington'|'marta'='washington',back=false,color=0x487a76,textures?:Record<string,Texture>){
   super();this.label=back?'local-back':character;this.addChild(this.torso,this.arms,this.head,this.hands);
+  if(textures){this.installRaster(textures,back,color);return;}
   const shirt=new Graphics().moveTo(-89,95).bezierCurveTo(-73,15,70,15,90,95).lineTo(110,200).lineTo(-110,200).closePath().fill(color).stroke(outline);this.torso.addChild(shirt);
   if(character==='washington'){
    this.torso.addChild(new Graphics().moveTo(-41,44).lineTo(-19,170).lineTo(-68,190).lineTo(-74,74).closePath().fill(0x58453a).stroke({color:ink,width:4}).moveTo(41,44).lineTo(19,170).lineTo(68,190).lineTo(74,74).closePath().fill(0x58453a).stroke({color:ink,width:4}));
@@ -33,9 +35,22 @@ export class CharacterRig extends Container {
   if(character==='washington')this.head.addChild(new Graphics().moveTo(0,20).bezierCurveTo(-14,12,-16,33,-36,24).bezierCurveTo(-31,45,-6,40,0,29).bezierCurveTo(9,42,29,43,36,24).bezierCurveTo(15,33,17,12,0,20).fill(0xc9c9b9).stroke({color:ink,width:3}));
   this.cacheParts();
  }
+ installRaster(textures:Record<string,Texture>,back:boolean,color:number){
+  this.textures=textures;
+  const add=(part:string,parent:Container,key=part)=>{const texture=textures[`${part}.png`];if(!texture)return;const sprite=new Sprite(texture);sprite.position.set(-160,-110);sprite.width=320;sprite.height=320;parent.addChild(sprite);this.faceParts.set(key,sprite);return sprite;};
+  add(back?'back-torso':'torso',this.torso);if(color!==0x8c8e63&&color!==0x487a76)this.torso.tint=color===0xa8543d?0xffc5aa:0xbde8ed;
+  if(back){if(this.character==='marta')add('nape',this.head);add('back-head',this.head);add('back-arm-left',this.arms);add('back-arm-right',this.arms);}
+  else{add('face',this.head);add('hair',this.head);this.head.addChild(this.eyes,this.brows,this.mouth);add('eyes-open',this.eyes,'eyes');add('brows-neutral-left',this.brows,'brow-left');add('brows-neutral-right',this.brows,'brow-right');add('mouth-neutral',this.mouth,'mouth');add('nose',this.head,'nose');const cheeks=add('cheeks',this.head);if(cheeks)cheeks.visible=false;for(const part of ['upper-left','upper-right','forearm-left','forearm-right'])add(part,this.arms);}
+  add('hand-left',this.hands);add('hand-right',this.hands);this.cacheParts();
+ }
+ setPart(key:string,part:string){const sprite=this.faceParts.get(key),texture=this.textures?.[`${part}.png`];if(sprite&&texture){sprite.texture=texture;sprite.width=320;sprite.height=320;}}
  cacheParts(){for(const part of [this.torso,this.arms,this.hands,this.head])part.cacheAsTexture({resolution:2,antialias:false});}
- breathe(time:number,reduced:boolean){if(reduced||this.label==='local-back')return;this.torso.scale.y=1+Math.sin(time*1.6)*.009;this.head.y=Math.sin(time*1.6)*1.5;const closed=time%4.7<.12;if(closed!==this.blinkClosed){this.blinkClosed=closed;this.eyes.scale.y=closed?.08:1;this.head.updateCacheTexture();}}
+ breathe(time:number,reduced:boolean){if(reduced||this.label==='local-back')return;this.torso.scale.y=1+Math.sin(time*1.6)*.009;this.head.y=Math.sin(time*1.6)*1.5;if(time>=this.nextBlink){this.blinkUntil=time+.12;this.nextBlink=time+2+Math.random()*4;}const closed=time<this.blinkUntil;if(closed!==this.blinkClosed){this.blinkClosed=closed;this.eyes.scale.y=closed?.08:1;this.head.updateCacheTexture();}}
  gesture(kind:string){
+  if(this.textures){if(this.label==='local-back')return;this.head.rotation=kind==='tic'?.045:0;
+   const eyes=kind==='ojosCerrados'?'closed':kind==='guinoDerecho'?'wink-right':kind==='guinoIzquierdo'?'wink-left':'open';this.setPart('eyes',`eyes-${eyes}`);
+   this.setPart('brow-left',kind==='cejas'||kind==='cejaIzquierda'?'brows-raised-left':'brows-neutral-left');this.setPart('brow-right',kind==='cejas'?'brows-raised-right':'brows-neutral-right');
+   const mouths:Record<string,string>={beso:'kiss',bocaAbierta:'shout',lengua:'tongue',morderLabio:'bite',lamerLabio:'lick',labiosDerecha:'right',labiosIzquierda:'left',o:'o',sonrisa:'smile'};this.setPart('mouth',`mouth-${mouths[kind]??'neutral'}`);this.setPart('nose',kind==='nariz'?'nose-wrinkled':'nose');const cheeks=this.faceParts.get('cheeks');if(cheeks)cheeks.visible=kind==='cachetes';this.hands.y=kind==='menton'?-80:0;this.hands.rotation=kind==='menton'?-.18:0;this.head.updateCacheTexture();return;}
   if(this.label==='local-back')return;this.head.rotation=kind==='tic'?.045:0;this.head.scale.x=kind==='cachetes'?1.13:1;this.brows.y=kind==='cejas'?-8:0;this.eyes.scale.y=1;
   const eyes=this.eyes.children[0] as Graphics;eyes.clear();for(const side of [-1,1]){const closed=kind==='ojosCerrados'||kind===(side<0?'guinoDerecho':'guinoIzquierdo');const x=side*24;if(closed)eyes.moveTo(x-13,-9).quadraticCurveTo(x,-4,x+13,-9).stroke({color:ink,width:3});else eyes.ellipse(x,-11,16,12).fill(0xfff4d9).stroke({color:ink,width:3}).ellipse(x-side*5,-9,4,7).fill(ink);}
   const brow=this.brows.children[0] as Graphics;brow.clear().moveTo(-41,kind==='cejaIzquierda'?-38:-28).quadraticCurveTo(-23,kind==='cejaIzquierda'?-45:-35,-9,-28).stroke({color:this.character==='marta'?ink:0xc2c1ae,width:8,cap:'round'}).moveTo(9,-28).quadraticCurveTo(24,-36,40,-27).stroke({color:this.character==='marta'?ink:0xc2c1ae,width:8,cap:'round'});

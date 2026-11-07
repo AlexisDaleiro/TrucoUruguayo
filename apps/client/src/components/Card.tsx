@@ -1,13 +1,8 @@
 import {numberOf,suitOf,pieceOf,type Card as CardId} from '../../../../packages/engine/src/index';
 import {t} from '../i18n';
 import s from './Card.module.css';
-export function Suit({suit,x=0,y=0,size=30}:{suit:string;x?:number;y?:number;size?:number}){
- return <g transform={`translate(${x} ${y}) scale(${size/40})`} stroke="#29201a" strokeWidth="2.5" strokeLinejoin="round">{suit==='O'?<><circle r="16" fill="#e9b84d"/><circle r="10" fill="none" stroke="#a26829"/><path d="M-6 0h12M0-6v12" stroke="#a26829"/></>:suit==='E'?<><path d="M-4 5L0-24 5 5z" fill="#d1e4de"/><path d="M-12 7Q0 0 12 7L10 11H-10Z" fill="#e9b84d"/><path d="M0 11v12" stroke="#ac4030" strokeWidth="6"/></>:suit==='B'?<><path d="M-4 22L-8-14Q-7-25 2-22L11-17 5 22Z" fill="#588b56"/><path d="M-1 12L1-12M-6-6L6-1" stroke="#b9ce6e"/></>:<><path d="M-14-16H14L10-3Q0 10-10-3Z" fill="#bd5140"/><path d="M-9-13H9L6-5H-6Z" fill="#f4cd7c"/><path d="M0 7v10M-10 20h20" stroke="#d5a447" strokeWidth="5"/></>}</g>;
-}
-export function CardArt({card}:{card:CardId}){
- const n=numberOf(card),suit=suitOf(card);const positions=n===1?[[50,73]]:Array.from({length:Math.min(n,7)},(_,i)=>[n%2&&i===n-1?50:i%2?68:32,48+Math.floor(i/2)*25]);
- return <svg viewBox="0 0 100 146" aria-hidden="true"><rect x="2" y="2" width="96" height="142" rx="8" fill="#ffedca" stroke="#2e251f" strokeWidth="3"/><rect x="8" y="8" width="84" height="130" rx="4" fill="none" stroke="#cfa871"/><text x="13" y="28" fontSize="21" fontFamily="Nunito, sans-serif" fontWeight="900" fill="#3d3025">{n}</text><Suit suit={suit} x={22} y={40} size={15}/>{n<10?positions.map(([x,y],i)=><Suit key={i} suit={suit} x={x} y={y} size={n===1?43:22}/>):<><path d="M24 115L29 74Q50 54 72 74L78 115Z" fill={suit==='C'?'#ae5141':'#437c89'} stroke="#2e251f" strokeWidth="3"/><ellipse cx="50" cy="55" rx="17" ry="22" fill="#e3ac70" stroke="#2e251f" strokeWidth="3"/><path d="M30 40L33 24 44 31 51 21 58 32 69 26 70 42Z" fill="#dba53f" stroke="#2e251f" strokeWidth="3"/><path d="M40 54h3m14 0h3M43 65q7 6 14 0" fill="none" stroke="#2e251f" strokeWidth="3"/><Suit suit={suit} x={50} y={95} size={29}/></>}<g transform="rotate(180 50 73)"><text x="13" y="28" fontSize="21" fontFamily="Nunito, sans-serif" fontWeight="900" fill="#3d3025">{n}</text></g></svg>;
-}
+import {CardArt} from './CardArt';
+export {CardArt} from './CardArt';
 export function Card({card,sample,disabled,onPlay,index=0}:{card:CardId;sample:CardId;disabled?:boolean;onPlay:()=>void;index?:number}){
  return <button className={`${s.card} ${pieceOf(card,sample)!==null?s.piece:''}`} style={{'--angle':`${(index-1)*9}deg`} as React.CSSProperties} disabled={disabled} onClick={onPlay} aria-label={`${numberOf(card)} de ${t.suits[suitOf(card)]}`} data-card={card}><CardArt card={card}/></button>;
 }

@@ -1,0 +1,5 @@
+import {useState} from 'react';
+import manifest from '../../../../assets-src/voices/voice-lines.json';
+import {audio,type Bus} from './AudioManager';
+import {t} from '../i18n';
+export default function VoiceGallery(){const [character,setCharacter]=useState('washington');return <section><h2>{t.voice}</h2><p>{audio.pendingVoices?t.voicePending:t.voiceReady}</p><label>{t.character}<select value={character} onChange={event=>setCharacter(event.target.value)}>{Object.keys(manifest.profiles).map(id=><option key={id}>{id}</option>)}</select></label><label>{t.voiceLine}<select onChange={event=>{void audio.speak(character,event.target.value,character==='washington'?-.6:.6);}} defaultValue=""><option value="" disabled>{t.voiceLine}</option>{manifest.lines.map(line=><option key={line.id} value={line.id}>{line.variants[0]}</option>)}</select></label>{(['master','music','ambience','sfx','voice','ui'] as Bus[]).map(bus=><label key={bus}>{bus==='master'?t.master:t[bus]}<input type="range" min="0" max="1" step="0.05" defaultValue={audio.levels[bus]} onChange={event=>audio.setVolume(bus,Number(event.target.value))}/></label>)}</section>;}

@@ -11,13 +11,17 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
-    "build": "pnpm --filter @truco/client build && node tools/budget.mjs",
+    "build": "pnpm --filter @truco/client build && node tools/budget.mjs && node tools/art/verify.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "sim": "tsx packages/bots/src/sim.ts",
     "deploy": "pnpm build && wrangler deploy",
-    "android:sync": "pnpm build && cap sync android"
+    "android:sync": "pnpm build && cap sync android",
+    "art:build": "tsx tools/art/cards.tsx && node tools/art/build.mjs",
+    "voices:plan": "tsx tools/voices/generate.ts",
+    "voices:generate": "tsx tools/voices/generate.ts --execute"
   },
   "devDependencies": {
+    "@assetpack/core": "1.7.0",
     "@cloudflare/workers-types": "5.20261104.1",
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.65.0",
@@ -28,6 +32,7 @@
     "@vitest/coverage-v8": "5.1.0",
     "eslint": "10.14.0",
     "fast-check": "4.10.2",
+    "sharp": "0.34.5",
     "tsx": "4.23.15",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.1",
