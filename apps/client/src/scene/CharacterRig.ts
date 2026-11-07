@@ -27,7 +27,7 @@ export class CharacterRig extends Container {
   }
   this.eyes.addChild(new Graphics().ellipse(-24,-11,16,12).fill(0xfff4d9).stroke({color:ink,width:3}).ellipse(23,-11,16,12).fill(0xfff4d9).stroke({color:ink,width:3}).ellipse(-19,-9,4,7).fill(ink).ellipse(19,-9,4,7).fill(ink));
   this.brows.addChild(new Graphics().moveTo(-41,-28).quadraticCurveTo(-23,-35,-9,-28).stroke({color:character==='marta'?ink:0xc2c1ae,width:8,cap:'round'}).moveTo(9,-28).quadraticCurveTo(24,-36,40,-27).stroke({color:character==='marta'?ink:0xc2c1ae,width:8,cap:'round'}));
-  const nose=new Graphics().moveTo(0,-16).quadraticCurveTo(-17,10,-5,15).quadraticCurveTo(13,20,18,9).quadraticCurveTo(19,1,6,2).fill(0xe5ad76).stroke({color:ink,width:3});
+  const nose=new Graphics().moveTo(0,-16).quadraticCurveTo(-17,10,-5,15).quadraticCurveTo(13,20,18,9).quadraticCurveTo(19,1,6,2).fill(0xe5ad76).stroke({color:ink,width:3});nose.label='nose';
   this.mouth.addChild(new Graphics().moveTo(-16,35).quadraticCurveTo(2,46,20,31).stroke({color:ink,width:4,cap:'round'}));
   this.head.addChild(this.eyes,this.brows,nose,this.mouth);
   if(character==='washington')this.head.addChild(new Graphics().moveTo(0,20).bezierCurveTo(-14,12,-16,33,-36,24).bezierCurveTo(-31,45,-6,40,0,29).bezierCurveTo(9,42,29,43,36,24).bezierCurveTo(15,33,17,12,0,20).fill(0xc9c9b9).stroke({color:ink,width:3}));
@@ -35,5 +35,17 @@ export class CharacterRig extends Container {
  }
  cacheParts(){for(const part of [this.torso,this.arms,this.hands,this.head])part.cacheAsTexture({resolution:2,antialias:false});}
  breathe(time:number,reduced:boolean){if(reduced||this.label==='local-back')return;this.torso.scale.y=1+Math.sin(time*1.6)*.009;this.head.y=Math.sin(time*1.6)*1.5;const closed=time%4.7<.12;if(closed!==this.blinkClosed){this.blinkClosed=closed;this.eyes.scale.y=closed?.08:1;this.head.updateCacheTexture();}}
- gesture(kind:string){this.brows.y=kind==='cejas'?-8:0;this.eyes.scale.y=kind.startsWith('guino')?.35:1;this.head.updateCacheTexture();}
+ gesture(kind:string){
+  if(this.label==='local-back')return;this.head.rotation=kind==='tic'?.045:0;this.head.scale.x=kind==='cachetes'?1.13:1;this.brows.y=kind==='cejas'?-8:0;this.eyes.scale.y=1;
+  const eyes=this.eyes.children[0] as Graphics;eyes.clear();for(const side of [-1,1]){const closed=kind==='ojosCerrados'||kind===(side<0?'guinoDerecho':'guinoIzquierdo');const x=side*24;if(closed)eyes.moveTo(x-13,-9).quadraticCurveTo(x,-4,x+13,-9).stroke({color:ink,width:3});else eyes.ellipse(x,-11,16,12).fill(0xfff4d9).stroke({color:ink,width:3}).ellipse(x-side*5,-9,4,7).fill(ink);}
+  const brow=this.brows.children[0] as Graphics;brow.clear().moveTo(-41,kind==='cejaIzquierda'?-38:-28).quadraticCurveTo(-23,kind==='cejaIzquierda'?-45:-35,-9,-28).stroke({color:this.character==='marta'?ink:0xc2c1ae,width:8,cap:'round'}).moveTo(9,-28).quadraticCurveTo(24,-36,40,-27).stroke({color:this.character==='marta'?ink:0xc2c1ae,width:8,cap:'round'});
+  const mouth=this.mouth.children[0] as Graphics;mouth.clear();this.mouth.position.set(0,kind==='neutral'||kind==='tic'?0:7);
+  if(kind==='beso')mouth.ellipse(0,34,6,9).fill(0xb76555).stroke({color:ink,width:3});
+  else if(kind==='bocaAbierta'||kind==='lengua') {mouth.ellipse(0,36,12,9).fill(ink);if(kind==='lengua')mouth.ellipse(0,42,5,8).fill(0xc9786a).stroke({color:ink,width:2});}
+  else if(kind==='morderLabio')mouth.roundRect(-14,30,28,13,5).fill(0xffefd1).stroke({color:ink,width:3}).moveTo(-12,40).quadraticCurveTo(0,47,12,40).stroke({color:0xa85043,width:4});
+  else if(kind==='lamerLabio')mouth.moveTo(-15,35).quadraticCurveTo(0,44,15,35).stroke({color:ink,width:3}).ellipse(1,31,6,5).fill(0xc9786a).stroke({color:ink,width:2});
+  else {const offset=kind==='labiosDerecha'?12:kind==='labiosIzquierda'?-12:0;mouth.moveTo(-16+offset,35).quadraticCurveTo(2+offset,46,20+offset,31).stroke({color:ink,width:4,cap:'round'});}
+  const nose=this.head.children.find(c=>c.label==='nose');if(nose)nose.scale.x=kind==='nariz'?1.3:1;
+  this.hands.rotation=kind==='menton'?-.15:0;this.head.updateCacheTexture();
+ }
 }
