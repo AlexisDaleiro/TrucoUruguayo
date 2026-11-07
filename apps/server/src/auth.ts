@@ -1,8 +1,15 @@
+import {androidOrigin} from '../../../packages/shared/src/mobile';
 import {createClient} from '@supabase/supabase-js';
 import {type Env,type Profile} from './types';
 import {accountCall} from './Accounts';
 export const cookieName='boliche_session_v1';
-export function sessionToken(request:Request):string|null{return request.headers.get('cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith(cookieName+'='))?.slice(cookieName.length+1)??null;}
+export const nativeRequest=(request:Request)=>request.headers.get('Origin')===androidOrigin;
+export function sessionToken(request:Request):string|null{
+ if(nativeRequest(request)){
+  const token=request.headers.get('X-Boliche-Session');
+  return token&&/^[a-f0-9-]{72}$/.test(token)?token:null;
+ }
+ return request.headers.get('cookie')?.split(';').map(s=>s.trim()).find(s=>s.startsWith(cookieName+'='))?.slice(cookieName.length+1)??null;}
 export async function verifiedUid(request:Request,env:Env):Promise<string|null>{
  const authorization=request.headers.get('Authorization');if(!authorization)return null;
  if(!authorization.startsWith('Bearer ')||!env.SUPABASE_URL||!env.SUPABASE_PUBLISHABLE_KEY)throw new Error('AUTH');

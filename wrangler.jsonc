@@ -1,7 +1,7 @@
 {
   "$schema":"node_modules/wrangler/config-schema.json",
   "name":"truco-de-boliche", "main":"apps/server/src/index.ts", "compatibility_date":"2026-11-06",
-  "assets":{"directory":"apps/client/dist","binding":"ASSETS","not_found_handling":"single-page-application","run_worker_first":["/api/*"]},
+  "assets":{"directory":"apps/client/dist","binding":"ASSETS","not_found_handling":"single-page-application","run_worker_first":["/api/*","/.well-known/assetlinks.json"]},
   "observability":{"enabled":true},
   "durable_objects":{"bindings":[{"name":"ACCOUNTS","class_name":"Accounts"},{"name":"MATCH_ROOM","class_name":"MatchRoom"},{"name":"MATCHMAKER","class_name":"Matchmaker"},{"name":"FEEDBACK","class_name":"Feedback"}]},
   "migrations":[{"tag":"v1","new_sqlite_classes":["Accounts","MatchRoom","Matchmaker"]},{"tag":"v2","new_sqlite_classes":["Feedback"]}]

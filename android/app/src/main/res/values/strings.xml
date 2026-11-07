@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Truco de Boliche</string>
+    <string name="title_activity_main">Truco de Boliche</string>
+    <string name="package_name">uy.trucodeboliche.app</string>
+    <string name="custom_url_scheme">uy.trucodeboliche.app</string>
+</resources>

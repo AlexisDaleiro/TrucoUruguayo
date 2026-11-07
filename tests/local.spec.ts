@@ -30,3 +30,12 @@ test('galerías y rendimiento CPU4x',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/?local=1');await expect(page.locator('canvas')).toBeVisible();await page.waitForTimeout(3000);const cdp=await page.context().newCDPSession(page);await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});
  const perf=await page.evaluate(()=>new Promise<{frames:number;elapsed:number;fps:number;p95:number}>(resolve=>{const times:number[]=[];let last=performance.now();const start=last;function frame(now:number){times.push(now-last);last=now;if(now-start<3000)requestAnimationFrame(frame);else{times.sort((a,b)=>a-b);resolve({frames:times.length,elapsed:now-start,fps:times.length*1000/(now-start),p95:times[Math.floor(times.length*.95)]});}}requestAnimationFrame(frame);}));await mkdir('docs/evidencia',{recursive:true});await writeFile(`docs/evidencia/rendimiento-${capturePhase?'fase-'+capturePhase:'actual'}.json`,JSON.stringify(perf,null,2));expect(perf.fps).toBeGreaterThan(50);
 });
+
+test('un corte al cargar el dibujo no desmonta la mesa',async({page})=>{
+ await page.route('**/src/scene/SceneView.tsx',route=>route.abort('failed'));
+ const failed=page.waitForEvent('requestfailed',request=>request.url().endsWith('/src/scene/SceneView.tsx'));
+ await page.goto('/?local=1');
+ await failed;
+ await expect(page.getByTestId('menu-scene')).toBeVisible();
+ await expect(page.locator('[data-card]').first()).toBeVisible();
+});

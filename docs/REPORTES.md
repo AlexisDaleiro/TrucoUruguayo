@@ -66,3 +66,13 @@ Beta desplegada en el Worker del proyecto. Versión Cloudflare `48c3f96a-8b3f-48
 Lighthouse móvil sobre producción dio 100 en rendimiento, accesibilidad, prácticas y SEO, con LCP 786 ms y TBT 21 ms. En 4G emulada con caché fría, las tres aperturas del alta tardaron 1,95 s, 1,47 s y 1,61 s, sin errores. Menú 158,4 KiB gzip incluyendo Auth opcional. En mesa con CPU 4× se midieron 59,76 FPS y p95 16,7 ms. Simuladas 100.000 manos, 844.672 acciones válidas y 14.083 partidas completas. Nivel alto ganó 64,1% contra el bajo. Evidencia en `docs/evidencia/`.
 
 [REVISAR] El menú anima la tele y el personaje con una escena liviana. Pixi carga al entrar a la mesa. En modo offline las fichas muestran «—» y solo se habilita la práctica. El balance y el umbral de errores menor a 1% se evaluarán con sesiones reales consentidas. El ajuste actual de bots proviene de simulación.
+
+## Fase 7 — Android (2026-11-07)
+
+Capacitor 8.6, API 36, ícono y pantalla de inicio propios. Ciclo de vida para pausa de audio/dibujo, botón atrás, compartir, vibración y App Links. La tienda Android usa AdMob recompensado y RevenueCat con Play Billing. Se verifica firma SSV en el Worker. El máximo diario es cinco anuncios de dos fichas. Consumibles y Pase usan créditos idempotentes y una migración con permisos de servicio.
+
+Validación local con 89 tests, 100% de líneas del motor y 99,64% de ramas. La suite de navegador pasó 19 de 20 en la primera pasada. La última prueba reprodujo un corte durante la carga del dibujo. Se aisló el fallo con una barrera para que se mantenga el estado de la mesa y se verificaron las cuatro regresiones de Android y reconexión. Se revisaron la matriz de la tienda Android, menú, privacidad y mesas en `docs/capturas/fase-7/`. Medición de mesa 60,22 FPS, p95 16,7 ms con CPU 4× en Chromium.
+
+Worker público `f019d7a2-bb5c-426a-97d1-9fc03ffb1393`. Probados sesión Android con una cuenta temporal, saldo inicial 10, borrado, asociación HTTP 200 y rechazo 401 del webhook sin credencial. La respuesta de App Links queda vacía hasta cargar los certificados. Se generaron AAB sin firma y APK debug en el workflow Android 42421740690.
+
+[REVISAR] Los anuncios de prueba quedan separados del build con unidades reales. La declaración 18+ se usa solo para mostrar anuncios. El cosmético mensual del Pase es un sello del perfil. Las pruebas de dispositivo físico, la firma, los anuncios de una unidad propia, las compras de licencia y el enlace certificado quedan en `docs/PENDIENTES_HUMANO.md`.

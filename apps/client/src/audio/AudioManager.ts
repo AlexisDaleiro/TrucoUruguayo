@@ -3,14 +3,17 @@ export const sounds=['shuffle','deal','sample','select','play','piece','trick','
 export type Sound=typeof sounds[number];
 interface VoiceClip{id:string;variant:number;start:number;duration:number;envelope:number[];}
 class AudioManager {
+ appActive=true;
+ setAppActive(active:boolean){this.appActive=active;this.updateVisibility();}
+ updateVisibility=()=>{const ctx=this.context;if(!ctx)return;if(document.hidden||!this.appActive)void ctx.suspend();else void ctx.resume();};
  context:AudioContext|null=null;buses=new Map<Bus,GainNode>();levels:Record<Bus,number>={master:.65,music:.55,ambience:.5,sfx:.8,voice:1,ui:.7};muted=false;voices=0;tension=0;night=false;menu=true;beat=0;nextBeat=0;timer:ReturnType<typeof setInterval>|null=null;reverb:ConvolverNode|null=null;
  buffers=new Map<string,AudioBuffer>();banks=new Map<string,Promise<{buffer:AudioBuffer;clips:VoiceClip[]}|null>>();pendingVoices=true;
  constructor(){try{const stored=JSON.parse(localStorage.getItem('boliche-audio')??'{}') as Partial<Record<Bus,number>>;for(const bus of Object.keys(this.levels) as Bus[])if(typeof stored[bus]==='number')this.levels[bus]=Math.max(0,Math.min(1,stored[bus]!));}catch{/* Unavailable storage keeps defaults. */}}
  async unlock(){if(!this.context){const ctx=this.context=new AudioContext();for(const name of Object.keys(this.levels) as Bus[]){const gain=ctx.createGain();gain.gain.value=this.levels[name];this.buses.set(name,gain);}this.buses.get('master')!.connect(ctx.destination);for(const [name,gain]of this.buses)if(name!=='master')gain.connect(this.buses.get('master')!);
   this.reverb=ctx.createConvolver();const impulse=ctx.createBuffer(2,ctx.sampleRate*.32,ctx.sampleRate);for(let channel=0;channel<2;channel++){const data=impulse.getChannelData(channel);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*.065))*.15;}this.reverb.buffer=impulse;this.reverb.connect(this.buses.get('voice')!);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)void ctx.suspend();else void ctx.resume();});this.nextBeat=ctx.currentTime+.05;this.timer=setInterval(()=>this.sequence(),125);
+  document.addEventListener('visibilitychange',this.updateVisibility);this.nextBeat=ctx.currentTime+.05;this.timer=setInterval(()=>this.sequence(),125);
   void fetch('/assets/voices/status.json').then(r=>r.json()).then(status=>{this.pendingVoices=!(status as {ready:boolean}).ready;}).catch(()=>{this.pendingVoices=true;});
- }await this.context.resume();}
+ }if(this.appActive&&!document.hidden)await this.context.resume();}
  setVolume(bus:Bus,value:number){this.levels[bus]=Math.max(0,Math.min(1,value));localStorage.setItem('boliche-audio',JSON.stringify(this.levels));this.applyMix();}
  applyMix(){const ctx=this.context;if(!ctx)return;for(const [bus,gain]of this.buses){const duck=this.voices&&bus==='music'?Math.pow(10,-6/20):this.voices&&bus==='ambience'?Math.pow(10,-4/20):1;gain.gain.setTargetAtTime(this.levels[bus]*duck,ctx.currentTime,.08);}}
  setScene(menu:boolean,night:boolean,intensity:number){this.menu=menu;this.night=night;this.tension=Math.max(0,Math.min(1,intensity));}

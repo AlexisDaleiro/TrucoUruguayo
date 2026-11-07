@@ -1,3 +1,5 @@
+import type {CommerceCredit} from '../../../packages/shared/src/mobile';
+import {issueAdIntent,removeAdIntents,creditLocal,creditVerifiedAd} from './mobileEconomy';
 import {DurableObject} from 'cloudflare:workers';
 import {type Env,type Profile,type PlayerSettings,type MatchResult,internal,stub} from './types';
 import {nicknameSchema} from '../../../packages/protocol/src/index';
@@ -5,7 +7,7 @@ import {weekKey,economy} from '../../../packages/shared/src/economy';
 import {readProfile,reserveEntries,refundEntries,recordResult,equippedProfile,normalize,type WeekRow,type WalletEntry} from './meta';
 import {remoteMeta} from './RemoteMeta';
 async function collectPrefix<T>(storage:DurableObjectStorage,prefix:string){const all=new Map<string,T>();let cursor:string|undefined;for(;;){const page=await storage.list<T>({prefix,limit:500,startAfter:cursor});for(const [key,value]of page)all.set(key,value);if(page.size<500)break;cursor=[...page.keys()].at(-1);}return all;}
-interface Command{op:string;token?:string;accessToken?:string;id?:string;nickname?:string;character?:'washington'|'marta';ids?:string[];ref?:string;uid?:string;result?:MatchResult;age13Confirmed?:boolean;tutorialDone?:boolean;settings?:Partial<PlayerSettings>;itemId?:string;variant?:string;code?:string;}
+interface Command{op:string;credit?:CommerceCredit;nonce?:string;at?:number;token?:string;accessToken?:string;id?:string;nickname?:string;character?:'washington'|'marta';ids?:string[];ref?:string;uid?:string;result?:MatchResult;age13Confirmed?:boolean;tutorialDone?:boolean;settings?:Partial<PlayerSettings>;itemId?:string;variant?:string;code?:string;}
 export class Accounts extends DurableObject<Env>{
  locked:Promise<unknown>=Promise.resolve();remote=remoteMeta(this.env);
  fetch(request:Request):Promise<Response>{const next=this.locked.then(()=>this.handle(request)).catch(error=>{const message=error instanceof Error?error.message:'UNKNOWN';const code=['BALANCE','PROFILE','ITEM_LOCKED','ACCOUNT_EXISTS','AUTH','DELETE_RETRY','REMOTE_META'].find(code=>message.includes(code))??'ACCOUNT_ERROR';return Response.json({error:code},{status:code==='AUTH'?401:409});});this.locked=next;return next;}
@@ -37,17 +39,38 @@ export class Accounts extends DurableObject<Env>{
    const profile=await this.ctx.storage.get<Profile>('profile:'+body.id);if(!profile)throw Error('PROFILE');if(this.remote){const ledger=[...(await collectPrefix<WalletEntry>(this.ctx.storage,`wallet:${profile.id}:`))].map(([key,entry])=>({...entry,ref:key.slice(('wallet:'+profile.id+':').length)}));const results=[...(await collectPrefix<MatchResult>(this.ctx.storage,'result:')).values()].filter(result=>result.members.some(member=>member.id===profile.id));const canonical=await this.remote.bootstrap(normalize(profile),body.uid!,{ledger,results});if(canonical.id!==profile.id)throw Error('ACCOUNT_EXISTS');await this.ctx.storage.put('profile:'+profile.id,canonical);}
    await this.ctx.storage.put('uid:'+body.uid,body.id!);await this.ctx.storage.put('linked:'+body.id,body.uid!);return Response.json({ok:true});
   }
+  if(body.op==='billingSeen'){
+   await this.ctx.storage.put('billing-seen:'+body.id,true);return Response.json({ok:true});
+  }
+  if(body.op==='adIntent'){
+   const profile=await this.profile(body.id!);if(!profile?.age13Confirmed)throw Error('PROFILE');
+   if((await this.remote?.commerce({kind:'ad_status',id:profile.id}))?.limited)return Response.json({ok:false,error:'AD_LIMIT'});
+   return Response.json(await issueAdIntent(this.ctx.storage,profile.id));
+  }
+  if(body.op==='adReward')return Response.json(await creditVerifiedAd(this.ctx.storage,this.remote,body.nonce!,body.ref!,body.at!));
+  if(body.op==='commerceCredit'){
+   const credit=body.credit!;if(await this.ctx.storage.get('deleted:'+credit.id))return Response.json({ok:true,ignored:true});
+   await this.ctx.storage.put('billing-seen:'+credit.id,true);
+   return Response.json(this.remote?await this.remote.commerce(credit):await creditLocal(this.ctx.storage,credit));
+  }
   if(body.op==='registerRoom'){await this.ctx.storage.put(`room:${body.id}:${body.code}`,Date.now());return Response.json({ok:true});}
   if(body.op==='deleting'){const id=body.token?await this.ctx.storage.get<string>('session:'+body.token):undefined;return Response.json(id?Boolean(await this.ctx.storage.get('deleted:'+id)):false);}
   if(body.op==='deleteTarget'){const id=body.token?await this.ctx.storage.get<string>('session:'+body.token):undefined;return Response.json(id??null);}
   if(body.op==='beginDelete'){const id=body.id!,uid=await this.ctx.storage.get<string>('linked:'+id);await this.ctx.storage.put('deleted:'+id,true);if(uid)await this.ctx.storage.put('deletedUID:'+uid,true);const rooms=await collectPrefix<number>(this.ctx.storage,`room:${id}:`);return Response.json({rooms:[...rooms].filter(([,at])=>Date.now()-at<31*86400000).map(([key])=>key.split(':').at(-1)!),uid:uid??null});}
   if(body.op==='delete'){
    const id=body.id!,uid=await this.ctx.storage.get<string>('linked:'+id);if(!await this.ctx.storage.get('deleted:'+id))throw Error('DELETE_RETRY');
+   if(await this.ctx.storage.get('billing-seen:'+id)){
+    if(!this.env.REVENUECAT_SECRET_KEY)throw Error('DELETE_RETRY');
+    const response=await fetch('https://api.revenuecat.com/v1/subscribers/'+encodeURIComponent(id),{method:'DELETE',headers:{Authorization:'Bearer '+this.env.REVENUECAT_SECRET_KEY},signal:AbortSignal.timeout(10000)});
+    if(!response.ok&&response.status!==404)throw Error('DELETE_RETRY');
+    await this.ctx.storage.delete('billing-seen:'+id);
+   }
    if(this.remote&&uid){if(body.accessToken){const signout=await this.remote.client.auth.admin.signOut(body.accessToken,'global');if(signout.error&&!['session_not_found','user_not_found','bad_jwt'].includes(signout.error.code??''))throw Error('DELETE_RETRY');}await this.remote.call({op:'delete',id});const {error}=await this.remote.client.auth.admin.deleteUser(uid);if(error&&error.code!=='user_not_found')throw Error('DELETE_RETRY');}
    const sessions=await collectPrefix<string>(this.ctx.storage,'session:');for(const [key,owner]of sessions)if(owner===id)await this.ctx.storage.delete(key);
    for(const prefix of ['wallet:','room:']){const entries=await collectPrefix(this.ctx.storage,`${prefix}${id}:`);for(const key of entries.keys())await this.ctx.storage.delete(key);}
    const weekly=await collectPrefix<WeekRow>(this.ctx.storage,'week:');for(const [key,row]of weekly)if(row.profileId===id)await this.ctx.storage.delete(key);
    const results=await collectPrefix<MatchResult>(this.ctx.storage,'result:');for(const [key,result]of results)if(result.members.some(member=>member.id===id)){result.members=result.members.map(member=>member.id===id?{...member,id:'deleted'}:member);delete result.bonuses[id];await this.ctx.storage.put(key,result);}
+   await removeAdIntents(this.ctx.storage,id);
    await this.ctx.storage.delete('profile:'+id);await this.ctx.storage.delete('linked:'+id);if(uid)await this.ctx.storage.delete('uid:'+uid);return Response.json({ok:true});
   }
   if(body.op==='logout'){if(body.token)await this.ctx.storage.delete('session:'+body.token);return Response.json({ok:true});}

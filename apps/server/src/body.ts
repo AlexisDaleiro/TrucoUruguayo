@@ -1,5 +1,5 @@
-export async function readJson(request:Request):Promise<unknown>{
+export async function readJson(request:Request,limit=4096):Promise<unknown>{
  const reader=request.body?.getReader();if(!reader)return {};let size=0;let text='';const decoder=new TextDecoder();
- for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>4096){await reader.cancel();throw new Error('INVALID_REQUEST');}text+=decoder.decode(value,{stream:true});}
+ for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>limit){await reader.cancel();throw new Error('INVALID_REQUEST');}text+=decoder.decode(value,{stream:true});}
  text+=decoder.decode();try{return JSON.parse(text||'{}');}catch{throw new Error('INVALID_REQUEST');}
 }

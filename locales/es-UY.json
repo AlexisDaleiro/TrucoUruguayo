@@ -384,6 +384,14 @@
       "body": "Guardamos un identificador de cuenta, apodo, personaje, opciones, progreso, fichas e inventario. Con Google se vincula la identidad de acceso. El chat usa frases predefinidas y no permite texto libre."
     },
     {
+      "title": "Soporte y compras en Android",
+      "body": "El comentario que enviás desde Soporte se conserva hasta 90 días. En Android, Google Play procesa el pago y RevenueCat comunica el producto y su estado junto con el identificador interno de tu perfil. Gestioná la renovación del Pase desde Google Play."
+    },
+    {
+      "title": "Anuncios opcionales en Android",
+      "body": "Al solicitar un anuncio opcional, Google puede procesar datos del dispositivo y del anuncio para mostrarlo y prevenir el fraude. El juego pide anuncios sin personalización y usa un código temporal para acreditar la recompensa."
+    },
+    {
       "title": "Dónde se procesan",
       "body": "Cloudflare sirve el juego y mantiene las salas. Cuando está configurado, Supabase gestiona autenticación y datos de cuenta. Estos proveedores pueden procesar información fuera de Uruguay. Las conexiones técnicas reciben la dirección IP necesaria para responder."
     },
@@ -425,5 +433,24 @@
   "feedbackSend": "Enviar comentario",
   "feedbackSuccess": "Gracias. Recibimos tu comentario.",
   "feedbackAuth": "Entrá al boliche con tu perfil para enviar un comentario.",
-  "feedbackLimit": "Ya nos escribiste hace poco. Probá más tarde."
+  "feedbackLimit": "Ya nos escribiste hace poco. Probá más tarde.",
+
+  "mobileUnavailable": "Por ahora esta opción no está disponible.",
+  "mobileAdsTitle": "Un anuncio, dos fichas",
+  "mobileAdAge": "Confirmo que tengo 18 años o más para ver anuncios.",
+  "mobileAdAction": "Ver anuncio (+2)",
+  "mobileAdTest": "Ver anuncio de prueba",
+  "mobileTestNote": "Los anuncios de prueba sirven para verificar la pantalla y no acreditan fichas.",
+  "mobilePending": "Estamos esperando la confirmación. El saldo se actualiza cuando llega.",
+  "mobileUpdated": "Tu cuenta se actualizó.",
+  "mobileLimit": "Llegaste al máximo de cinco anuncios de hoy.",
+  "mobilePrivacy": "Privacidad de anuncios",
+  "mobileBuy": "Comprar",
+  "mobileRestore": "Restaurar compras",
+  "mobilePlayPrice": "Precio en Google Play",
+  "mobileStopMatch": "Estas opciones están disponibles al volver al menú.",
+  "mobilePassStamp": "Sellos del Pase Boliche",
+  "mobilePassActive": "Pase Boliche activo",
+  "mobilePreview": "Vista previa de Android",
+  "mobileMonthlyPrice": "Suscripción mensual"
 }
