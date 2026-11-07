@@ -6,3 +6,4 @@ allowBuilds:
   workerd: true
   sharp: true
   cpu-features: false
+  '@ffmpeg-installer/linux-x64': false
