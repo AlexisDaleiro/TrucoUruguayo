@@ -1,17 +1,27 @@
 {
-  "initialMenuGzipBytes": 162156,
-  "allChunksGzipBytes": 378846,
+  "initialMenuGzipBytes": 169021,
+  "allChunksGzipBytes": 398089,
   "budgetBytes": 409600,
   "withinBudget": true,
   "files": [
     {
-      "name": "BitmapFont-zIvvOSdn.js",
+      "name": "AudioManager-CC-0QFrc.js",
+      "gzipBytes": 2713,
+      "initialMenu": true
+    },
+    {
+      "name": "auth-Cn_VzJzY.js",
+      "gzipBytes": 1948,
+      "initialMenu": true
+    },
+    {
+      "name": "BitmapFont-BOULVxUs.js",
       "gzipBytes": 73,
       "initialMenu": false
     },
     {
-      "name": "browserAll-CC47ZqHs.js",
-      "gzipBytes": 11202,
+      "name": "browserAll-DTZsv3Ln.js",
+      "gzipBytes": 11201,
       "initialMenu": false
     },
     {
@@ -25,7 +35,7 @@
       "initialMenu": false
     },
     {
-      "name": "CanvasRenderer-CNS2mZfs.js",
+      "name": "CanvasRenderer-C5hQ4OHC.js",
       "gzipBytes": 77,
       "initialMenu": false
     },
@@ -35,9 +45,39 @@
       "initialMenu": false
     },
     {
+      "name": "dist-CMedSjkm.js",
+      "gzipBytes": 3079,
+      "initialMenu": true
+    },
+    {
       "name": "dist-CVPAM7_G.js",
       "gzipBytes": 55253,
       "initialMenu": true
+    },
+    {
+      "name": "esm-B8ul2Xwj.js",
+      "gzipBytes": 985,
+      "initialMenu": false
+    },
+    {
+      "name": "esm-BwqzcTfw.js",
+      "gzipBytes": 376,
+      "initialMenu": false
+    },
+    {
+      "name": "esm-CRcqQD9B.js",
+      "gzipBytes": 245,
+      "initialMenu": false
+    },
+    {
+      "name": "esm-Czc0qlnM.js",
+      "gzipBytes": 245,
+      "initialMenu": false
+    },
+    {
+      "name": "esm-s6_-qkbT.js",
+      "gzipBytes": 3101,
+      "initialMenu": false
     },
     {
       "name": "Filter-Bie18jwJ.js",
@@ -65,24 +105,44 @@
       "initialMenu": false
     },
     {
-      "name": "index-DWEXwpnx.js",
-      "gzipBytes": 99375,
+      "name": "index-BXmaMEPu.js",
+      "gzipBytes": 94377,
       "initialMenu": true
     },
     {
-      "name": "index-D_I5gLIi.css",
-      "gzipBytes": 7099,
+      "name": "index-CKKC6fhN.css",
+      "gzipBytes": 7280,
       "initialMenu": true
     },
     {
-      "name": "init-J4AkBZV5.js",
-      "gzipBytes": 4575,
+      "name": "init-DQTxhCV7.js",
+      "gzipBytes": 4576,
+      "initialMenu": false
+    },
+    {
+      "name": "jsx-runtime-C3cWAN_r.js",
+      "gzipBytes": 3114,
+      "initialMenu": true
+    },
+    {
+      "name": "MobileCommerce-CC7h43rY.js",
+      "gzipBytes": 2071,
+      "initialMenu": false
+    },
+    {
+      "name": "nativeRuntime-flT14qZE.js",
+      "gzipBytes": 888,
       "initialMenu": false
     },
     {
       "name": "practice.worker-BY05Qyyr.js",
       "gzipBytes": 3583,
       "initialMenu": false
+    },
+    {
+      "name": "preload-helper-7y9sWmk5.js",
+      "gzipBytes": 828,
+      "initialMenu": true
     },
     {
       "name": "RenderTargetSystem-CCE6_1wz.js",
@@ -95,27 +155,62 @@
       "initialMenu": true
     },
     {
-      "name": "SceneView-2hw4fIT1.js",
-      "gzipBytes": 111149,
+      "name": "SceneView-BIzinE2D.js",
+      "gzipBytes": 111282,
       "initialMenu": false
     },
     {
-      "name": "VoiceGallery-SfJcIdNF.js",
-      "gzipBytes": 2063,
+      "name": "VoiceGallery-BXE7Ok-b.js",
+      "gzipBytes": 2099,
       "initialMenu": false
     },
     {
-      "name": "WebGLRenderer-CckRn_5E.js",
+      "name": "web-2bB_NIqT.js",
+      "gzipBytes": 248,
+      "initialMenu": false
+    },
+    {
+      "name": "web-BM7xF5pS.js",
+      "gzipBytes": 398,
+      "initialMenu": false
+    },
+    {
+      "name": "web-CFrg4GVw.js",
+      "gzipBytes": 732,
+      "initialMenu": false
+    },
+    {
+      "name": "web-DhrYiDIu.js",
+      "gzipBytes": 2072,
+      "initialMenu": false
+    },
+    {
+      "name": "web-DOJy7o0Z.js",
+      "gzipBytes": 481,
+      "initialMenu": false
+    },
+    {
+      "name": "web-Oaz3Gj6m.js",
+      "gzipBytes": 242,
+      "initialMenu": false
+    },
+    {
+      "name": "web-vkiGPX-z.js",
+      "gzipBytes": 125,
+      "initialMenu": false
+    },
+    {
+      "name": "WebGLRenderer-CEda9ul5.js",
       "gzipBytes": 76,
       "initialMenu": false
     },
     {
-      "name": "WebGPURenderer-CHDIe86G.js",
+      "name": "WebGPURenderer-3BqD4G2m.js",
       "gzipBytes": 77,
       "initialMenu": false
     },
     {
-      "name": "webworkerAll-CDcbA8Ie.js",
+      "name": "webworkerAll-Bsbkz33E.js",
       "gzipBytes": 69,
       "initialMenu": false
     }

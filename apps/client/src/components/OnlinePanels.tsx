@@ -1,3 +1,4 @@
+import {isAndroid,publicSite,shareInvite} from '../platform';
 import {catalog,ownsItem} from '../../../../packages/shared/src/catalog';
 import {useEffect,useState} from 'react';
 import {t} from '../i18n';
@@ -10,7 +11,7 @@ export function OnlinePlay({mode,onClose}:{mode:2|4;onClose:()=>void}){
 }
 export function Lobby(){
  const snapshot=useOnline(x=>x.snapshot),[copied,setCopied]=useState(false);if(!snapshot)return null;const own=snapshot.members[snapshot.seat];
- const share=async()=>{const url=location.origin+'/sala/'+snapshot.code;if(navigator.share){try{await navigator.share({title:t.brand,url});return;}catch(error){if(error instanceof Error&&error.name==='AbortError')return;}}await navigator.clipboard.writeText(url);setCopied(true);};
+ const share=async()=>{const url=publicSite+'/sala/'+snapshot.code;try{await shareInvite(url,t.brand);if(!isAndroid&&!navigator.share)setCopied(true);}catch(error){if(error instanceof Error&&error.name==='AbortError')return;await navigator.clipboard.writeText(url);setCopied(true);}};
  return <div className={s.lobby}><h2>{t.room}</h2><p>{t.entry}</p><strong className={s.bigCode}>{snapshot.code}</strong><div className={s.secondaryRow}><button onClick={()=>void navigator.clipboard.writeText(snapshot.code).then(()=>setCopied(true))}>{copied?t.copied:t.copy}</button><button onClick={()=>void share()}>{t.share}</button></div><p className={s.note}>{t.connectionNote}</p><div className={s.seatGrid}>{snapshot.members.map((member,index)=><div key={index} className={`${s.seatCard} ${index%2?s.teamB:s.teamA}`}><small>{t.seat} {index+1} · {index%2?t.teamB:t.teamA}</small><span>{member?.nickname??t.emptySeat}</span><small>{member?.ready?t.readyStatus:member?t.waitingReady:'—'}</small>{snapshot.host?<select aria-label={`${t.seat} ${index+1}`} value={index} onChange={e=>void roomOperation('seat',{from:index,to:Number(e.target.value)})}>{snapshot.members.map((_,to)=><option key={to} value={to}>{t.seat} {to+1}</option>)}</select>:null}</div>)}</div><button className={s.primary} disabled={own?.ready} onClick={()=>void roomOperation('ready')}>{own?.ready?t.waitingReady:t.ready} →</button>{snapshot.host?<button onClick={()=>void roomOperation('fill')}>{t.fillBots}</button>:null}<button onClick={()=>void roomOperation('abandon')}>{t.back}</button></div>;
 }
 export function Queue(){const since=useOnline(x=>x.since),[seconds,setSeconds]=useState(0);useEffect(()=>{const id=setInterval(()=>setSeconds(Math.floor((Date.now()-since)/1000)),500);return()=>clearInterval(id);},[since]);return <div className={s.queue}><div className={s.searchSpinner}>◈</div><h2>{t.searching}</h2><p>{seconds}s</p><p>{t.searchNote}</p><button onClick={()=>void cancelSearch()}>{t.cancel}</button></div>;}

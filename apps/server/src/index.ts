@@ -1,22 +1,37 @@
+import {androidOrigin,androidPackage,demoRewardedUnit} from '../../../packages/shared/src/mobile';
+import {commerceCallback} from './commerce';
 import {feedbackAuthorized} from './Feedback';
 export {Feedback} from './Feedback';
 import {z} from 'zod';
 import {readJson} from './body';
 import {type Env,type Profile,stub,internal} from './types';
 import {accountCall} from './Accounts';
-import {identity,verifiedUid,sessionToken,sessionCookie} from './auth';
+import {identity,verifiedUid,sessionToken,sessionCookie,nativeRequest} from './auth';
 import {roomSchema,codeSchema,roomCode,nicknameSchema} from '../../../packages/protocol/src/index';
 import {economy,type EconomyConfig} from '../../../packages/shared/src/economy';
 import {catalog,ownsItem} from '../../../packages/shared/src/catalog';
 import {remoteMeta} from './RemoteMeta';
 export {Accounts} from './Accounts';export {MatchRoom} from './MatchRoom';export {Matchmaker} from './Matchmaker';
 function error(code:string,status=400){return Response.json({error:code},{status,headers:{'Cache-Control':'no-store'}});}
-function sameOrigin(request:Request){const origin=request.headers.get('Origin');if(!origin)return true;const url=new URL(request.url);return origin===url.origin||(['127.0.0.1','localhost'].includes(url.hostname)&&['http://127.0.0.1:5173','http://localhost:5173'].includes(origin));}
-export default {async fetch(request:Request,env:Env):Promise<Response>{
- const url=new URL(request.url);if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
+function sameOrigin(request:Request){const origin=request.headers.get('Origin');if(!origin||origin===androidOrigin)return true;const url=new URL(request.url);return origin===url.origin||(['127.0.0.1','localhost'].includes(url.hostname)&&['http://127.0.0.1:5173','http://localhost:5173'].includes(origin));}
+async function handle(request:Request,env:Env):Promise<Response>{
+ const url=new URL(request.url);
+ if(url.pathname==='/.well-known/assetlinks.json'){
+  const fingerprints=(env.ANDROID_SHA256??'').split(',').map(value=>value.trim().toUpperCase()).filter(value=>/^([A-F0-9]{2}:){31}[A-F0-9]{2}$/.test(value));
+  const links=fingerprints.length?[{relation:['delegate_permission/common.handle_all_urls'],target:{namespace:'android_app',package_name:androidPackage,sha256_cert_fingerprints:fingerprints}}]:[];
+  return Response.json(links,{headers:{'Cache-Control':'public,max-age=300'}});
+ }
+ if(!url.pathname.startsWith('/api/'))return env.ASSETS.fetch(request);
  if(url.pathname==='/api/health')return Response.json({ok:true,name:'Truco de Boliche',storage:'local'});
  if(!sameOrigin(request))return error('ORIGIN',403);
  try{
+  const callback=await commerceCallback(request,env,url);if(callback)return callback;
+  if(url.pathname==='/api/mobile/config'&&request.method==='GET'){
+   if(!nativeRequest(request))return error('FORBIDDEN',403);
+   const adUnit=env.ADMOB_REWARDED_ID??demoRewardedUnit;
+   const revenueCatKey=env.REVENUECAT_APP_ID&&env.REVENUECAT_WEBHOOK_KEY?env.REVENUECAT_PUBLIC_KEY??null:null;
+   return Response.json({adUnit,testAds:!env.ADMOB_REWARDED_ID,revenueCatKey},{headers:{'Cache-Control':'no-store'}});
+  }
   if(url.pathname==='/api/auth/config'){
    const mode=env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY?'supabase':'local';
    const profile=mode==='local'&&url.searchParams.get('profile')==='1'?await identity(request,env):undefined;
@@ -39,9 +54,14 @@ export default {async fetch(request:Request,env:Env):Promise<Response>{
   const profile=await identity(request,env);
   if(url.pathname==='/api/auth/session'){const token=sessionToken(request);const deleting=!profile&&token&&await accountCall<boolean>(env,{op:'deleting',token});return Response.json({profile},{headers:{'Cache-Control':'no-store',...(!profile&&token&&!deleting?{'Set-Cookie':sessionCookie(request,'',true)}:{})}});}
   if(url.pathname==='/api/auth/guest'&&request.method==='POST'){
-   if(profile)return Response.json({profile});const body=z.object({nickname:nicknameSchema.optional(),character:z.enum(['washington','marta']).optional(),age13Confirmed:z.literal(true).optional()}).strict().parse(await readJson(request));const nickname=nicknameSchema.parse(body.nickname??'Paisano '+Math.floor(Math.random()*9000+1000));const uid=await verifiedUid(request,env);if(env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY&&!uid)return error('AUTH',401);const created=await accountCall<{profile:Profile;token:string}>(env,{op:'create',nickname,character:body.character,uid,age13Confirmed:body.age13Confirmed});return Response.json({profile:created.profile},{headers:{'Set-Cookie':sessionCookie(request,created.token),'Cache-Control':'no-store'}});
+   if(profile)return Response.json({profile});const body=z.object({nickname:nicknameSchema.optional(),character:z.enum(['washington','marta']).optional(),age13Confirmed:z.literal(true).optional()}).strict().parse(await readJson(request));const nickname=nicknameSchema.parse(body.nickname??'Paisano '+Math.floor(Math.random()*9000+1000));const uid=await verifiedUid(request,env);if(env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY&&!uid)return error('AUTH',401);const created=await accountCall<{profile:Profile;token:string}>(env,{op:'create',nickname,character:body.character,uid,age13Confirmed:body.age13Confirmed});return nativeRequest(request)?Response.json({profile:created.profile,sessionToken:created.token},{headers:{'Cache-Control':'no-store'}}):Response.json({profile:created.profile},{headers:{'Set-Cookie':sessionCookie(request,created.token),'Cache-Control':'no-store'}});
   }
   if(!profile)return error('AUTH',401);
+  if(url.pathname==='/api/mobile/ad-intent'&&request.method==='POST'){
+   if(!nativeRequest(request)||!profile.age13Confirmed)return error('FORBIDDEN',403);
+   if(!env.ADMOB_REWARDED_ID)return error('UNAVAILABLE',503);
+   return Response.json(await accountCall(env,{op:'adIntent',id:profile.id}),{headers:{'Cache-Control':'no-store'}});
+  }
   if(url.pathname==='/api/feedback'&&request.method==='POST'){if(!profile.age13Confirmed)return error('AGE_REQUIRED',409);const body=z.object({category:z.enum(['bug','idea','other']),message:z.string().trim().min(10).max(800)}).strict().parse(await readJson(request));return stub(env.FEEDBACK,'feedback-v1').fetch(internal({...body,profileId:profile.id}));}
   if(url.pathname==='/api/profile'&&request.method==='POST'){const settings=z.object({fast:z.boolean(),reduced:z.boolean(),haptics:z.boolean(),quality:z.enum(['auto','high','medium','low']),telemetry:z.boolean()}).partial();const body=z.object({nickname:nicknameSchema.optional(),age13Confirmed:z.literal(true).optional(),tutorialDone:z.literal(true).optional(),settings:settings.optional()}).strict().parse(await readJson(request));return Response.json(await accountCall(env,{op:'update',id:profile.id,...body,settings:body.settings}),{headers:{'Cache-Control':'no-store'}});}
   if(url.pathname==='/api/equip'&&request.method==='POST'){const body=z.object({itemId:z.string().max(80),variant:z.string().max(40).optional()}).strict().parse(await readJson(request));return Response.json(await accountCall(env,{op:'equip',id:profile.id,...body}),{headers:{'Cache-Control':'no-store'}});}
@@ -64,4 +84,18 @@ export default {async fetch(request:Request,env:Env):Promise<Response>{
   }
   return error('NOT_FOUND',404);
  }catch(caught){const message=caught instanceof Error?caught.message:'UNKNOWN';if(caught instanceof z.ZodError)return error('INVALID_REQUEST');if(message==='AUTH')return error('AUTH',401);if(message==='INVALID_REQUEST')return error(message);if(['BALANCE','ACCOUNT_EXISTS','ITEM_LOCKED','DELETE_RETRY','SERVER_ABORT'].includes(message))return error(message,409);console.error('api',url.pathname,message);return error('SERVER',500);}
+}
+export default {async fetch(request:Request,env:Env){
+ const native=nativeRequest(request)&&new URL(request.url).pathname.startsWith('/api/');
+ if(native&&request.method==='OPTIONS')return new Response(null,{status:204,headers:{
+  'Access-Control-Allow-Origin':androidOrigin,
+  'Access-Control-Allow-Methods':'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers':'Content-Type, Authorization, X-Boliche-Session',
+  'Access-Control-Max-Age':'600','Vary':'Origin'
+ }});
+ const response=await handle(request,env);
+ if(!native||response.status===101)return response;
+ const headers=new Headers(response.headers);headers.set('Access-Control-Allow-Origin',androidOrigin);headers.append('Vary','Origin');
+ headers.delete('Set-Cookie');
+ return new Response(response.body,{status:response.status,headers});
 }} satisfies ExportedHandler<Env>;

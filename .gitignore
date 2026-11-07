@@ -17,3 +17,5 @@ assets-src/prepared/
 .assetpack/
 assets-src/voices/cache/
 .worktrees/
+
+google-services.json

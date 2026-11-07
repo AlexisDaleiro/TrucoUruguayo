@@ -1,0 +1,54 @@
+name: android bundle
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'codex/fase-7', 'codex/fase-8']
+    paths:
+      - 'android/**'
+      - 'apps/client/**'
+      - 'packages/**'
+      - 'locales/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'capacitor.config.ts'
+      - '.github/workflows/android.yml'
+permissions:
+  contents: read
+jobs:
+  bundle:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm android:sync
+      - name: Check SDK and build unsigned AAB
+        working-directory: android
+        run: |
+          if [ ! -f "$ANDROID_HOME/platforms/android-36/android.jar" ]; then
+            sdkmanager 'platforms;android-36'
+          fi
+          bash ./gradlew :app:bundleRelease :app:assembleDebug --no-daemon
+      - name: Check bundle structure and SHA-256
+        run: |
+          unzip -t android/app/build/outputs/bundle/release/app-release.aab
+          sha256sum android/app/build/outputs/bundle/release/app-release.aab > android/app/build/outputs/bundle/release/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: truco-de-boliche-android
+          path: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android/app/build/outputs/bundle/release/SHA256SUMS
+            android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

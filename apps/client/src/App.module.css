@@ -21,3 +21,5 @@
 .resultCards{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.resultCards>span{width:62px}.resultCards svg{width:100%;display:block}
 
 .feedbackText{display:grid!important;grid-template-columns:minmax(0,1fr);justify-content:stretch!important;gap:8px;align-items:stretch!important}.feedbackText textarea{width:100%;resize:vertical;border:1px solid #8d7552;border-radius:8px;padding:12px;background:#211d18;color:#ffedc7;font:inherit}.feedbackText textarea:focus-visible{outline:3px solid #ffe095;outline-offset:3px}.offlineNotice{color:#ffe0a0;font-weight:800}
+
+.mobileCommerce{display:grid;gap:15px;margin:16px 0}.mobileReward{display:grid;gap:12px;border:1px solid #8d7552;border-radius:10px;background:#344239;padding:16px}.mobileReward h3,.mobileReward p{margin:0}.mobilePacks{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}.mobilePacks .shopCard{padding:12px}.mobilePacks button{width:100%;padding:8px}.mobileCommerce button:disabled{opacity:.6}.passStamps ul{display:flex;flex-wrap:wrap;gap:10px;padding:0;list-style:none}.passStamps li{padding:5px 10px;border-radius:12px;background:#534637;color:#ffe199}

@@ -1,3 +1,4 @@
+import {hapticCue} from '../platform';
 import {create} from 'zustand';
 import {act,legalActions,newMatch,shuffledDeck,timeout,viewFor,type State,type PlayerView,type Action} from '../../../../packages/engine/src/index';
 import {thinkMs} from '../../../../packages/bots/src/timing';
@@ -35,6 +36,7 @@ export const useGame=create<GameStore>((set,get)=>({
 function apply(seat:number,action:Action){
  const s=useGame.getState().state;if(!s)return;
  if(!legalActions(s,seat).some(a=>JSON.stringify(a)===JSON.stringify(action)))return;
+ if(seat===0&&usePreferences.getState().haptics&&action.type==='PLAY_CARD')hapticCue();
  const next=act(s,seat,action,action.type==='NEXT_HAND'?shuffledDeck():undefined);if(action.type==='NEXT_HAND')localPartnerSignal=undefined;useGame.setState({state:next,view:viewFor(next,0)});
  audio.play(action.type==='PLAY_CARD'?'play':action.type==='NEXT_HAND'?'deal':action.type==='ENVIDO'?'envido':'truco',seat===1?.4:0);
  if(next.winner!==null){audio.play(next.winner===0?'victory':'defeat');if(!tutorialMode)track('match_end',{mode:next.seats,online:false,won:next.winner===0});}else if(next.events.some(e=>e.type==='FLOR'))audio.play('flor');

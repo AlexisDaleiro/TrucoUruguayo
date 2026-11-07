@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@assetpack/core": "1.7.0",
+    "@capacitor/cli": "8.6.0",
     "@cloudflare/workers-types": "5.20261104.1",
     "@electric-sql/pglite": "0.5.15",
     "@eslint/js": "10.0.1",
@@ -40,5 +41,17 @@
     "vite": "8.3.6",
     "vitest": "5.1.0",
     "wrangler": "4.158.0"
+  },
+  "dependencies": {
+    "@capacitor-community/admob": "8.3.0",
+    "@capacitor/android": "8.6.0",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/browser": "8.0.5",
+    "@capacitor/core": "8.6.0",
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/share": "8.0.3",
+    "@capacitor/splash-screen": "8.0.2",
+    "@capacitor/status-bar": "8.0.4",
+    "@revenuecat/purchases-capacitor": "14.1.0"
   }
 }

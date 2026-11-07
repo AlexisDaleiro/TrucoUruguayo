@@ -30,9 +30,9 @@ export class Scene {
   host.appendChild(this.app.canvas);this.app.canvas.setAttribute('aria-hidden','true');this.app.stage.addChild(this.world);this.world.addChild(this.background,this.television,this.people,this.table,this.actorArms,this.matches,this.cards,this.foreground,this.effects);this.ready=true;this.layout();
   if(import.meta.env.DEV)Object.assign(window,{bolicheScene:{pause:()=>this.app.stop(),resume:()=>this.app.start(),metrics:()=>({fps:this.fps,frames:this.frames,quality:this.quality,renderer:this.app.renderer.name})}});
   this.observer=new ResizeObserver(()=>this.layout());this.observer.observe(host);
-  this.app.ticker.add(this.tick);document.addEventListener('visibilitychange',this.visibility);
+  this.app.ticker.add(this.tick);document.addEventListener('visibilitychange',this.visibility);document.addEventListener('boliche-visibility',this.visibility);this.visibility();
  }
- visibility=()=>{if(document.hidden)this.app.stop();else this.app.start();};
+ visibility=()=>{if(document.hidden||document.documentElement.hasAttribute('data-native-paused'))this.app.stop();else this.app.start();};
  tick=(ticker:Ticker)=>{
   const dt=ticker.deltaMS/1000;this.time+=dt;this.frames++;this.fps=this.fps*.97+ticker.FPS*.03;
   if(this.fps<50)this.slow+=dt;else this.slow=0;if(this.slow>3&&this.quality==='high'&&this.manualQuality==='auto'){this.quality='medium';for(const p of this.dust)p.visible=false;}
@@ -109,5 +109,5 @@ export class Scene {
  voiceEvents(view:PlayerView){let delay=0;for(const event of view.events){const relative=((event.seat??view.seat)-view.seat+this.mode)%this.mode;const rig=this.rigByRelative.get(relative);const names:Record<string,string>={TRUCO:view.value===1?'truco':view.value===2?'retruco':'valeCuatro',ENVIDO:view.pending?.sequence.at(-1)==='F'?'faltaEnvido':view.pending?.sequence.at(-1)==='R'?'realEnvido':'envido',FLOR:'flor',RESTO:'resto',QUIERO:'quiero',NO_QUIERO:'noQuiero',MAZO:'mazo',TANTO:event.value===undefined?'buenas':`tengo-${event.value}`};const id=names[event.type];if(!id)continue;const pan=relative===1&&this.mode===4?.65:relative===3?-.65:0;this.gestureTimers.push(setTimeout(()=>{if(this.destroyed)return;void audio.speak(this.characterAt(relative),id,pan,shape=>{if(rig&&!rig.destroyed)rig.gesture(shape);});},delay));delay+=900;}}
  localScores():[number,number]{const side=team(this.view?.seat??0);return [this.view?.scores[side]??0,this.view?.scores[1-side]??0];}
  showGesture(seat:number,gesture:string){const relative=(seat-(this.view?.seat??0)+this.mode)%this.mode;const rig=this.rigByRelative.get(relative);if(!rig)return;rig.gesture(gesture);this.gestureTimers.push(setTimeout(()=>{if(!rig.destroyed)rig.gesture('neutral');},700));}
- destroy(){this.clearAnimation();this.destroyed=true;for(const timer of this.gestureTimers)clearTimeout(timer);this.timeline?.kill();this.observer?.disconnect();document.removeEventListener('visibilitychange',this.visibility);gsap.killTweensOf(this.world);gsap.killTweensOf(this.cards);if(this.ready){this.app.ticker.remove(this.tick);this.app.destroy(true,{children:true});}}
+ destroy(){this.clearAnimation();this.destroyed=true;for(const timer of this.gestureTimers)clearTimeout(timer);this.timeline?.kill();this.observer?.disconnect();document.removeEventListener('visibilitychange',this.visibility);document.removeEventListener('boliche-visibility',this.visibility);gsap.killTweensOf(this.world);gsap.killTweensOf(this.cards);if(this.ready){this.app.ticker.remove(this.tick);this.app.destroy(true,{children:true});}}
 }

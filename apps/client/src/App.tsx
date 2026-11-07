@@ -10,13 +10,14 @@ import type {Scene,AnimationName} from './scene/Scene';
 import s from './App.module.css';
 import {OnlinePlay,Lobby,Queue,ErrorPanel} from './components/OnlinePanels';
 import {useOnline,joinRoom,disconnectOnline,roomOperation,sendChat,sendSena,cancelSearch,resumeSearch} from './network/online';
-import {linkGoogle} from './network/auth';
+import {linkGoogle,ensureSession} from './network/auth';
 import {Onboarding,TutorialOffer,Tutorial,Shop,Ranking,Wallet,Progress,ProfilePanel,AccountControls,LegalPage} from './components/MetaPanels';
 import {useMeta,hydrateProfile,applyProfile,updatePreferences,reloadProfile} from './state/meta';
 import {usePreferences} from './state/preferences';
 import {levelForXp} from '../../../packages/shared/src/economy';
 import {team,numberOf,suitOf} from '../../../packages/engine/src/index';
 const SceneView=lazy(()=>import('./scene/SceneView'));
+const MobilePreview=lazy(()=>import('./components/MobileCommerce'));
 const VoiceGallery=lazy(()=>import('./audio/VoiceGallery'));
 const actionLabel=(a:Action,value=1)=>a.type==='TRUCO'?(value===1?t.truco:value===2?t.retruco:t.four):a.type==='ENVIDO'?t[a.bid]:a.type==='PLAY_CARD'?'':t[a.type];
 function Speech({view}:{view:PlayerView}){
@@ -42,18 +43,28 @@ function Gallery({kind}:{kind:'animations'|'sounds'}){
 }
 function RulePage(){return <main className={s.document}><a href="/">← {t.back}</a><h1>{t.help}</h1>{t.rulesIntro.map(rule=><section key={rule.title}><h2>{rule.title}</h2><p>{rule.body}</p></section>)}</main>;}
 export default function App(){
- const [entered,setEntered]=useState(sessionStorage.getItem('boliche-entered')==='1'||location.search.includes('local=1'));
+ const [entered,setEntered]=useState(sessionStorage.getItem('boliche-entered')==='1'||location.search.includes('local=1')||new URLSearchParams(location.search).get('entrar')==='1');
  const [panel,setPanel]=useState<'options'|'play'|'shop'|'menu'|'chat'|'friends'|'senas'|'ranking'|'wallet'|'profile'|null>(null);const [mode,setMode]=useState<2|4>(2);
  const meta=useMeta(),connected=useConnected();const [offlineAllowed,setOfflineAllowed]=useState(()=>localStorage.getItem(practiceAgeKey)==='1'),[offlineAge,setOfflineAge]=useState(false);
  const [localSignal,setLocalSignal]=useState<{gesture:string;at:number}|null>(null);
  const online=useOnline();
  const playing=useGame(x=>x.playing),view=useGame(x=>x.view),fast=useGame(x=>x.fast);const effectiveMode=online.snapshot?.seats??view?.seats??mode;
- useEffect(()=>{const params=new URLSearchParams(location.search);if(import.meta.env.DEV&&params.get('local')==='1'){void hydrateProfile().then(()=>useMeta.setState({onboarding:false}));useGame.getState().start(params.get('mode')==='2v2'?4:2);setMode(params.get('mode')==='2v2'?4:2);}else{void hydrateProfile();if(location.pathname.startsWith('/sala/'))setEntered(true);}return()=>{disconnectOnline(true);useGame.getState().stop();};},[]);
+ useEffect(()=>{const params=new URLSearchParams(location.search);if(import.meta.env.DEV&&params.get('local')==='1'){void hydrateProfile().then(()=>useMeta.setState({onboarding:false}));useGame.getState().start(params.get('mode')==='2v2'?4:2);setMode(params.get('mode')==='2v2'?4:2);}else if(location.pathname==='/auth/callback'){void ensureSession().then(()=>location.replace('/?entrar=1')).catch(()=>location.replace('/'));}else{void hydrateProfile();if(location.pathname.startsWith('/sala/'))setEntered(true);}return()=>{disconnectOnline(true);useGame.getState().stop();};},[]);
  useEffect(()=>{if(!connected||!meta.profile?.age13Confirmed)return;const code=location.pathname.match(/^\/sala\/([A-Z2-9]{6})$/)?.[1]??sessionStorage.getItem('boliche_room_v1');if(code&&!useOnline.getState().code){setEntered(true);void joinRoom(code);}else if(!code)resumeSearch();},[connected,meta.profile?.age13Confirmed]);
  useEffect(()=>{if(connected)void hydrateProfile();},[connected]);
  useEffect(()=>{if(online.profile&&online.profile!==useMeta.getState().profile)applyProfile(online.profile);},[online.profile]);
  useEffect(()=>{if(!meta.profile)return;const timer=setInterval(()=>void reloadProfile(),60000);const visible=()=>{if(!document.hidden)void reloadProfile();};document.addEventListener('visibilitychange',visible);return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',visible);};},[meta.profile?.id]);
  useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if((e.target as HTMLElement).matches('input,select,textarea')||panel||!playing||useMeta.getState().tutorial||useMeta.getState().onboarding)return;const state=useGame.getState();const legal=state.view?.legal??[];let action:Action|undefined;const key=e.key.toLowerCase();if(['1','2','3'].includes(key))action=legal.filter(a=>a.type==='PLAY_CARD')[Number(key)-1];else if(key==='t')action=legal.find(a=>a.type==='TRUCO');else if(['e','r','f'].includes(key))action=legal.find(a=>a.type==='ENVIDO'&&a.bid===key.toUpperCase());else if(key==='q')action=legal.find(a=>a.type==='QUIERO');else if(key==='n')action=legal.find(a=>a.type==='NO_QUIERO');else if(key==='m')action=legal.find(a=>a.type==='MAZO');else if(key==='escape')setPanel('menu');else if(key==='c')setPanel('chat');else if(key==='s'&&state.view?.seats===4)setPanel('senas');if(action){e.preventDefault();state.send(action);}};window.addEventListener('keydown',onKey);return()=>window.removeEventListener('keydown',onKey);},[playing,panel]);
+ useEffect(()=>{
+  const back=(event:Event)=>{
+   const dialog=[...document.querySelectorAll('dialog[open]')].at(-1);
+   if(dialog){event.preventDefault();dialog.dispatchEvent(new Event('cancel',{cancelable:true}));}
+   else if(playing){event.preventDefault();setPanel('menu');}
+   else if(location.pathname!=='/'){event.preventDefault();location.assign('/');}
+  };
+  window.addEventListener('boliche-back',back);return()=>window.removeEventListener('boliche-back',back);
+ },[playing]);
+ if(import.meta.env.DEV&&location.pathname==='/dev/android')return <main className={s.document}><h1>{t.mobilePreview}</h1><Suspense fallback={<p>{t.loading}</p>}><MobilePreview preview/></Suspense></main>;
  if(import.meta.env.DEV&&location.pathname.startsWith('/dev/'))return <Gallery kind={location.pathname.includes('sonidos')?'sounds':'animations'}/>;
  if(location.pathname==='/reglamento')return <RulePage/>;
  const legalPages:Record<string,'privacy'|'terms'|'delete'|'credits'|'support'>={'/privacidad':'privacy','/terminos':'terms','/borrar-cuenta':'delete','/creditos':'credits','/soporte':'support'};if(legalPages[location.pathname])return <LegalPage kind={legalPages[location.pathname]}/>;

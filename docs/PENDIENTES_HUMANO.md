@@ -34,3 +34,10 @@ Revisar reglas [VALIDAR] en docs/REGLAS.md y validar diseño legal/textos con ab
 
 1. Configurar Sentry y PostHog como en Fase 5. Invitar jugadores para medir sesiones reales con consentimiento. En PostHog, revisar `session_error / app_open` por ID anónimo único, con una ventana de siete días y tráfico de prueba excluido. Registrar tamaño de la muestra y ajustar bots o economía solo si los datos lo justifican.
 2. Para leer feedback privado, generar una clave aleatoria de 32 bytes, guardarla en el gestor de secretos del proyecto y cargarla con `pnpm exec wrangler secret put FEEDBACK_READ_KEY`. En la máquina del operador configurar esa misma clave en la variable `BOLICHE_FEEDBACK_READ_KEY`. Ejecutar `Invoke-RestMethod 'https://truco-de-boliche.alexisdaleiro.workers.dev/api/feedback' -Headers @{Authorization=('Bearer '+$env:BOLICHE_FEEDBACK_READ_KEY)}`. Los comentarios se reciben aunque la lectura esté desactivada.
+
+## Android y proveedores (Fase 7)
+
+- Generar y resguardar la clave de subida. Firmar el AAB y habilitar Play App Signing. Cargar el certificado SHA-256 para App Links y verificar con un teléfono. Los comandos exactos están en `docs/ANDROID.md`.
+- Crear app y unidad en AdMob. Configurar bloqueos, consentimiento, recompensa y URL SSV. Cargar los IDs para el Worker y para el build en el momento de habilitar anuncios reales. Primero probar con ID de demostración y luego unidad propia en modo de prueba.
+- Crear los cuatro productos en Play, configurar oferta y webhook de RevenueCat, cargar las claves y registrar testers de licencia. Probar créditos, restauración y renovación en pista interna con un dispositivo físico. Completar Android API 36 en CI o con el SDK de Android instalado.
+- Aplicar además la migración Supabase `20261107222100_mobile_commerce.sql` antes de usar pagos/anuncios con el adaptador remoto. Los callbacks se verifican de extremo a extremo en el código local con firmas de fixture y se prueban con los proveedores una vez configurados.

@@ -1,3 +1,5 @@
+import {publicSite,hapticCue} from '../platform';
+import {usePreferences} from '../state/preferences';
 import {track} from '../telemetry';
 import {create} from 'zustand';
 import type {PlayerView,Action} from '../../../../packages/engine/src/index';
@@ -23,11 +25,11 @@ class RoomConnection {
    useOnline.setState({status:'reconnecting'});this.reconnect=setTimeout(()=>void this.connect(),1200);return;
   }
   if(this.closed||this.version!==generation)return;
-  const url=new URL('/api/rooms/'+this.code+'/socket',location.origin);url.protocol=url.protocol==='https:'?'wss:':'ws:';
+  const url=new URL('/api/rooms/'+this.code+'/socket',publicSite);url.protocol=url.protocol==='https:'?'wss:':'ws:';
   const ws=new WebSocket(url,['boliche.v1','boliche-ticket.'+token]);this.socket=ws;
   ws.onopen=()=>{this.heartbeat=setInterval(()=>{if(ws.readyState===WebSocket.OPEN)ws.send('ping');},20000);};
   ws.onmessage=e=>{if(this.closed||this.version!==generation)return;let message:Record<string,unknown>;try{message=JSON.parse(String(e.data));}catch{return;}
-   if(message.type==='SNAPSHOT'){const snapshot=message as unknown as Snapshot;const previous=useOnline.getState().snapshot;useOnline.setState({snapshot,code:this.code,status:snapshot.view?'playing':'lobby',error:null});if(snapshot.view){if(!previous?.view)track('match_start',{mode:snapshot.seats,online:true});if(snapshot.view.winner!==null&&previous?.view?.winner===null)track('match_end',{mode:snapshot.seats,online:true,won:snapshot.view.winner===snapshot.seat%2});acceptOnlineView(snapshot.view,action=>this.action(action),()=>disconnectOnline());if(snapshot.view.seq!==previous?.view?.seq)audio.play(snapshot.view.events.some(event=>event.type==='FLOR')?'flor':snapshot.view.events.some(event=>event.type==='PLAY_CARD')?'play':'button');if(!previous?.view||snapshot.view.winner!==null)void refreshProfile().then(profile=>useOnline.setState({profile})).catch(()=>{});}else detachOnline();}
+   if(message.type==='SNAPSHOT'){const snapshot=message as unknown as Snapshot;const previous=useOnline.getState().snapshot;useOnline.setState({snapshot,code:this.code,status:snapshot.view?'playing':'lobby',error:null});if(snapshot.view){if(!previous?.view)track('match_start',{mode:snapshot.seats,online:true});if(snapshot.view.winner!==null&&previous?.view?.winner===null)track('match_end',{mode:snapshot.seats,online:true,won:snapshot.view.winner===snapshot.seat%2});acceptOnlineView(snapshot.view,action=>this.action(action),()=>disconnectOnline());if(snapshot.view.seq!==previous?.view?.seq&&usePreferences.getState().haptics&&snapshot.view.events.some(event=>event.type==='PLAY_CARD'&&event.seat===snapshot.seat))hapticCue();if(snapshot.view.seq!==previous?.view?.seq)audio.play(snapshot.view.events.some(event=>event.type==='FLOR')?'flor':snapshot.view.events.some(event=>event.type==='PLAY_CARD')?'play':'button');if(!previous?.view||snapshot.view.winner!==null)void refreshProfile().then(profile=>useOnline.setState({profile})).catch(()=>{});}else detachOnline();}
    if(message.type==='CHAT'){useOnline.setState({chat:{seat:Number(message.seat),phrase:Number(message.phrase),at:Date.now()}});audio.play('chat');}
    if(message.type==='SENA'){const signal:SignalEvent={seat:Number(message.seat),gesture:String(message.gesture),at:Date.now(),id:++signalId};useOnline.setState(state=>({sena:signal,senas:[...state.senas.slice(-7),signal]}));audio.play('sena');}
    if(message.type==='ERROR'){if(message.code!=='STALE')useOnline.setState({error:String(message.code)});}

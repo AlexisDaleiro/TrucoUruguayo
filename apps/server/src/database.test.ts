@@ -18,3 +18,21 @@ test('curva SQL usa economy_config y no umbrales duplicados',async()=>{await db.
 test('migrar invitado conserva historial y no vuelve a acreditar resultados anteriores',async()=>{const id=crypto.randomUUID(),uid=crypto.randomUUID();await db.exec('reset role');await db.query('insert into auth.users values($1)',[uid]);await db.exec('set role service_role');const profile={...fresh(0),id,wallet:9,xp:100};const result:MatchResult={ref:'legacy-match',at:Date.now(),hasBots:true,winner:0,members:[{id,seat:0,mmr:1000,originalBot:false,abandoned:false},{id:'bot:legacy',seat:1,mmr:1000,originalBot:true,abandoned:false}],bonuses:{}};const history={ledger:[{ref:'legacy-entry',delta:-1,reason:'entry',createdAt:2},{ref:'welcome',delta:10,reason:'welcome',createdAt:1}],results:[result]};expect(await command<Profile>({op:'bootstrap',uid,profile,history})).toMatchObject({wallet:9,xp:100});await command({op:'result',result});expect(await command<Profile>({op:'profile',id})).toMatchObject({wallet:9,xp:100});expect(await command<unknown[]>({op:'ledger',id})).toHaveLength(2);});
 test('RLS impide leer otra cuenta y escribir economía/RPC desde cliente',async()=>{await db.exec('set role authenticated');try{await db.query("select set_config('request.jwt.claim.sub',$1,false)",[uids[0]]);expect((await db.query('select * from public.profiles')).rows).toHaveLength(1);expect((await db.query('select distinct user_id from public.wallet_tx')).rows).toEqual([{user_id:uids[0]}]);await expect(db.query('update public.profiles set wallet=999')).rejects.toThrow(/permission denied/);await expect(command({op:'reserve',ids:[ids[0]],ref:'forged'})).rejects.toThrow(/permission denied/);}finally{await db.exec('reset role');}});
 test('libro inmutable y borrado efectivo con cascada/anonimización',async()=>{await expect(db.query("update public.wallet_tx set delta=100 where ref='drain'")).rejects.toThrow('APPEND_ONLY');await command({op:'delete',id:ids[0]});expect(await command({op:'profile',id:ids[0]})).toBeNull();expect((await db.query('select * from public.wallet_tx where user_id=$1',[uids[0]])).rows).toHaveLength(0);expect(JSON.stringify((await db.query('select result from public.match_results')).rows)).not.toContain(ids[0]);});
+
+test('SQL acredita transacciones de Android una vez, limita anuncios y protege la RPC',async()=>{
+ const id=crypto.randomUUID(),uid=crypto.randomUUID();
+ await db.exec('reset role');await db.query('insert into auth.users values($1)',[uid]);await db.exec('set role service_role');
+ await command({op:'bootstrap',uid,profile:{...fresh(0),id}});
+ const credit=async(body:object)=>(await db.query<{result:{ok:boolean;limited?:boolean;duplicate?:boolean}}>('select public.commerce_command($1::jsonb) as result',[JSON.stringify({id,...body})])).rows[0].result;
+ expect(await credit({kind:'pack',ref:'play:sql-1',amount:60})).toEqual({ok:true});
+ expect(await credit({kind:'pack',ref:'play:sql-1',amount:60})).toMatchObject({duplicate:true});
+ for(let i=0;i<5;i++)await credit({kind:'ad',ref:'ad:sql-'+i});
+ expect(await credit({kind:'ad',ref:'ad:sql-six'})).toMatchObject({limited:true});
+ const now=Date.now();
+ await credit({kind:'pass',ref:'pass:sql-1',at:now,expires:now+3600000,stamp:'pass_stamp:2026-11'});
+ await credit({kind:'pass',ref:'pass:old-1',at:now-1,expires:now-1});
+ expect(await command({op:'profile',id})).toMatchObject({wallet:80,passUntil:now+3600000,inventory:['pass_stamp:2026-11']});
+ await db.exec('set role authenticated');
+ try{await expect(credit({kind:'pack',ref:'play:forged',amount:150})).rejects.toThrow(/permission denied/);}
+ finally{await db.exec('reset role');}
+});

@@ -60,3 +60,10 @@ La CI Linux reveló @ffmpeg-installer/linux-x64 transitivo de la funcionalidad d
 - Para abrir el WebSocket el cliente pide un permiso de 20 segundos de un solo uso. Así se conserva la verificación del usuario de Supabase en HTTP aunque el WebSocket del navegador no permita adjuntar el JWT.
 - Los bots ponderan las señas recibidas como evidencia parcial. Las declaraciones públicas de tantos, las flores anunciadas y las cartas conocidas son restricciones. La práctica calcula la decisión fuera del hilo de dibujo.
 - El menú conserva la tele animada, el personaje en reposo y el ambiente con una escena DOM/SVG. Pixi se carga al abrir la mesa, donde se necesitan las interacciones y el rig completo. Las fuentes conservan todos sus caracteres en WOFF2.
+
+## Fase 7
+
+- Identificador de paquete `uy.trucodeboliche.app`. El build de prueba conserva IDs de demostración de AdMob aunque el Worker se configure más tarde. La unidad real requiere habilitarla en el build.
+- Los anuncios requieren declaración 18+ solo al pedir un anuncio, sin guardar fecha de nacimiento. No se solicitan anuncios en una mesa activa.
+- El cosmético mensual del Pase es un sello coleccionable en el perfil. La suscripción no modifica el saldo y la entrada se registra con valor cero mientras esté vigente.
+- El webhook de compras deduplica consumibles por transacción de Play y el Pase por evento de RevenueCat. El servidor reconoce exclusivamente los productos y el entorno configurados.
