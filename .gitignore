@@ -12,3 +12,4 @@ playwright-report/
 *.jks
 local.properties
 *.log
+docs/evidencia/cpu-profile.json

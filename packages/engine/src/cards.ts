@@ -39,6 +39,13 @@ export function envido(hand:readonly Card[],sample:Card):number {
  for(let i=0;i<hand.length;i++)for(let j=i+1;j<hand.length;j++)if(suitOf(hand[i])===suitOf(hand[j]))best=Math.max(best,20+cardPoints(hand[i],sample)+cardPoints(hand[j],sample));
  return best;
 }
+export function envidoCards(hand:readonly Card[],sample:Card):Card[]{
+ const ps=hand.filter(c=>pieceOf(c,sample)!==null).sort((a,b)=>cardPoints(b,sample)-cardPoints(a,sample));
+ if(ps.length){const other=hand.filter(c=>pieceOf(c,sample)===null).sort((a,b)=>cardPoints(b,sample)-cardPoints(a,sample));return other.length?[ps[0],other[0]]:[ps[0]];}
+ const sorted=[...hand].sort((a,b)=>cardPoints(b,sample)-cardPoints(a,sample));
+ for(const a of sorted){const b=sorted.find(c=>c!==a&&suitOf(c)===suitOf(a));if(b)return [a,b];}
+ return [sorted[0]];
+}
 /** Rejection sampling removes modulo bias. Server owns this source. */
 export function shuffledDeck(random:()=>number=()=>{
  const value=new Uint32Array(1);crypto.getRandomValues(value);return value[0]/4294967296;
