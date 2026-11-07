@@ -44,6 +44,7 @@ export class CharacterRig extends Container {
   add('hand-left',this.hands);add('hand-right',this.hands);this.cacheParts();
  }
  setPart(key:string,part:string){const sprite=this.faceParts.get(key),texture=this.textures?.[`${part}.png`];if(sprite&&texture){sprite.texture=texture;sprite.width=320;sprite.height=320;}}
+ variant(value:string){if(!this.textures)return;if(value==='sin_boina'&&this.character==='washington'){const hair=this.faceParts.get('hair');if(hair)hair.visible=false;if(this.label==='local-back')this.setPart('back-head','face');}if(value==='pelo_gris'&&this.character==='marta'){this.setPart('hair','hair-gray');this.setPart('back-head','back-head-gray');}if(value==='camisa_roja'||value==='cardigan_azul'){const suffix=value==='camisa_roja'?'red':'blue';for(const part of ['torso','back-torso','upper-left','upper-right'])this.setPart(part,`${part}-${suffix}`);this.torso.tint=0xffffff;}for(const part of [this.torso,this.head,this.arms,this.hands])part.updateCacheTexture();}
  cacheParts(){for(const part of [this.torso,this.arms,this.hands,this.head])part.cacheAsTexture({resolution:2,antialias:false});}
  breathe(time:number,reduced:boolean){if(reduced||this.label==='local-back')return;this.torso.scale.y=1+Math.sin(time*1.6)*.009;this.head.y=Math.sin(time*1.6)*1.5;if(time>=this.nextBlink){this.blinkUntil=time+.12;this.nextBlink=time+2+Math.random()*4;}const closed=time<this.blinkUntil;if(closed!==this.blinkClosed){this.blinkClosed=closed;this.eyes.scale.y=closed?.08:1;this.head.updateCacheTexture();}}
  gesture(kind:string){

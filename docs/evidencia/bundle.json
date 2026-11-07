@@ -1,15 +1,15 @@
 {
-  "allChunksGzipBytes": 360377,
+  "allChunksGzipBytes": 372098,
   "budgetBytes": 409600,
   "withinBudget": true,
   "files": [
     {
-      "name": "BitmapFont-BoIQBN7m.js",
+      "name": "BitmapFont-BgYn7Yv8.js",
       "gzipBytes": 73
     },
     {
-      "name": "browserAll-DQ0L2zfh.js",
-      "gzipBytes": 11200
+      "name": "browserAll-CTB1XAt6.js",
+      "gzipBytes": 11199
     },
     {
       "name": "Cache-BLvqy-61.js",
@@ -20,7 +20,7 @@
       "gzipBytes": 22844
     },
     {
-      "name": "CanvasRenderer-DTM7JVik.js",
+      "name": "CanvasRenderer-lZRNO9mt.js",
       "gzipBytes": 77
     },
     {
@@ -52,16 +52,16 @@
       "gzipBytes": 20499
     },
     {
-      "name": "index-Cv39ncRY.css",
-      "gzipBytes": 5067
+      "name": "index-BATKUB9F.js",
+      "gzipBytes": 97580
     },
     {
-      "name": "index-D4C496Uj.js",
-      "gzipBytes": 87161
+      "name": "index-zD9dU3MB.css",
+      "gzipBytes": 5654
     },
     {
-      "name": "init-B2XNFNML.js",
-      "gzipBytes": 4577
+      "name": "init-CSjInHR3.js",
+      "gzipBytes": 4575
     },
     {
       "name": "RenderTargetSystem-CCE6_1wz.js",
@@ -72,23 +72,23 @@
       "gzipBytes": 429
     },
     {
-      "name": "SceneView-D0EXeCVe.js",
-      "gzipBytes": 110510
+      "name": "SceneView-CeMsin2W.js",
+      "gzipBytes": 111224
     },
     {
-      "name": "VoiceGallery-gubhxbe8.js",
-      "gzipBytes": 2062
+      "name": "VoiceGallery-C01Q3jjN.js",
+      "gzipBytes": 2066
     },
     {
-      "name": "WebGLRenderer-BUs1DS-6.js",
+      "name": "WebGLRenderer-BWtKeHCg.js",
       "gzipBytes": 76
     },
     {
-      "name": "WebGPURenderer-DxjQW-48.js",
+      "name": "WebGPURenderer-DxzrZDD8.js",
       "gzipBytes": 77
     },
     {
-      "name": "webworkerAll-ClMl2kqm.js",
+      "name": "webworkerAll-BL2sCgFs.js",
       "gzipBytes": 69
     }
   ]

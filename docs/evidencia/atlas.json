@@ -1,38 +1,38 @@
 {
-  "highBytes": 20020044,
+  "highBytes": 24671384,
   "cacheReserveBytes": 134217728,
   "details": [
     {
       "name": "washington",
       "resolution": 1,
-      "width": 516,
-      "height": 674,
-      "frames": 51,
-      "rgbaBytes": 1391136
+      "width": 588,
+      "height": 708,
+      "frames": 55,
+      "rgbaBytes": 1665216
     },
     {
       "name": "washington",
       "resolution": 2,
-      "width": 930,
-      "height": 1158,
-      "frames": 51,
-      "rgbaBytes": 4307760
+      "width": 1238,
+      "height": 1196,
+      "frames": 55,
+      "rgbaBytes": 5922592
     },
     {
       "name": "marta",
       "resolution": 1,
-      "width": 517,
-      "height": 616,
-      "frames": 51,
-      "rgbaBytes": 1273888
+      "width": 581,
+      "height": 753,
+      "frames": 57,
+      "rgbaBytes": 1749972
     },
     {
       "name": "marta",
       "resolution": 2,
-      "width": 907,
-      "height": 1173,
-      "frames": 51,
-      "rgbaBytes": 4255644
+      "width": 1322,
+      "height": 1379,
+      "frames": 57,
+      "rgbaBytes": 7292152
     },
     {
       "name": "cards-classica",

@@ -1,7 +1,7 @@
 import {regeneration,economy,weekKey,matchXp,eloDelta,entryDelta} from '../../../packages/shared/src/economy';
 import {equip} from '../../../packages/shared/src/catalog';
 import type {Profile,PlayerSettings,MatchResult} from './types';
-export const defaultSettings:PlayerSettings={fast:false,reduced:false,haptics:true,quality:'auto',telemetry:false};
+export const defaultSettings:PlayerSettings={fast:false,reduced:false,haptics:false,quality:'auto',telemetry:false};
 export interface WalletEntry{profileId:string;delta:number;reason:string;ref:string;createdAt:number;}
 export interface WeekRow{profileId:string;nickname:string;points:number;wins:number;losses:number;week:string;}
 export function normalize(profile:Profile):Profile{return {...profile,inventory:profile.inventory??[],settings:{...defaultSettings,...profile.settings},age13Confirmed:profile.age13Confirmed??false,tutorialDone:profile.tutorialDone??false,wins:profile.wins??0,losses:profile.losses??0};}

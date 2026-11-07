@@ -4,7 +4,7 @@ alter table public.profiles add column app_id uuid not null default gen_random_u
  add column wallet integer not null default 0 check(wallet>=0),
  add column regen_at bigint not null default (extract(epoch from clock_timestamp())*1000)::bigint,
  add column loadout jsonb not null default '{"character":"char_don_washington","environment":"env_galpon","cardSkin":"cards_clasica"}',
- add column inventory jsonb not null default '[]', add column settings jsonb not null default '{"fast":false,"reduced":false,"haptics":true,"quality":"auto","telemetry":false}',
+ add column inventory jsonb not null default '[]', add column settings jsonb not null default '{"fast":false,"reduced":false,"haptics":false,"quality":"auto","telemetry":false}',
  add column age13_confirmed boolean not null default false,add column tutorial_done boolean not null default false,
  add column wins integer not null default 0,add column losses integer not null default 0,add column pass_until bigint not null default 0;
 create table public.wallet_tx(user_id uuid not null references public.profiles(user_id) on delete cascade,delta integer not null,reason text not null,ref text primary key,created_at bigint not null);
@@ -21,7 +21,7 @@ grant select on public.wallet_tx,public.weekly_stats to authenticated;
 create policy own_wallet on public.wallet_tx for select to authenticated using((select auth.uid())=user_id);
 create policy own_week on public.weekly_stats for select to authenticated using((select auth.uid())=user_id);
 grant select,insert,update,delete on public.profiles,public.wallet_tx,public.match_results,public.weekly_stats,public.economy_config to service_role;
-insert into public.economy_config values('default','{"welcome":10,"entry":1,"regenMs":7200000,"regenCap":5,"xpWin":50,"xpLoss":20,"eloK":32,"levelThresholds":[0,100,250,450,700,1000]}') on conflict(id) do nothing;
+insert into public.economy_config values('default','{"welcome":10,"entry":1,"regenMs":7200000,"regenCap":5,"xpWin":50,"xpLoss":20,"eloK":32,"levelThresholds":[0,100,250,450,700,1000],"levelStepXp":500}') on conflict(id) do nothing;
 create schema if not exists private;
 revoke all on schema private from public,anon,authenticated;
 grant usage on schema private to service_role;
@@ -49,15 +49,19 @@ begin
  select * into p from public.profiles where app_id=p_id;return p;
 end $$;
 create function public.meta_command(p_command jsonb) returns jsonb language plpgsql security invoker set search_path=public,pg_temp as $$
-declare op text=p_command->>'op';p public.profiles;seed jsonb=p_command->'profile';item jsonb;entry public.wallet_tx;id uuid;uid uuid;ids uuid[];ts bigint=(extract(epoch from clock_timestamp())*1000)::bigint;cfg jsonb;business_ref text=p_command->>'ref';result jsonb;member jsonb;won boolean;bonus jsonb;extra integer;opponent numeric;change integer;wk date;inserted text;rows jsonb;category_key text;equipped_value jsonb;level_no integer;catalog jsonb=p_command->'catalog';
+declare op text=p_command->>'op';p public.profiles;seed jsonb=p_command->'profile';item jsonb;entry public.wallet_tx;id uuid;uid uuid;ids uuid[];ts bigint=(extract(epoch from clock_timestamp())*1000)::bigint;cfg jsonb;business_ref text=p_command->>'ref';result jsonb;member jsonb;history_entry jsonb;won boolean;bonus jsonb;extra integer;opponent numeric;change integer;wk date;inserted text;rows jsonb;category_key text;equipped_value jsonb;level_no integer;last_threshold integer;catalog jsonb=p_command->'catalog';
 begin
  select ec.config into cfg from public.economy_config ec where ec.id='default';
- if op='bootstrap' then
+ if op='config' then return cfg;elsif op='bootstrap' then
   uid=(p_command->>'uid')::uuid;select * into p from public.profiles where user_id=uid for update;
   if found then return private.profile_json(p);end if;
   insert into public.profiles(user_id,app_id,nickname,character,xp,mmr,regen_at,loadout,inventory,settings,age13_confirmed,tutorial_done,wins,losses,pass_until)
   values(uid,(seed->>'id')::uuid,seed->>'nickname',seed->>'character',coalesce((seed->>'xp')::int,0),coalesce((seed->>'mmr')::int,1000),coalesce((seed->>'regenAt')::bigint,ts),seed->'loadout',coalesce(seed->'inventory','[]'),seed->'settings',coalesce((seed->>'age13Confirmed')::boolean,false),coalesce((seed->>'tutorialDone')::boolean,false),coalesce((seed->>'wins')::int,0),coalesce((seed->>'losses')::int,0),coalesce((seed->>'passUntil')::bigint,0)) returning * into p;
-  insert into public.wallet_tx values(uid,coalesce((seed->>'wallet')::int,(cfg->>'welcome')::int),'welcome',p.app_id||':welcome',ts);
+  if jsonb_array_length(coalesce(p_command->'history'->'ledger','[]'))>0 then
+   for history_entry in select value from jsonb_array_elements(p_command->'history'->'ledger') order by (value->>'createdAt')::bigint,(value->>'delta')::integer desc loop insert into public.wallet_tx values(uid,(history_entry->>'delta')::integer,history_entry->>'reason',p.app_id||':'||(history_entry->>'ref'),(history_entry->>'createdAt')::bigint) on conflict do nothing;end loop;
+   for history_entry in select value from jsonb_array_elements(coalesce(p_command->'history'->'results','[]')) loop insert into public.match_results values(history_entry->>'ref',history_entry,(history_entry->>'at')::bigint) on conflict do nothing;end loop;
+   if (select wallet from public.profiles where user_id=uid)<>(seed->>'wallet')::integer then raise exception 'MIGRATION_BALANCE';end if;
+  else insert into public.wallet_tx values(uid,coalesce((seed->>'wallet')::int,(cfg->>'welcome')::int),'welcome',p.app_id||':welcome',ts);end if;
   select * into p from public.profiles where user_id=uid;return private.profile_json(p);
  elsif op='profile' then p=private.refresh_profile((p_command->>'id')::uuid);if p.user_id is null then return null;end if;return private.profile_json(p);
  elsif op in ('reserve','refund') then
@@ -94,7 +98,7 @@ begin
  elsif op='ledger' then select coalesce(jsonb_agg(row),'[]') into rows from (select (p_command->>'id') as "profileId",w.delta,w.reason,substring(w.ref from 38) as ref,w.created_at as "createdAt" from public.wallet_tx w join public.profiles pr using(user_id) where pr.app_id=(p_command->>'id')::uuid order by w.created_at desc limit 100) row;return rows;
  elsif op='update' then
   id=(seed->>'id')::uuid;p=private.refresh_profile(id);if p.user_id is null then raise exception 'PROFILE';end if;
-  level_no=case when p.xp<100 then 1 when p.xp<250 then 2 when p.xp<450 then 3 when p.xp<700 then 4 when p.xp<1000 then 5 else 6+(p.xp-1000)/500 end;
+  select count(*) into level_no from jsonb_array_elements_text(cfg->'levelThresholds') threshold where threshold::integer<=p.xp;select max(threshold::integer) into last_threshold from jsonb_array_elements_text(cfg->'levelThresholds') threshold;if p.xp>=last_threshold then level_no=level_no+(p.xp-last_threshold)/coalesce((cfg->>'levelStepXp')::int,500);end if;
   if catalog is null then raise exception 'ITEM_LOCKED';end if;
   for category_key,equipped_value in select * from jsonb_each(seed->'loadout') loop
    if category_key like '%Variant' then continue;end if;

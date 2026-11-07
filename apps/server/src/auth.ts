@@ -11,6 +11,6 @@ export async function verifiedUid(request:Request,env:Env):Promise<string|null>{
 }
 export async function identity(request:Request,env:Env):Promise<Profile|null>{
  const token=sessionToken(request);if(!token)return null;const profile=await accountCall<Profile|null>(env,{op:'session',token});if(!profile)return null;
- const uid=await verifiedUid(request,env);if(uid)await accountCall(env,{op:'link',id:profile.id,uid});return profile;
+ const uid=await verifiedUid(request,env);const linked=await accountCall<string|null>(env,{op:'linkedUID',id:profile.id});if(env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY&&linked&&linked!==uid)return null;if(uid)await accountCall(env,{op:'link',id:profile.id,uid});return profile;
 }
 export function sessionCookie(request:Request,token:string,clear=false){return `${cookieName}=${clear?'':token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${clear?0:31536000}${new URL(request.url).protocol==='https:'?'; Secure':''}`;}

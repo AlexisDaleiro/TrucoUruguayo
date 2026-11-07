@@ -89,10 +89,10 @@
   "flor": "¡Flor!",
   "reveal": "Cartas del tanto ganador",
   "splashNote": "Subí el volumen. La mesa te espera.",
-  "nickname": "¿Cómo te dicen?",
+  "nickname": "Tu apodo",
   "save": "De una",
   "cancel": "Cancelar",
-  "nicknameError": "Elegí un apodo de 2 a 24 letras o números.",
+  "nicknameError": "Probá con un apodo de 2 a 24 letras o números, sin expresiones ofensivas.",
   "level": "Nivel",
   "tokens": "fichas",
   "menu": "Menú de partida",
@@ -125,24 +125,44 @@
   "brandLine2": "Boliche",
   "rulesIntro": [
     {
-      "title": "La muestra manda",
-      "body": "El 2, 4, 5, 11 y 10 del palo de la muestra son las piezas. Si la muestra es una pieza, el 12 de ese palo toma su lugar."
+      "title": "La mesa y las manos",
+      "body": "Jugamos con baraja española de 40 cartas. Cada persona recibe tres cartas y se descubre la muestra. En 2vs2 los equipos se alternan y tu compañero está enfrente. Se reparte y se juega en sentido antihorario."
     },
     {
-      "title": "Las bazas",
-      "body": "Jugás tres cartas, una por turno. Ganá dos bazas para llevarte la mano. Si hay parda, vale la primera baza ganada; si las tres empatan, gana el mano."
+      "title": "Piezas y alcahuete",
+      "body": "El 2, 4, 5, 11 y 10 del palo de la muestra son piezas, en ese orden. Superan a todas las cartas comunes. Si la muestra es una pieza, el 12 de ese palo ocupa su lugar, con su fuerza y sus tantos."
     },
     {
-      "title": "Los cantos",
-      "body": "Truco vale 2, retruco 3 y vale cuatro 4. El envido va primero. La flor se anuncia automáticamente; no hace falta que la busques entre los botones."
+      "title": "Orden de las cartas comunes",
+      "body": "De mayor a menor: 1 de espada, 1 de basto, 7 de espada, 7 de oro, treses, doses, 1 de copa y oro, reyes, caballos, sotas, 7 de copa y basto, seises, cincos y cuatros. Las piezas y el alcahuete se consideran antes de esta lista."
     },
     {
-      "title": "El tanteador",
-      "body": "La partida termina cuando un equipo llega a 30. Cada cinco fósforos forman un cuadradito. Las fichas sirven para entrar a una partida; ganar da experiencia."
+      "title": "Bazas y pardas",
+      "body": "Cada mano tiene hasta tres bazas. La carta más fuerte gana la baza y su equipo abre la siguiente. Dos bazas alcanzan. Si la primera es parda, decide la siguiente que no lo sea; si todas son pardas, gana la mano. Si se ganó la primera y la segunda es parda, gana ese equipo; si cada uno ganó una y la tercera es parda, decide la primera. Después de parda vuelve a abrir quien abrió esa baza."
     },
     {
-      "title": "Compañeros",
-      "body": "En 2 vs 2 tu compañero se sienta enfrente. Las señas son gestos para comunicarse entre compañeros."
+      "title": "Truco, retruco y vale cuatro",
+      "body": "Sin canto la mano vale uno. Truco querido vale dos; retruco tres; vale cuatro cuatro. Los equipos se alternan al subir: sube quien aceptó el canto anterior. No quiero termina la mano con el valor anterior para quien cantó. Irse al mazo entrega el valor aceptado de la mano."
+    },
+    {
+      "title": "Envido",
+      "body": "Se canta durante la primera baza, en tu turno y antes de tirar tu carta; también podés responder con envido a un truco de esa baza. Dos comunes del mismo palo suman sus valores y veinte; las figuras comunes valen cero. Sin pareja, cuenta la mayor. Las piezas valen 30, 29, 28, 27 y 27: usás la de mayor valor más la común más alta. No se suman piezas entre sí para envido. Envido vale dos y real tres; los cantos se acumulan. Falta envido reemplaza la suma por lo que le falta al equipo que va adelante para terminar. Si no quieren, se toma el valor previo o uno si era el primer canto. En empate decide la mano."
+    },
+    {
+      "title": "Flor",
+      "body": "Hay flor con tres comunes del mismo palo, una pieza y dos comunes del mismo palo, o dos o más piezas. Se anuncia automáticamente si está habilitada y anula el envido. Con comunes suma veinte; con una pieza, su valor y las dos comunes; con varias, el valor completo de la mayor más la unidad de las demás piezas y el valor de la común si queda una. Si solo un equipo tiene flor, suma tres por cada una. Si ambos tienen, la comparación simple da tres puntos por cada flor cantada en la mesa a la mayor flor. Contraflor al resto querida da lo que le falta al equipo que va adelante para terminar. Con flor me achico entrega tres por cada flor cantada, sin comparar. En empate decide la mano."
+    },
+    {
+      "title": "Señas",
+      "body": "Solo en 2vs2. Tu compañero ve el gesto elegido y los rivales un tic disimulado. Podés mandar una cada segundo y medio, incluso para despistar. Levantar cejas es 2 pieza; beso 4; nariz 5; guiños 11 y 10; labios a derecha 1 espada; mentón 1 basto; labios a izquierda 7 espada; una ceja 7 oro; morder labio tres; boca abierta dos; lengua anchos falsos; ojos cerrados comunes; lamer labio envido; cachetes flor."
+    },
+    {
+      "title": "Tiempo y puntaje",
+      "body": "El turno dura 25 segundos. Al agotarse, un canto se rechaza y, si toca jugar, sale la carta de menor fuerza. Tenés 45 segundos de gracia al desconectarte; si volvés, recuperás el asiento en la próxima decisión. Abandonar a propósito cuenta como derrota. Los fósforos forman grupos de cinco. Gana quien llega a 30 o 40, según la mesa."
+    },
+    {
+      "title": "Participantes y fichas",
+      "body": "Si no hay rivales disponibles, podés jugar contra jugadores controlados por IA. Las partidas que empiezan con ellos no entran al ranking semanal. La ficha es una entrada por partida online: ganar da XP y progreso. La práctica y el tutorial son gratis."
     }
   ],
   "room": "Mesa con amigos",
@@ -205,12 +225,186 @@
     "RATE_LIMIT": "Dale un segundo a la mesa antes de volver a tocar.",
     "COOLDOWN": "Esperá un poquito antes de repetir.",
     "ILLEGAL_ACTION": "Esa jugada ya no está disponible.",
-    "ACTION_FAILED": "No pudimos validar la jugada. Volvé a intentarlo."
+    "ACTION_FAILED": "No pudimos validar la jugada. Volvé a intentarlo.",
+    "AGE_REQUIRED": "Confirmá tu edad en el alta para entrar a una mesa.",
+    "ITEM_LOCKED": "Ese artículo todavía no está desbloqueado.",
+    "RESULT_PENDING": "Todavía estamos guardando el resultado. Probá en unos segundos.",
+    "SERVER_ABORT": "Esta mesa se cerró por un error. Volvé al menú y creá otra.",
+    "DELETE_RETRY": "El borrado sigue pendiente. Volvé a intentarlo desde la página de borrado."
   },
   "teamA": "Equipo A",
   "teamB": "Equipo B",
   "voicePending": "Voces pendientes de generar con Azure S0.",
   "voiceReady": "Voces listas para probar.",
   "voiceLine": "Elegí una frase",
-  "character": "Personaje"
+  "character": "Personaje",
+  "onboardTitle": "Antes de sentarte",
+  "onboardIntro": "Elegí cómo te conocen en la mesa. Tu cuenta de invitado guarda el progreso en este dispositivo.",
+  "age13": "Confirmo que tengo 13 años o más.",
+  "onboardPrivacy": "Al continuar aceptás los Términos. Mirá cómo cuidamos tus datos.",
+  "loading": "Un momento…",
+  "continue": "Continuar",
+  "tutorialOffer": "¿Una mano para arrancar? En dos minutos conocés la muestra, las piezas y los cantos. Es gratis y podés saltearlo.",
+  "tutorialStart": "Hacer el tutorial",
+  "skip": "Saltear",
+  "tutorialStep": "PASO {n} DE 6",
+  "tutorialFinish": "Listo para la mesa",
+  "nextStep": "Seguir",
+  "tutorialSteps": [
+    {
+      "title": "La muestra cambia todo",
+      "body": "La carta al lado del mazo es la muestra: acá es el 7 de oro. El 2, 4, 5, 11 y 10 de ese palo son piezas. Este 2 de oro es la más fuerte.",
+      "action": "Ya encontré la pieza",
+      "success": "Las piezas ganan a todas las cartas comunes. Si la muestra es una pieza, el 12 de su palo ocupa su lugar."
+    },
+    {
+      "title": "Una carta a la mesa",
+      "body": "Jugás una carta por turno. Probá este 2 de oro: es pieza por la muestra. Cada mano tiene hasta tres bazas.",
+      "action": "Jugar el 2 de oro",
+      "success": "¡Ahí va! Gana la mejor carta de la baza. Dos bazas ganadas alcanzan para llevarse la mano."
+    },
+    {
+      "title": "Dale carácter: ¡Truco!",
+      "body": "Una mano vale un punto. Truco querido la lleva a dos; retruco a tres y vale cuatro a cuatro. Si no quieren, se lleva el valor anterior quien cantó.",
+      "action": "Cantar truco",
+      "success": "El rival quiso: esta mano ahora vale dos puntos. El canto cambia el valor, nunca el saldo de fichas."
+    },
+    {
+      "title": "Sumá el envido",
+      "body": "Con dos cartas del mismo palo, sumás sus valores y veinte. Tenés 6 y 7 de espada: 33. Las figuras comunes valen cero.",
+      "action": "Cantar envido",
+      "success": "Comparaste tus 33. Real envido y falta envido pueden subir el desafío. En el empate, vale la mano."
+    },
+    {
+      "title": "La flor se canta",
+      "body": "Tres del mismo palo, o una pieza con dos del mismo palo, forman flor. Esta mano tiene 2 de oro, 4 y 6 de espada: flor de 40.",
+      "action": "Reconocer la flor",
+      "success": "¡Flor! Se anuncia automáticamente para que no se te pase. También hay flor con dos o tres piezas."
+    },
+    {
+      "title": "Tu compañero y el tanteador",
+      "body": "En 2vs2 tu compañero se sienta enfrente. Levantar las cejas le señala el 2 pieza. Los fósforos forman grupos de cinco: gana el equipo que llega a 30 o 40.",
+      "action": "Mandar la seña de cejas",
+      "success": "Tu compañero recibió la seña. Los rivales ven un gesto disimulado. El tutorial no consumió fichas ni acreditó XP."
+    }
+  ],
+  "catalogWashington": "Don Washington",
+  "catalogMarta": "Marta",
+  "catalogGalpon": "Galpón de campo · día",
+  "catalogBoliche": "Boliche · noche",
+  "catalogClassic": "Clásica",
+  "catalogCeleste": "Celeste",
+  "shopTabs": {
+    "tokens": "Fichas",
+    "character": "Personajes",
+    "environment": "Entornos",
+    "cardSkin": "Cartas"
+  },
+  "unlockLevel": "Se desbloquea en nivel {n}",
+  "included": "Incluido",
+  "locked": "Por desbloquear",
+  "variant": "Variante",
+  "variants": {
+    "base": "Original",
+    "camisa_roja": "Camisa roja",
+    "sin_boina": "Sin boina",
+    "cardigan_azul": "Cárdigan azul",
+    "pelo_gris": "Pelo gris"
+  },
+  "passName": "Pase Boliche",
+  "passDescription": "Entradas ilimitadas mientras esté activo, tele sin promos y un cosmético del mes. Disponible en Android.",
+  "ranking": "Ranking semanal",
+  "rankingNote": "Cuentan las partidas que comienzan entre humanos. Un reemplazo durante la partida conserva su validez. La semana empieza el lunes a las 00:00 de Uruguay.",
+  "rankingEmpty": "La semana está abierta. ¡La primera mesa puede ser la tuya!",
+  "weekOf": "Semana del",
+  "rankingPoints": "puntos",
+  "wins": "victorias",
+  "losses": "derrotas",
+  "tryAgain": "No pudimos cargarlo. Volvé a intentarlo.",
+  "walletTitle": "Tus fichas",
+  "walletNote": "Cada partida online tiene una entrada de 1 ficha. Ganar suma progreso. La práctica y el tutorial son gratis.",
+  "nextToken": "Próxima ficha gratis en {time}.",
+  "regenFull": "La recarga gratis se detiene cuando tenés {n} o más fichas.",
+  "profileTitle": "Tu perfil",
+  "xp": "Progreso de nivel",
+  "mmr": "Nivel de competencia",
+  "practiceResult": "Práctica terminada: no acredita XP ni consume fichas.",
+  "progressPending": "Estamos guardando tu progreso…",
+  "qualityLabels": {
+    "auto": "Automática",
+    "high": "Alta",
+    "medium": "Media",
+    "low": "Baja"
+  },
+  "haptics": "Vibración",
+  "telemetry": "Compartir errores y uso anónimo",
+  "telemetryNote": "Opcional. Sin grabar pantallas, manos de cartas ni apodos. Podés desactivarlo cuando quieras.",
+  "logout": "Cerrar sesión",
+  "logoutWarning": "Si seguís como invitado y cerrás sesión, podés perder el acceso a tu progreso. Vinculá Google antes.",
+  "deleteAccount": "Borrar mi cuenta",
+  "deleteWarning": "Se eliminarán tu perfil, fichas, inventario y ranking. Saldrás de las mesas activas. Esta acción es definitiva.",
+  "deleteConfirm": "Sí, borrar mi cuenta",
+  "deleteNoSession": "Para borrar tu cuenta, abrí esta página desde el dispositivo donde jugás o iniciá sesión primero.",
+  "deleteIntro": "Podés borrar tu cuenta y los datos asociados desde esta página o desde Opciones.",
+  "serverAbort": "La mesa se cerró por un error. Si todavía no había terminado la primera mano, se devuelve la entrada.",
+  "statsTricks": "Bazas",
+  "statsTruco": "Trucos ganados",
+  "statsTantos": "Tantos ganados",
+  "termsIntro": "Truco de Boliche está en beta. Estas condiciones describen el funcionamiento del juego.",
+  "privacyIntro": "Guardamos los datos necesarios para jugar y conservar tu progreso. No pedimos fecha de nacimiento ni acceso a tus contactos.",
+  "legalTerms": [
+    {
+      "title": "Quiénes pueden jugar",
+      "body": "El juego está destinado a personas de 13 años o más. Usá un apodo respetuoso y cuidá el acceso a tu cuenta."
+    },
+    {
+      "title": "Fichas y progreso",
+      "body": "Una ficha permite entrar a una partida. Se consume cuando se reparten las cartas. No se transfiere, no se convierte en dinero y no se entrega al ganar. Ganar suma XP y progreso. La práctica y el tutorial son gratis."
+    },
+    {
+      "title": "Partidas y participantes",
+      "body": "Si no hay rivales disponibles, podés jugar contra jugadores controlados por IA. Las partidas que empiezan con ellos no cuentan para el ranking semanal. Abandonar a propósito cuenta como derrota. Una desconexión tiene 45 segundos de gracia; podés recuperar el asiento al volver."
+    },
+    {
+      "title": "Compras y anuncios",
+      "body": "Las compras se ofrecen únicamente en la app de Android mediante Google Play. La web muestra el catálogo. Los anuncios recompensados son opcionales y no aparecen en medio de una mano."
+    },
+    {
+      "title": "Errores y cuenta",
+      "body": "Si un error del servidor cierra la mesa antes de terminar la primera mano, se devuelve la entrada. Podés vincular tu invitado a Google para conservar el acceso o borrar tu cuenta desde Opciones y desde la página de borrado."
+    },
+    {
+      "title": "Soporte",
+      "body": "El equipo de Truco de Boliche recibe reportes en las incidencias del proyecto. No publiques datos personales, claves ni comprobantes de compra en un reporte público."
+    }
+  ],
+  "legalPrivacy": [
+    {
+      "title": "Datos necesarios",
+      "body": "Guardamos un identificador de cuenta, apodo, personaje, opciones, progreso, fichas e inventario. Con Google se vincula la identidad de acceso. El chat usa frases predefinidas y no permite texto libre."
+    },
+    {
+      "title": "Dónde se procesan",
+      "body": "Cloudflare sirve el juego y mantiene las salas. Cuando está configurado, Supabase gestiona autenticación y datos de cuenta. Estos proveedores pueden procesar información fuera de Uruguay. Las conexiones técnicas reciben la dirección IP necesaria para responder."
+    },
+    {
+      "title": "Diagnóstico opcional",
+      "body": "Si lo activás, Sentry recibe errores depurados y PostHog eventos de uso con un identificador de sesión sin apodo. No se graban pantallas ni se envían cartas, mazos, claves o mensajes libres. La geolocalización de analítica se desactiva. Podés retirar el permiso en Opciones."
+    },
+    {
+      "title": "Conservación y borrado",
+      "body": "Las salas se conservan hasta 30 días tras terminar. El perfil y el progreso se conservan mientras exista tu cuenta. Al borrarla se eliminan sus datos y se desvincula la identidad de los resultados conservados. Las copias técnicas de los proveedores siguen sus plazos de retención."
+    },
+    {
+      "title": "Tus opciones",
+      "body": "Podés revisar el perfil, cambiar tus opciones y solicitar el borrado desde el juego o desde la página web de borrado. La Ley 18.331 de Uruguay regula la protección de datos personales. El canal de soporte del proyecto está enlazado en esta página; no publiques información privada."
+    }
+  ],
+  "creditsBody": "Personajes y pared originales generados para el proyecto con ImageGen; cartas, objetos, música y efectos originales. Nunito y Lilita One bajo SIL Open Font License. Los créditos y procedencia completos están en CREDITS.md del proyecto.",
+  "environmentAuto": "Si no elegís un entorno, la mesa 1vs1 es de día y la 2vs2 de noche.",
+  "environmentForce": "Entorno de la sala",
+  "environmentDefault": "Elección de cada jugador",
+  "googleSignIn": "Ya tengo cuenta · Entrar con Google",
+  "saveNickname": "Guardar apodo",
+  "motionSystem": "También respetamos las animaciones reducidas de tu dispositivo."
 }

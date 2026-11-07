@@ -22,6 +22,7 @@ describe('vectores exactos del maestro',()=>{
 });
 describe('transiciones',()=>{
  const base=()=>rig(['1E 7E 3B','4C 6B 10E'],'6O',{florEnabled:false});
+ test('justificantes se muestran al ganar la partida con tanto y al cerrar flor automática',()=>{let state=base();state.scores=[22,20];state=act(state,0,{type:'ENVIDO',bid:'F'});state=act(state,1,{type:'QUIERO'});expect(state.winner).toBe(0);expect(new Set(viewFor(state,1).revealed[0].cards)).toEqual(new Set<Card>(['1E','7E']));expect(viewFor(state,1).hands[0]).toEqual([null,null,null]);let flower=rig(['2O 7C 6C','4B 5E 10C'],'7O');expect(viewFor(flower,1).revealed).toEqual([]);flower=act(flower,0,{type:'MAZO'});expect(viewFor(flower,1).revealed[0]).toEqual({seat:0,cards:['2O','7C','6C']});});
  test('cantos, alternancia y rechazos',()=>{
   let s=base();s=act(s,0,{type:'TRUCO'});expect(legalActions(s,0)).toEqual([]);s=act(s,1,{type:'QUIERO'});expect(s.value).toBe(2);expect(legalActions(s,0).some(a=>a.type==='TRUCO')).toBe(false);
   s=act(s,0,{type:'PLAY_CARD',cardId:'1E'});s=act(s,1,{type:'TRUCO'});s=act(s,0,{type:'NO_QUIERO'});expect(s.scores).toEqual([0,2]);
