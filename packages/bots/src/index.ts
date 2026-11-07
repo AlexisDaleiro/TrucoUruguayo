@@ -2,11 +2,12 @@ import {deck,rank,envido,flor,team,type Action,type Card,type PlayerView} from '
 export type Difficulty='low'|'medium'|'high';
 export const profiles={low:{samples:4,noise:.75,bluff:.03},medium:{samples:24,noise:.14,bluff:.08},high:{samples:96,noise:.015,bluff:.12}} as const;
 export const nicknames=['El Tano','La Flaca','Cacho','Nelly','El Zurdo','Pocha','El Vasco','Lili'];
+export const difficultyForMmr=(mmr:number):Difficulty=>mmr<900?'low':mmr>1300?'high':'medium';
 export function thinkMs(random:()=>number=Math.random):number {
  const normal=Math.sqrt(-2*Math.log(Math.max(random(),.00001)))*Math.cos(2*Math.PI*random());return Math.max(1200,Math.min(6000,Math.exp(7.8+.42*normal)));
 }
 /** Determinizations use only the seat-filtered view, never server state. */
-export function chooseAction(view:PlayerView,difficulty:Difficulty='medium',random:()=>number=Math.random):Action {
+export function chooseAction(view:PlayerView,difficulty:Difficulty='medium',random:()=>number=Math.random,knowledge:{partnerSignal?:string}={}):Action {
  const actions=view.legal;if(!actions.length)throw new Error('Sin acciones');
  const profile=profiles[difficulty];
  if(random()<profile.noise)return actions[Math.floor(random()*actions.length)];
@@ -22,6 +23,7 @@ export function chooseAction(view:PlayerView,difficulty:Difficulty='medium',rand
   strength+=ours.filter((r,i)=>r<=theirs[i]).length>=2?1:0;
  }
  strength/=profile.samples;
+ if(view.seats===4&&knowledge.partnerSignal){const boost=['cejas','beso','nariz','guinoDerecho','guinoIzquierdo'].includes(knowledge.partnerSignal)?.18:knowledge.partnerSignal==='ojosCerrados'?-.12:.06;strength=Math.max(0,Math.min(1,strength+boost));}
  const find=(type:Action['type'])=>actions.find(a=>a.type===type);
  if(view.handWinner!==null)return actions[0];
  if(view.pending){

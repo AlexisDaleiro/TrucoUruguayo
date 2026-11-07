@@ -2,5 +2,7 @@
   "$schema":"node_modules/wrangler/config-schema.json",
   "name":"truco-de-boliche", "main":"apps/server/src/index.ts", "compatibility_date":"2026-11-06",
   "assets":{"directory":"apps/client/dist","binding":"ASSETS","not_found_handling":"single-page-application","run_worker_first":["/api/*"]},
-  "observability":{"enabled":true}
+  "observability":{"enabled":true},
+  "durable_objects":{"bindings":[{"name":"ACCOUNTS","class_name":"Accounts"},{"name":"MATCH_ROOM","class_name":"MatchRoom"},{"name":"MATCHMAKER","class_name":"Matchmaker"}]},
+  "migrations":[{"tag":"v1","new_sqlite_classes":["Accounts","MatchRoom","Matchmaker"]}]
 }

@@ -1,2 +1,2 @@
 import {defineConfig} from '@playwright/test';
-export default defineConfig({testDir:'tests',timeout:60000,workers:1,use:{baseURL:'http://127.0.0.1:5173',headless:true},webServer:{command:'pnpm dev',url:'http://127.0.0.1:5173',reuseExistingServer:!process.env.CI,timeout:120000}});
+export default defineConfig({testDir:'tests',timeout:60000,workers:1,use:{baseURL:'http://127.0.0.1:5173',headless:true,actionTimeout:15000},webServer:[{command:'pnpm build && pnpm exec wrangler dev --local --ip 127.0.0.1 --port 8787',url:'http://127.0.0.1:8787/api/health',reuseExistingServer:!process.env.CI,timeout:120000},{command:'pnpm dev:client',url:'http://127.0.0.1:5173',reuseExistingServer:!process.env.CI,timeout:60000}]});

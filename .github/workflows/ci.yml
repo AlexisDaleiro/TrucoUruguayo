@@ -21,7 +21,9 @@ jobs:
         if: always()
         with:
           name: browser-evidence
-          path: docs/capturas
+          path: |
+            docs/capturas
+            test-results/capturas
   deploy:
     if: github.ref == 'refs/heads/main' && vars.CLOUDFLARE_DEPLOY_ENABLED == 'true'
     needs: check

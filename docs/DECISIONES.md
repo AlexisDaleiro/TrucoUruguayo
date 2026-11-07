@@ -27,3 +27,10 @@ CI fijada en Ubuntu 24.04 para evitar cambios de imagen durante la migración ub
 
 ## 2026-11-06 — Renderer adaptativo [REVISAR]
 Perfil real: Chromium usa ANGLE/SwiftShader por software. Con CPU4x la primera escena dio7FPS; cachear fondo/mesa dio16, quitar MSAA23, Canvas nativo43 y cachear el rig por piezas60. Se selecciona Canvas de Pixi8.22 cuando WebGL es software o no hay aceleración identificable; WebGL en hardware. No se reduce ni se finge la medición del test. Texturas estáticas a1x y piezas a2x; expresiones invalidan su caché al cambiar, respiración transforma las piezas ya cacheadas. Tele y efectos siguen en capas dinámicas.
+
+## 2026-11-06 — Autoridad y cuentas locales
+Sin claves, Accounts (Durable Object SQLite) conserva perfiles y sesiones opacas en cookie HttpOnly/SameSiteStrict. MatchRoom conserva mazo/auditoría y emite exclusivamente `viewFor`. La reserva de entrada de todos los humanos sucede en una sola transacción antes del reparto y usa matchId único; un reintento no duplica la entrada. Las intenciones tienen UUID y secuencia; las mutaciones de sala se serializan para conservar primera respuesta válida. Chat y señas no reinician el tiempo de turno.
+
+Con claves, el SDK oficial Supabase verifica `getClaims` (JWKS), issuer y audience; la vinculación usa `linkIdentity` sobre el invitado. No se usa metadata editable como autorización. Un UID ya vinculado a otro perfil se rechaza antes de unir saldos; alternativa descartada: acreditar varias bienvenidas al enlazar invitados repetidos. Producción contra Supabase requiere proyecto y migraciones aplicadas; no se declara probada con credenciales ausentes.
+
+Fuentes técnicas consultadas: https://developers.cloudflare.com/durable-objects/best-practices/websockets/ ; https://supabase.com/docs/guides/auth/auth-anonymous ; https://supabase.com/docs/guides/auth/jwts .

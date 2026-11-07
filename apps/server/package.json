@@ -1,1 +1,1 @@
-{"name":"@truco/server","private":true,"type":"module"}
+{"name":"@truco/server","private":true,"type":"module","dependencies":{"@supabase/supabase-js":"2.119.0","zod":"4.6.7"}}

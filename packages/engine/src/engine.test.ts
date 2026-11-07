@@ -1,7 +1,7 @@
 import {describe,test,expect} from 'vitest';
 import fc from 'fast-check';
 import {act,bidPoints,cardPoints,deck,defaultRules,deal,envido,envidoCards,envidoRaises,falta,flor,handResult,legalActions,newMatch,order,pieceOf,rank,shuffledDeck,team,timeout,viewFor,type Card,type State,type Action} from './index';
-import {senas,senaCooldownMs} from './senas';
+import {senas,senaCooldownMs,signalFor} from './senas';
 const h=(text:string)=>text.split(' ') as Card[];
 const rig=(hands:string[],sample:Card,config:Parameters<typeof newMatch>[2]={}):State=>{
  const seats=hands.length as 2|4;const hs=hands.map(h);const initial:Card[]=[];for(let i=0;i<3;i++)for(const hand of hs)initial.push(hand[i]);initial.push(sample);return newMatch(seats,[...initial,...deck().filter(c=>!initial.includes(c))],config);
@@ -89,3 +89,6 @@ test('Son buenas oculta el tanto; se revelan solo las cartas que justifican',()=
  let s=rig(['7E 6E 3B','4C 6B 10E'],'6O',{florEnabled:false});s=act(s,0,{type:'ENVIDO',bid:'E'});s=act(s,1,{type:'QUIERO'});const events=viewFor(s,0).events;expect(events.find(e=>e.seat===1&&e.type==='TANTO')?.value).toBeUndefined();s=act(s,0,{type:'MAZO'});expect(viewFor(s,1).revealed).toEqual([{seat:0,cards:['7E','6E']}]);
  expect(envidoCards(h('4O 1B 1O'),'7O')).toHaveLength(2);expect(envidoCards(h('10E 11B 12C'),'7O')).toHaveLength(1);expect(envidoCards(h('2O 4O 5O'),'7O')).toEqual(['2O']);
 });
+test.each([
+ ['2O 4O 5O','cachetes'],['2O 6B 7E','lamerLabio'],['2O 4O 6B','cejas'],['4O 5O 6B','beso'],['5O 10O 6B','nariz'],['11O 10O 6B','guinoDerecho'],['10O 6B 5B','guinoIzquierdo'],['1E 6B 5B','labiosDerecha'],['1B 6B 5B','menton'],['7E 6B 5B','labiosIzquierda'],['7O 6B 5B','cejaIzquierda'],['3E 6B 5B','morderLabio'],['2E 6B 5B','bocaAbierta'],['1C 6B 5B','lengua'],['6C 6B 5B','ojosCerrados']
+])('seña verdadera %s',(cards,expected)=>expect(signalFor(h(cards),'7O')).toBe(expected));
