@@ -31,3 +31,14 @@ Verificado: `pnpm check` verde, 59 tests, cobertura100% líneas/99,63% ramas. Pa
 Capturas revisadas en `docs/capturas/fase-3/`: splash, menú, mesa local, mesas online1v1/2v2 y lobby en11tamaños, búsqueda, reconexión y resultados. Hojas de contacto por grupo. Se corrigió la altura de los rivales laterales y la mesa de noche. Último rendimiento CPU4x60,29FPS/p9516,8ms; todos los chunks332,1KiB gzip.
 
 Riesgos/pendientes: loginGoogle, vinculación y baseSupabase no se declaran probados sin proyecto/claves (pasos en pendientes humanos). Backend de datos sigue local hasta Fase5. Meta/XP, regeneración y reembolso robusto se completan allí. Arte/audio y pequeños ajustes de presentación siguen en Fase4. El proxyVite registra ECONNABORTED al cerrar navegadores de las pruebas; no son errores JavaScript del juego. CI remota de esta rama se sigue tras el push.
+
+CI Fase3 42326065769 completada en verde.
+
+## Fase4 — Integración cerrada; voces externas pendientes (2026-11-06)
+Arte original producido con ImageGen nativo: seis hojas Washington/Marta y pared. Rigs PNG alineados, expresiones/señas, brazos por encima de mesa, parpadeo2–6s; barajas Clásica/Celeste originalesSVG y atlasAssetPack1x/2x. Prompts, rig.json, checklist y créditos incluidos. Galerías, animaciones interrumpibles con limpieza de objetos, encuadre y tipografía pulidos. Se revisaron hojas de expresiones y capturas de menú/mesa/local/online/lobby/resultado/galerías en docs/capturas/fase-4.
+
+Audio WebAudio original con seis buses, música procedural adaptativa, ambientes/SFX, paneo y niveles persistidos. Pipeline AzureS0/SSML idempotente por hash, ffmpeg−16LUFS/−1dBTP, spritesOpus/AAC y RMS para lip-flap. Dry-run sin síntesis:968clips pendientes. La galería permite selección de voz/frase y mezcla, indica honestamente que los archivos faltan.
+
+Checks:59tests, lint/typecheck/build verdes; cobertura motor100% líneas/99,63% ramas. Suite12e2e verde4,2min con partidas2/4contextos, privacidad, idempotencia, búsqueda y gracia45s; tras los últimos ajustes de encuadre/recortes, matriz y galerías2e2e nuevamente verdes. CPU4x60,18FPS/p9516,7ms. JS+CSS351,9KiB gzip contando todos los chunks. Atlas alta19,1MiBRGBA (sin pared/caché/renderer), validación automática de bounds/alpha/integridad incluida en build.
+
+[REVISAR] Música y ambientes por síntesis original; humo ruidoso omitido por presupuesto, se conserva luz/polvo/CRT. El arte vectorial original de objetos y figuras permanece como arte del producto. No se declara cumplido «cero placeholders/voces finales»: falta AzureS0/key/facturación y revisión de escucha humana. No se bloquea la siguiente fase por eso, conforme al modo autónomo. Android físico y mezcla final siguen pendientes de validación externa.

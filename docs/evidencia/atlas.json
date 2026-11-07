@@ -1,0 +1,70 @@
+{
+  "highBytes": 20020044,
+  "cacheReserveBytes": 134217728,
+  "details": [
+    {
+      "name": "washington",
+      "resolution": 1,
+      "width": 516,
+      "height": 674,
+      "frames": 51,
+      "rgbaBytes": 1391136
+    },
+    {
+      "name": "washington",
+      "resolution": 2,
+      "width": 930,
+      "height": 1158,
+      "frames": 51,
+      "rgbaBytes": 4307760
+    },
+    {
+      "name": "marta",
+      "resolution": 1,
+      "width": 517,
+      "height": 616,
+      "frames": 51,
+      "rgbaBytes": 1273888
+    },
+    {
+      "name": "marta",
+      "resolution": 2,
+      "width": 907,
+      "height": 1173,
+      "frames": 51,
+      "rgbaBytes": 4255644
+    },
+    {
+      "name": "cards-classica",
+      "resolution": 1,
+      "width": 836,
+      "height": 904,
+      "frames": 41,
+      "rgbaBytes": 3022976
+    },
+    {
+      "name": "cards-classica",
+      "resolution": 2,
+      "width": 1620,
+      "height": 1768,
+      "frames": 41,
+      "rgbaBytes": 11456640
+    },
+    {
+      "name": "cards-celeste",
+      "resolution": 1,
+      "width": 836,
+      "height": 904,
+      "frames": 41,
+      "rgbaBytes": 3022976
+    },
+    {
+      "name": "cards-celeste",
+      "resolution": 2,
+      "width": 1620,
+      "height": 1768,
+      "frames": 41,
+      "rgbaBytes": 11456640
+    }
+  ]
+}
