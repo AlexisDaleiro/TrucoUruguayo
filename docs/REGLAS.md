@@ -244,4 +244,5 @@ Las salas privadas pueden elegir `targetScore` y `florEnabled`. El matchmaking u
 - Falta: leaderNeeds por defecto; malasGanaPartida opcional.
 - Flor de ambos equipos: secuencia y comparación de 4.9.
 - Señas de 1B y 7O: por definir gestos distintos.
+- Implementación provisional: 1B tocar mentón; 7O levantar solo ceja izquierda. Ver decisiones. Flags adicionales `pardaLead` y `florBothMode` identifican la variante implementada.
 
