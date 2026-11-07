@@ -1,0 +1,35 @@
+{
+  "githubRun": 42421740690,
+  "package": "uy.trucodeboliche.app",
+  "targetSdk": 36,
+  "aab": {
+    "name": "app-release.aab",
+    "bytes": 17159984,
+    "sha256": "4ef5fff25abd257f1999029d273cb0e89503ea1a906489a4c43dc79e0e55da31",
+    "plugins": [
+      "@capacitor-community/admob",
+      "@capacitor/app",
+      "@capacitor/browser",
+      "@capacitor/haptics",
+      "@capacitor/share",
+      "@capacitor/splash-screen",
+      "@capacitor/status-bar",
+      "@revenuecat/purchases-capacitor"
+    ]
+  },
+  "apk": {
+    "name": "app-debug.apk",
+    "bytes": 20330118,
+    "sha256": "b72168472f435c118d0f611a0c04c673e75555fa72c5d390fc31772a8d7ea834",
+    "plugins": [
+      "@capacitor-community/admob",
+      "@capacitor/app",
+      "@capacitor/browser",
+      "@capacitor/haptics",
+      "@capacitor/share",
+      "@capacitor/splash-screen",
+      "@capacitor/status-bar",
+      "@revenuecat/purchases-capacitor"
+    ]
+  }
+}

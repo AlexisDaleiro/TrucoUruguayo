@@ -1,27 +1,17 @@
 {
-  "initialMenuGzipBytes": 169021,
-  "allChunksGzipBytes": 398089,
+  "initialMenuGzipBytes": 168401,
+  "allChunksGzipBytes": 397376,
   "budgetBytes": 409600,
   "withinBudget": true,
   "files": [
     {
-      "name": "AudioManager-CC-0QFrc.js",
-      "gzipBytes": 2713,
-      "initialMenu": true
-    },
-    {
-      "name": "auth-Cn_VzJzY.js",
-      "gzipBytes": 1948,
-      "initialMenu": true
-    },
-    {
-      "name": "BitmapFont-BOULVxUs.js",
+      "name": "BitmapFont-DpTj6Oup.js",
       "gzipBytes": 73,
       "initialMenu": false
     },
     {
-      "name": "browserAll-DTZsv3Ln.js",
-      "gzipBytes": 11201,
+      "name": "browserAll-BEUGLxxD.js",
+      "gzipBytes": 11199,
       "initialMenu": false
     },
     {
@@ -35,7 +25,7 @@
       "initialMenu": false
     },
     {
-      "name": "CanvasRenderer-C5hQ4OHC.js",
+      "name": "CanvasRenderer-CuVpts9w.js",
       "gzipBytes": 77,
       "initialMenu": false
     },
@@ -105,18 +95,18 @@
       "initialMenu": false
     },
     {
-      "name": "index-BXmaMEPu.js",
-      "gzipBytes": 94377,
-      "initialMenu": true
-    },
-    {
       "name": "index-CKKC6fhN.css",
       "gzipBytes": 7280,
       "initialMenu": true
     },
     {
-      "name": "init-DQTxhCV7.js",
-      "gzipBytes": 4576,
+      "name": "index-CzrqKm_e.js",
+      "gzipBytes": 98418,
+      "initialMenu": true
+    },
+    {
+      "name": "init-oqLMovhA.js",
+      "gzipBytes": 4577,
       "initialMenu": false
     },
     {
@@ -125,13 +115,13 @@
       "initialMenu": true
     },
     {
-      "name": "MobileCommerce-CC7h43rY.js",
-      "gzipBytes": 2071,
+      "name": "MobileCommerce-BuGvnxKz.js",
+      "gzipBytes": 2058,
       "initialMenu": false
     },
     {
-      "name": "nativeRuntime-flT14qZE.js",
-      "gzipBytes": 888,
+      "name": "nativeRuntime-C7TeLVGZ.js",
+      "gzipBytes": 869,
       "initialMenu": false
     },
     {
@@ -155,13 +145,13 @@
       "initialMenu": true
     },
     {
-      "name": "SceneView-BIzinE2D.js",
-      "gzipBytes": 111282,
+      "name": "SceneView-at8tQ8c9.js",
+      "gzipBytes": 111240,
       "initialMenu": false
     },
     {
-      "name": "VoiceGallery-BXE7Ok-b.js",
-      "gzipBytes": 2099,
+      "name": "VoiceGallery-B-YK5nsC.js",
+      "gzipBytes": 2081,
       "initialMenu": false
     },
     {
@@ -200,17 +190,17 @@
       "initialMenu": false
     },
     {
-      "name": "WebGLRenderer-CEda9ul5.js",
+      "name": "WebGLRenderer-BcYqhe-c.js",
       "gzipBytes": 76,
       "initialMenu": false
     },
     {
-      "name": "WebGPURenderer-3BqD4G2m.js",
+      "name": "WebGPURenderer-CyPkYg8x.js",
       "gzipBytes": 77,
       "initialMenu": false
     },
     {
-      "name": "webworkerAll-Bsbkz33E.js",
+      "name": "webworkerAll-CW75I5II.js",
       "gzipBytes": 69,
       "initialMenu": false
     }

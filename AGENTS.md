@@ -5,7 +5,7 @@ Leer docs/PROMPT_MAESTRO.md. El usuario autorizó ejecutar fases 0 a 8 autónoma
 
 ## Estado actual
 
-Fases 0–6 verificadas. Beta Fase 6 en el Worker público truco-de-boliche, versión 48c3f96a-8b3f-4812-86b2-63252d09c9e7. Lighthouse 100, menú 158,4 KiB gzip, 4G emulada 1,47–1,95 s. 84 tests, 18 escenarios de navegador y 100.000 manos de simulación. Seguir Fases 7–8. Revisar docs/REPORTES.md y docs/PENDIENTES_HUMANO.md para criterios externos.
+Fases 0–7 implementadas y verificadas. Beta pública en Cloudflare con versión f019d7a2-bb5c-426a-97d1-9fc03ffb1393. Fase 6 Lighthouse 100, 4G 1,47–1,95 s. Fase 7 AAB y APK de GitHub Actions 42421740690, SDK 36, 89 tests y comprobación local de Android y reconexión. Regresión de carga de Pixi contenida por SceneBoundary y prueba de gracia espera el asiento. Continuar Fase 8, material Play Store y guía de lanzamiento. Ver docs/REPORTES.md, docs/ANDROID.md y docs/PENDIENTES_HUMANO.md.
 
 ## Comandos
 Node24; pnpm11.25.0; pnpm i; pnpm dev (Vite5173 y Wrangler8787); pnpm check; pnpm test; pnpm test:coverage; pnpm test:e2e; pnpm build; pnpm sim --hands 100000; pnpm deploy; pnpm android:sync; pnpm art:build; node tools/art/verify.mjs; pnpm voices:plan (sin síntesis); pnpm voices:generate (requiere Azure S0/key y pago humano).
