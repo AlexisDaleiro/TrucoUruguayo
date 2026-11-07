@@ -4,8 +4,8 @@ No pegar secretos en el chat ni en archivos versionados.
 
 ## Cloudflare y CI
 1. Resuelto: sesión existente válida y Worker nuevo publicado en https://truco-de-boliche.alexisdaleiro.workers.dev (HTTP 200 verificado).
-2. Para futuras operaciones que exijan más permisos: ejecutar `pnpm exec wrangler login` y completar el navegador. El token actual avisa scopes faltantes; no renovarlo es necesario para el Worker inicial.
-3. GitHub → repositorio → Settings → Secrets and variables → Actions: secrets CLOUDFLARE_ACCOUNT_ID y CLOUDFLARE_API_TOKEN (Worker edit y Durable Objects); variable CLOUDFLARE_DEPLOY_ENABLED=true.
+2. Para futuras operaciones que exijan más permisos: ejecutar `pnpm exec wrangler login` y completar el navegador. El Worker público actual ya está desplegado.
+3. Para activar despliegue automático, GitHub → repositorio → Settings → Secrets and variables → Actions: secrets CLOUDFLARE_ACCOUNT_ID y CLOUDFLARE_API_TOKEN (Worker edit y Durable Objects); variable CLOUDFLARE_DEPLOY_ENABLED=true.
 4. Verificar URL y `/api/health`. El desarrollo local no necesita cuenta.
 
 ## Supabase
@@ -28,7 +28,7 @@ Revisar reglas [VALIDAR] en docs/REGLAS.md y validar diseño legal/textos con ab
 2. Crear proyecto en PostHog; copiar el project token público en `VITE_POSTHOG_KEY` y el host de ingesta US/EU en `VITE_POSTHOG_HOST` (por ejemplo https://eu.i.posthog.com). No usar personal API key. Reconstruir/publicar el cliente tras cambiar variables VITE.
 3. En Opciones activar voluntariamente «Compartir errores y uso anónimo». Probar un error y eventos de prueba; revisar en ambos paneles que no haya apodos, cartas, tokens ni datos de cuenta. Sin consentimiento no se envía nada. No se declara recepción real sin estas cuentas.
 4. Antes de lanzamiento comercial, proporcionar nombre/razón social responsable, contacto privado de soporte, domicilio/jurisdicción y plazos de retención de proveedores. Completar/revisar `/privacidad` y `/terminos` con el abogado. Por ahora identifican al equipo del proyecto y enlazan soporte público sin pedir información personal allí; no son una validación legal final.
-5. Aplicar ambas migraciones Supabase con `pnpm dlx supabase@latest link --project-ref TU_REF` y `pnpm dlx supabase@latest db push`, después de revisar destino y backup. Probar dos usuarios reales: cada uno solo lee su perfil/libro y no puede escribir saldos ni ejecutar `meta_command`. Probar Google, recuperación de cuenta y borrado. Las pruebas PGlite verifican SQL/RLS, no la configuración de Auth y del proyecto remoto.
+5. Aplicar las migraciones Supabase con `pnpm dlx supabase@latest link --project-ref TU_REF` y `pnpm dlx supabase@latest db push`, después de revisar destino y backup. Probar dos usuarios reales: cada uno solo lee su perfil/libro y no puede escribir saldos ni ejecutar `meta_command`. Probar Google, recuperación de cuenta y borrado. Las pruebas PGlite verifican SQL/RLS, no la configuración de Auth y del proyecto remoto.
 
 ## Beta web (Fase 6)
 
@@ -42,3 +42,11 @@ Revisar reglas [VALIDAR] en docs/REGLAS.md y validar diseño legal/textos con ab
 - Crear los cuatro productos en Play, configurar oferta y webhook de RevenueCat, cargar las claves y registrar testers de licencia. Probar créditos, restauración y renovación en pista interna con un dispositivo físico. Completar Android API 36 en CI o con el SDK de Android instalado.
 - Aplicar además la migración Supabase `20261107222100_mobile_commerce.sql` antes de usar pagos/anuncios con el adaptador remoto. Los callbacks se verifican de extremo a extremo en el código local con firmas de fixture y se prueban con los proveedores una vez configurados.
 - Al configurar RevenueCat, cargar también `REVENUECAT_SECRET_KEY` para que el borrado solicite la eliminación de cliente en RevenueCat. Verificar el flujo con una cuenta de pruebas con compras y confirmar la operación en el panel. Gestionar renovaciones en Google Play.
+
+
+## Play Console y cierre de validación (Fase 8)
+
+1. Definir titular, correo privado de soporte y condiciones de retención. Completar la política y el canal de solicitud de borrado desde web para invitados Android que ya no tienen acceso a su dispositivo. Verificar con una cuenta vinculada y una de invitado. Revisar los borradores legales con un abogado uruguayo.
+2. Descargar el AAB y APK desde `docs/entregas/android/` o GitHub Actions. Firmar con la clave de subida, cargar en prueba interna y ejecutar la lista de QA en un teléfono físico y una tablet. Probar anuncios y compras con las cuentas de prueba de los proveedores. Verificar App Links con la firma definitiva.
+3. Copiar ficha, recursos y textos desde `docs/entregas/play-store/FICHA.md`. Confirmar IARC y Seguridad de los datos según el AAB definitivo. Abrir prueba cerrada y pedir acceso a producción cuando Play Console confirme el criterio de testers. El recorrido completo está en `docs/entregas/play-store/PUBLICACION.md`.
+4. Completar las voces Azure y la escucha final, y medir la tasa de errores de sesiones reales consentidas antes del lanzamiento general.

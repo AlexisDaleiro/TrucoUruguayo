@@ -23,4 +23,4 @@ pnpm sim --hands 100000
 
 `pnpm deploy` compila y despliega usando la sesión de Wrangler. No incluir claves ni sesiones en Git. CI ejecuta checks en cada push; el despliegue automático requiere secrets y variable indicados en pendientes humanos.
 
-Web de desarrollo inicial: https://truco-de-boliche.alexisdaleiro.workers.dev . Su disponibilidad no implica que todas las fases estén completas.
+La [beta pública](https://truco-de-boliche.alexisdaleiro.workers.dev) incluye la práctica sin conexión y las mesas online. Los [artefactos Android](docs/entregas/android/README.md) y la [guía de Play Store](docs/entregas/play-store/PUBLICACION.md) están en el repositorio. Los proveedores y el lanzamiento se configuran según los [pendientes humanos](docs/PENDIENTES_HUMANO.md).

@@ -1,0 +1,90 @@
+{
+  "texto": {
+    "titulo": 16,
+    "descripcion-corta": 68,
+    "descripcion-larga": 716
+  },
+  "vocabulario": "verificado",
+  "archivos": [
+    {
+      "archivo": "icono-512.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "bytes": 49851
+    },
+    {
+      "archivo": "imagen-destacada-1024x500.png",
+      "pixels": [
+        1024,
+        500
+      ],
+      "bytes": 559849
+    },
+    {
+      "archivo": "telefono-01-mesa-1v1.jpg",
+      "pixels": [
+        1080,
+        1920
+      ],
+      "bytes": 439480
+    },
+    {
+      "archivo": "telefono-02-mesa-2v2.jpg",
+      "pixels": [
+        1080,
+        1920
+      ],
+      "bytes": 447110
+    },
+    {
+      "archivo": "telefono-03-truco.jpg",
+      "pixels": [
+        1080,
+        1920
+      ],
+      "bytes": 443141
+    },
+    {
+      "archivo": "telefono-04-aprender.jpg",
+      "pixels": [
+        1080,
+        1920
+      ],
+      "bytes": 166708
+    },
+    {
+      "archivo": "tablet-7-01-mesa-1v1.jpg",
+      "pixels": [
+        1440,
+        2304
+      ],
+      "bytes": 615363
+    },
+    {
+      "archivo": "tablet-7-02-mesa-2v2.jpg",
+      "pixels": [
+        1440,
+        2304
+      ],
+      "bytes": 618111
+    },
+    {
+      "archivo": "tablet-10-01-mesa-1v1.jpg",
+      "pixels": [
+        2048,
+        1280
+      ],
+      "bytes": 535042
+    },
+    {
+      "archivo": "tablet-10-02-mesa-2v2.jpg",
+      "pixels": [
+        2048,
+        1280
+      ],
+      "bytes": 496126
+    }
+  ]
+}
