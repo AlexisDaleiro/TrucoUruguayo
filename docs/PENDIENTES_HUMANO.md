@@ -3,8 +3,8 @@
 No pegar secretos en el chat ni en archivos versionados.
 
 ## Cloudflare y CI
-1. Crear o entrar en Cloudflare; habilitar subdominio workers.dev.
-2. Ejecutar `pnpm exec wrangler login` en la raíz y completar el navegador; luego `pnpm deploy`.
+1. Resuelto: sesión existente válida y Worker nuevo publicado en https://truco-de-boliche.alexisdaleiro.workers.dev (HTTP 200 verificado).
+2. Para futuras operaciones que exijan más permisos: ejecutar `pnpm exec wrangler login` y completar el navegador. El token actual avisa scopes faltantes; no renovarlo es necesario para el Worker inicial.
 3. GitHub → repositorio → Settings → Secrets and variables → Actions: secrets CLOUDFLARE_ACCOUNT_ID y CLOUDFLARE_API_TOKEN (Worker edit y Durable Objects); variable CLOUDFLARE_DEPLOY_ENABLED=true.
 4. Verificar URL y `/api/health`. El desarrollo local no necesita cuenta.
 

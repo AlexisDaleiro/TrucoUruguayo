@@ -3,7 +3,7 @@
 Fuente de verdad: docs/PROMPT_MAESTRO.md completo. Pedido del usuario: fases 0–8 autónomas, sin pedir aprobación entre fases; fase 9 excluida. Leer docs/REPORTES.md y docs/PENDIENTES_HUMANO.md para retomar. No declarar cumplidos criterios sin evidencia.
 
 ## Estado
-Fase 0 en implementación. Referencias preservadas en docs/referencias. Repositorio inicialmente sin commits.
+Fase 0 cerrada; CI 42315839548 verde, Worker nuevo desplegado y HTTP200. Capturas fase-0 revisadas. Siguiente: Fase 1 motor/bots, cobertura ≥95%, 100000 manos. No saltar criterios ni fingir completos. Referencias preservadas. Ver reportes para pendientes externos.
 
 ## Stack y comandos
 pnpm workspaces; TypeScript strict; Vite/React 19, PixiJS 8, GSAP 3, Zustand, CSS Modules y Web Audio; motor puro sin dependencias; zod; Cloudflare Worker y Durable Objects SQLite; Supabase Auth/Postgres/RLS con adaptador local sin claves; Capacitor Android.
