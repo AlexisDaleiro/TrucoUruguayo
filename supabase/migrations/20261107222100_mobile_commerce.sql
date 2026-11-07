@@ -16,15 +16,16 @@ declare
  day_start bigint;
  stamp text=p_credit->>'stamp';
 begin
- if kind not in ('ad','pack','pass') or receipt is null or length(receipt)>220 then raise exception 'INVALID_CREDIT';end if;
+ if kind not in ('ad','pack','pass','ad_status') or (kind<>'ad_status' and (receipt is null or length(receipt)>220)) then raise exception 'INVALID_CREDIT';end if;
  select * into p from public.profiles where app_id=(p_credit->>'id')::uuid for update;
  if not found or not p.age13_confirmed then return '{"ok":true,"ignored":true}'::jsonb;end if;
- if kind='ad' then
+ if kind in ('ad','ad_status') then
   amount=2;reason='ad_reward';
   day_start=(extract(epoch from (date_trunc('day',clock_timestamp() at time zone 'America/Montevideo') at time zone 'America/Montevideo'))*1000)::bigint;
   if (select count(*) from public.wallet_tx where user_id=p.user_id and wallet_tx.reason='ad_reward' and created_at>=day_start)>=5 then
    return '{"ok":true,"limited":true}'::jsonb;
   end if;
+  if kind='ad_status' then return '{"ok":true}'::jsonb;end if;
  elsif kind='pack' then
   amount=(p_credit->>'amount')::int;reason='play_purchase';
   if amount is null or amount not in (20,60,150) then raise exception 'INVALID_CREDIT';end if;

@@ -39,10 +39,18 @@ export class Accounts extends DurableObject<Env>{
    const profile=await this.ctx.storage.get<Profile>('profile:'+body.id);if(!profile)throw Error('PROFILE');if(this.remote){const ledger=[...(await collectPrefix<WalletEntry>(this.ctx.storage,`wallet:${profile.id}:`))].map(([key,entry])=>({...entry,ref:key.slice(('wallet:'+profile.id+':').length)}));const results=[...(await collectPrefix<MatchResult>(this.ctx.storage,'result:')).values()].filter(result=>result.members.some(member=>member.id===profile.id));const canonical=await this.remote.bootstrap(normalize(profile),body.uid!,{ledger,results});if(canonical.id!==profile.id)throw Error('ACCOUNT_EXISTS');await this.ctx.storage.put('profile:'+profile.id,canonical);}
    await this.ctx.storage.put('uid:'+body.uid,body.id!);await this.ctx.storage.put('linked:'+body.id,body.uid!);return Response.json({ok:true});
   }
-  if(body.op==='adIntent'){const profile=await this.profile(body.id!);if(!profile?.age13Confirmed)throw Error('PROFILE');return Response.json(await issueAdIntent(this.ctx.storage,profile.id));}
+  if(body.op==='billingSeen'){
+   await this.ctx.storage.put('billing-seen:'+body.id,true);return Response.json({ok:true});
+  }
+  if(body.op==='adIntent'){
+   const profile=await this.profile(body.id!);if(!profile?.age13Confirmed)throw Error('PROFILE');
+   if((await this.remote?.commerce({kind:'ad_status',id:profile.id}))?.limited)return Response.json({ok:false,error:'AD_LIMIT'});
+   return Response.json(await issueAdIntent(this.ctx.storage,profile.id));
+  }
   if(body.op==='adReward')return Response.json(await creditVerifiedAd(this.ctx.storage,this.remote,body.nonce!,body.ref!,body.at!));
   if(body.op==='commerceCredit'){
    const credit=body.credit!;if(await this.ctx.storage.get('deleted:'+credit.id))return Response.json({ok:true,ignored:true});
+   await this.ctx.storage.put('billing-seen:'+credit.id,true);
    return Response.json(this.remote?await this.remote.commerce(credit):await creditLocal(this.ctx.storage,credit));
   }
   if(body.op==='registerRoom'){await this.ctx.storage.put(`room:${body.id}:${body.code}`,Date.now());return Response.json({ok:true});}
@@ -51,6 +59,12 @@ export class Accounts extends DurableObject<Env>{
   if(body.op==='beginDelete'){const id=body.id!,uid=await this.ctx.storage.get<string>('linked:'+id);await this.ctx.storage.put('deleted:'+id,true);if(uid)await this.ctx.storage.put('deletedUID:'+uid,true);const rooms=await collectPrefix<number>(this.ctx.storage,`room:${id}:`);return Response.json({rooms:[...rooms].filter(([,at])=>Date.now()-at<31*86400000).map(([key])=>key.split(':').at(-1)!),uid:uid??null});}
   if(body.op==='delete'){
    const id=body.id!,uid=await this.ctx.storage.get<string>('linked:'+id);if(!await this.ctx.storage.get('deleted:'+id))throw Error('DELETE_RETRY');
+   if(await this.ctx.storage.get('billing-seen:'+id)){
+    if(!this.env.REVENUECAT_SECRET_KEY)throw Error('DELETE_RETRY');
+    const response=await fetch('https://api.revenuecat.com/v1/subscribers/'+encodeURIComponent(id),{method:'DELETE',headers:{Authorization:'Bearer '+this.env.REVENUECAT_SECRET_KEY},signal:AbortSignal.timeout(10000)});
+    if(!response.ok&&response.status!==404)throw Error('DELETE_RETRY');
+    await this.ctx.storage.delete('billing-seen:'+id);
+   }
    if(this.remote&&uid){if(body.accessToken){const signout=await this.remote.client.auth.admin.signOut(body.accessToken,'global');if(signout.error&&!['session_not_found','user_not_found','bad_jwt'].includes(signout.error.code??''))throw Error('DELETE_RETRY');}await this.remote.call({op:'delete',id});const {error}=await this.remote.client.auth.admin.deleteUser(uid);if(error&&error.code!=='user_not_found')throw Error('DELETE_RETRY');}
    const sessions=await collectPrefix<string>(this.ctx.storage,'session:');for(const [key,owner]of sessions)if(owner===id)await this.ctx.storage.delete(key);
    for(const prefix of ['wallet:','room:']){const entries=await collectPrefix(this.ctx.storage,`${prefix}${id}:`);for(const key of entries.keys())await this.ctx.storage.delete(key);}

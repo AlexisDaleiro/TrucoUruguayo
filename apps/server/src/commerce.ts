@@ -7,14 +7,19 @@ import type {Env} from './types';
 
 const responseError=(error:string,status:number)=>Response.json({error},{status});
 const keyUrl='https://www.gstatic.com/admob/reward/verifier-keys.json';
-let publicKeys:{expires:number;keys:Map<string,string>}|undefined;
+let publicKeys:{fetchedAt:number;keys:Map<string,string>}|undefined;
+let keyRefresh:Promise<void>|null=null;
 async function googleKey(id:string){
- if(!publicKeys||publicKeys.expires<Date.now()){
-  const response=await fetch(keyUrl);if(!response.ok)throw Error('SSV_KEYS');
-  const body=z.object({keys:z.array(z.object({keyId:z.number().int(),base64:z.string()}))}).parse(await response.json());
-  publicKeys={expires:Date.now()+3600000,keys:new Map(body.keys.map(key=>[String(key.keyId),key.base64]))};
+ const now=Date.now();
+ if(!publicKeys||now-publicKeys.fetchedAt>3600000||!publicKeys.keys.has(id)&&now-publicKeys.fetchedAt>60000){
+  keyRefresh??=(async()=>{
+   const response=await fetch(keyUrl);if(!response.ok)throw Error('SSV_KEYS');
+   const body=z.object({keys:z.array(z.object({keyId:z.number().int(),base64:z.string()}))}).parse(await response.json());
+   publicKeys={fetchedAt:Date.now(),keys:new Map(body.keys.map(key=>[String(key.keyId),key.base64]))};
+  })().finally(()=>{keyRefresh=null;});
+  await keyRefresh;
  }
- return publicKeys.keys.get(id);
+ return publicKeys?.keys.get(id);
 }
 function base64(value:string){return Uint8Array.from(atob(value.replaceAll('-','+').replaceAll('_','/')),char=>char.charCodeAt(0));}
 function p1363(der:Uint8Array){

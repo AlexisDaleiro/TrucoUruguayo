@@ -26,12 +26,6 @@ async function handle(request:Request,env:Env):Promise<Response>{
  if(!sameOrigin(request))return error('ORIGIN',403);
  try{
   const callback=await commerceCallback(request,env,url);if(callback)return callback;
-  if(url.pathname==='/api/mobile/config'&&request.method==='GET'){
-   if(!nativeRequest(request))return error('FORBIDDEN',403);
-   const adUnit=env.ADMOB_REWARDED_ID??demoRewardedUnit;
-   const revenueCatKey=env.REVENUECAT_APP_ID&&env.REVENUECAT_WEBHOOK_KEY?env.REVENUECAT_PUBLIC_KEY??null:null;
-   return Response.json({adUnit,testAds:!env.ADMOB_REWARDED_ID,revenueCatKey},{headers:{'Cache-Control':'no-store'}});
-  }
   if(url.pathname==='/api/auth/config'){
    const mode=env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY?'supabase':'local';
    const profile=mode==='local'&&url.searchParams.get('profile')==='1'?await identity(request,env):undefined;
@@ -57,6 +51,13 @@ async function handle(request:Request,env:Env):Promise<Response>{
    if(profile)return Response.json({profile});const body=z.object({nickname:nicknameSchema.optional(),character:z.enum(['washington','marta']).optional(),age13Confirmed:z.literal(true).optional()}).strict().parse(await readJson(request));const nickname=nicknameSchema.parse(body.nickname??'Paisano '+Math.floor(Math.random()*9000+1000));const uid=await verifiedUid(request,env);if(env.SUPABASE_URL&&env.SUPABASE_PUBLISHABLE_KEY&&env.SUPABASE_SERVICE_ROLE_KEY&&!uid)return error('AUTH',401);const created=await accountCall<{profile:Profile;token:string}>(env,{op:'create',nickname,character:body.character,uid,age13Confirmed:body.age13Confirmed});return nativeRequest(request)?Response.json({profile:created.profile,sessionToken:created.token},{headers:{'Cache-Control':'no-store'}}):Response.json({profile:created.profile},{headers:{'Set-Cookie':sessionCookie(request,created.token),'Cache-Control':'no-store'}});
   }
   if(!profile)return error('AUTH',401);
+  if(url.pathname==='/api/mobile/config'&&request.method==='GET'){
+   if(!nativeRequest(request)||!profile.age13Confirmed)return error('FORBIDDEN',403);
+   const adUnit=env.ADMOB_REWARDED_ID??demoRewardedUnit;
+   const revenueCatKey=env.REVENUECAT_APP_ID&&env.REVENUECAT_WEBHOOK_KEY&&env.REVENUECAT_SECRET_KEY?env.REVENUECAT_PUBLIC_KEY??null:null;
+   if(revenueCatKey)await accountCall(env,{op:'billingSeen',id:profile.id});
+   return Response.json({adUnit,testAds:!env.ADMOB_REWARDED_ID,revenueCatKey},{headers:{'Cache-Control':'no-store'}});
+  }
   if(url.pathname==='/api/mobile/ad-intent'&&request.method==='POST'){
    if(!nativeRequest(request)||!profile.age13Confirmed)return error('FORBIDDEN',403);
    if(!env.ADMOB_REWARDED_ID)return error('UNAVAILABLE',503);

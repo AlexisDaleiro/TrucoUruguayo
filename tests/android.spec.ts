@@ -14,7 +14,7 @@ test('Android usa una sesión aislada y los callbacks requieren autenticación',
  const profile=await(await request.get('/api/auth/session',{headers:tokenHeaders})).json();
  expect(profile.profile.wallet).toBe(10);
  expect((await(await request.get('/api/auth/session',{headers:{'X-Boliche-Session':sessionToken}})).json()).profile).toBeNull();
- expect(await(await request.get('/api/mobile/config',{headers})).json()).toMatchObject({testAds:true,revenueCatKey:null});
+ expect(await(await request.get('/api/mobile/config',{headers:tokenHeaders})).json()).toMatchObject({testAds:true,revenueCatKey:null});
  expect((await request.post('/api/mobile/ad-intent',{headers:tokenHeaders,data:{}})).status()).toBe(503);
  expect((await request.post('/api/hooks/revenuecat',{headers:{Authorization:'Bearer falso'},data:{event:{}}})).status()).toBe(401);
  expect((await request.get('/api/hooks/admob')).status()).toBe(503);
