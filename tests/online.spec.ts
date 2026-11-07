@@ -55,7 +55,7 @@ test('gracia real de 45 segundos y recuperación del asiento',async({browser})=>
   await pages[1].evaluate(()=>window.bolicheNetwork!.cut());await expect(pages[1].getByRole('alert')).toBeVisible();await contexts[1].setOffline(true);
   await pages[0].waitForTimeout(40000);let snapshot=await contexts[0].request.get('/api/rooms/'+code+'/snapshot').then(r=>r.json());expect(snapshot.members[1].connected).toBe(false);
   await expect.poll(async()=>{snapshot=await contexts[0].request.get('/api/rooms/'+code+'/snapshot').then(r=>r.json());return snapshot.members[1].connected;},{timeout:15000,intervals:[500]}).toBe(true);
-  await contexts[1].setOffline(false);await expect(pages[1].getByRole('alert')).toBeHidden({timeout:15000});expect((await pages[1].evaluate(()=>window.bolicheDebug!.view()!)).seat).toBe(1);await pages[1].screenshot({path:`${captureRoot}/reconexion.png`});
+  await contexts[1].setOffline(false);await expect.poll(()=>pages[1].evaluate(()=>window.bolicheDebug!.view()?.seat??null),{timeout:15000}).toBe(1);await expect(pages[1].getByRole('alert')).toBeHidden({timeout:15000});await pages[1].screenshot({path:`${captureRoot}/reconexion.png`});
  }finally{for(const context of contexts)await context.close();}
 });
 test('anfitrión elige equipos y el lobby cabe en toda la matriz',async({browser})=>{
