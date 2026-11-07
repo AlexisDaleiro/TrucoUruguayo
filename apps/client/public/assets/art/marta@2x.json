@@ -1,0 +1,1037 @@
+{
+  "frames": {
+    "marta-upper-right.png": {
+      "frame": {
+        "x": 4,
+        "y": 4,
+        "w": 130,
+        "h": 190
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 413,
+        "y": 295,
+        "w": 130,
+        "h": 190
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-upper-left.png": {
+      "frame": {
+        "x": 138,
+        "y": 4,
+        "w": 130,
+        "h": 190
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 97,
+        "y": 295,
+        "w": 130,
+        "h": 190
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-torso.png": {
+      "frame": {
+        "x": 4,
+        "y": 198,
+        "w": 381,
+        "h": 340
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 129,
+        "y": 280,
+        "w": 381,
+        "h": 340
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-nose.png": {
+      "frame": {
+        "x": 272,
+        "y": 4,
+        "w": 76,
+        "h": 80
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 282,
+        "y": 208,
+        "w": 76,
+        "h": 80
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-nose-wrinkled.png": {
+      "frame": {
+        "x": 272,
+        "y": 88,
+        "w": 76,
+        "h": 80
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 282,
+        "y": 208,
+        "w": 76,
+        "h": 80
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-nape.png": {
+      "frame": {
+        "x": 389,
+        "y": 4,
+        "w": 130,
+        "h": 84
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 255,
+        "y": 234,
+        "w": 130,
+        "h": 84
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-tongue.png": {
+      "frame": {
+        "x": 389,
+        "y": 92,
+        "w": 74,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 283,
+        "y": 287,
+        "w": 74,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-smile.png": {
+      "frame": {
+        "x": 352,
+        "y": 126,
+        "w": 92,
+        "h": 33
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 274,
+        "y": 281,
+        "w": 92,
+        "h": 33
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-shout.png": {
+      "frame": {
+        "x": 389,
+        "y": 163,
+        "w": 72,
+        "h": 78
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 284,
+        "y": 263,
+        "w": 72,
+        "h": 78
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-right.png": {
+      "frame": {
+        "x": 389,
+        "y": 245,
+        "w": 81,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 297,
+        "y": 274,
+        "w": 81,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-o.png": {
+      "frame": {
+        "x": 467,
+        "y": 92,
+        "w": 50,
+        "h": 64
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 295,
+        "y": 270,
+        "w": 50,
+        "h": 64
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-neutral.png": {
+      "frame": {
+        "x": 272,
+        "y": 172,
+        "w": 84,
+        "h": 21
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 278,
+        "y": 287,
+        "w": 84,
+        "h": 21
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-lick.png": {
+      "frame": {
+        "x": 389,
+        "y": 297,
+        "w": 84,
+        "h": 49
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 278,
+        "y": 269,
+        "w": 84,
+        "h": 49
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-left.png": {
+      "frame": {
+        "x": 389,
+        "y": 350,
+        "w": 80,
+        "h": 48
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 262,
+        "y": 274,
+        "w": 80,
+        "h": 48
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-kiss.png": {
+      "frame": {
+        "x": 465,
+        "y": 160,
+        "w": 50,
+        "h": 28
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 295,
+        "y": 284,
+        "w": 50,
+        "h": 28
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-half.png": {
+      "frame": {
+        "x": 389,
+        "y": 402,
+        "w": 80,
+        "h": 47
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 280,
+        "y": 274,
+        "w": 80,
+        "h": 47
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-bite.png": {
+      "frame": {
+        "x": 389,
+        "y": 453,
+        "w": 84,
+        "h": 45
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 278,
+        "y": 275,
+        "w": 84,
+        "h": 45
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-mouth-angry.png": {
+      "frame": {
+        "x": 389,
+        "y": 502,
+        "w": 84,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 278,
+        "y": 282,
+        "w": 84,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-slam.png": {
+      "frame": {
+        "x": 523,
+        "y": 4,
+        "w": 116,
+        "h": 98
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 316,
+        "y": 485,
+        "w": 116,
+        "h": 98
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-right.png": {
+      "frame": {
+        "x": 521,
+        "y": 106,
+        "w": 114,
+        "h": 70
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 317,
+        "y": 499,
+        "w": 114,
+        "h": 70
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-point.png": {
+      "frame": {
+        "x": 477,
+        "y": 192,
+        "w": 146,
+        "h": 107
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 297,
+        "y": 444,
+        "w": 146,
+        "h": 107
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-mate.png": {
+      "frame": {
+        "x": 477,
+        "y": 303,
+        "w": 108,
+        "h": 114
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 222,
+        "y": 449,
+        "w": 108,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-left.png": {
+      "frame": {
+        "x": 477,
+        "y": 421,
+        "w": 116,
+        "h": 70
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 218,
+        "y": 499,
+        "w": 116,
+        "h": 70
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-grip.png": {
+      "frame": {
+        "x": 4,
+        "y": 542,
+        "w": 128,
+        "h": 78
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 224,
+        "y": 483,
+        "w": 128,
+        "h": 78
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hand-chin.png": {
+      "frame": {
+        "x": 4,
+        "y": 624,
+        "w": 108,
+        "h": 150
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 266,
+        "y": 279,
+        "w": 108,
+        "h": 150
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-hair.png": {
+      "frame": {
+        "x": 136,
+        "y": 542,
+        "w": 172,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 234,
+        "y": 13,
+        "w": 172,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-forearm-right.png": {
+      "frame": {
+        "x": 477,
+        "y": 495,
+        "w": 88,
+        "h": 90
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 393,
+        "y": 463,
+        "w": 88,
+        "h": 90
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-forearm-left.png": {
+      "frame": {
+        "x": 312,
+        "y": 542,
+        "w": 88,
+        "h": 93
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 160,
+        "y": 461,
+        "w": 88,
+        "h": 93
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-face.png": {
+      "frame": {
+        "x": 643,
+        "y": 4,
+        "w": 260,
+        "h": 250
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 190,
+        "y": 103,
+        "w": 260,
+        "h": 250
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-wink-right.png": {
+      "frame": {
+        "x": 116,
+        "y": 716,
+        "w": 164,
+        "h": 51
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 172,
+        "w": 164,
+        "h": 51
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-wink-left.png": {
+      "frame": {
+        "x": 284,
+        "y": 716,
+        "w": 164,
+        "h": 51
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 172,
+        "w": 164,
+        "h": 51
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-right.png": {
+      "frame": {
+        "x": 312,
+        "y": 639,
+        "w": 164,
+        "h": 51
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 172,
+        "w": 164,
+        "h": 51
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-open.png": {
+      "frame": {
+        "x": 452,
+        "y": 694,
+        "w": 164,
+        "h": 51
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 172,
+        "w": 164,
+        "h": 51
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-left.png": {
+      "frame": {
+        "x": 480,
+        "y": 589,
+        "w": 164,
+        "h": 51
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 172,
+        "w": 164,
+        "h": 51
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-half.png": {
+      "frame": {
+        "x": 569,
+        "y": 495,
+        "w": 164,
+        "h": 50
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 173,
+        "w": 164,
+        "h": 50
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-eyes-closed.png": {
+      "frame": {
+        "x": 737,
+        "y": 258,
+        "w": 164,
+        "h": 30
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 238,
+        "y": 185,
+        "w": 164,
+        "h": 30
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-cheeks.png": {
+      "frame": {
+        "x": 589,
+        "y": 303,
+        "w": 187,
+        "h": 74
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 226,
+        "y": 225,
+        "w": 187,
+        "h": 74
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-cards-hands.png": {
+      "frame": {
+        "x": 648,
+        "y": 549,
+        "w": 217,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 211,
+        "y": 412,
+        "w": 217,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-raised.png": {
+      "frame": {
+        "x": 737,
+        "y": 381,
+        "w": 166,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 237,
+        "y": 130,
+        "w": 166,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-raised-right.png": {
+      "frame": {
+        "x": 627,
+        "y": 258,
+        "w": 75,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 328,
+        "y": 130,
+        "w": 75,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-raised-left.png": {
+      "frame": {
+        "x": 480,
+        "y": 644,
+        "w": 75,
+        "h": 40
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 237,
+        "y": 130,
+        "w": 75,
+        "h": 40
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-neutral.png": {
+      "frame": {
+        "x": 597,
+        "y": 425,
+        "w": 174,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 233,
+        "y": 146,
+        "w": 174,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-neutral-right.png": {
+      "frame": {
+        "x": 589,
+        "y": 381,
+        "w": 78,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 329,
+        "y": 146,
+        "w": 78,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-neutral-left.png": {
+      "frame": {
+        "x": 559,
+        "y": 644,
+        "w": 79,
+        "h": 32
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 233,
+        "y": 146,
+        "w": 79,
+        "h": 32
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-furrowed.png": {
+      "frame": {
+        "x": 4,
+        "y": 778,
+        "w": 174,
+        "h": 37
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 233,
+        "y": 143,
+        "w": 174,
+        "h": 37
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-furrowed-right.png": {
+      "frame": {
+        "x": 182,
+        "y": 771,
+        "w": 83,
+        "h": 37
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 324,
+        "y": 143,
+        "w": 83,
+        "h": 37
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-brows-furrowed-left.png": {
+      "frame": {
+        "x": 269,
+        "y": 771,
+        "w": 83,
+        "h": 37
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 233,
+        "y": 143,
+        "w": 83,
+        "h": 37
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-back-torso.png": {
+      "frame": {
+        "x": 4,
+        "y": 819,
+        "w": 365,
+        "h": 350
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 137,
+        "y": 271,
+        "w": 365,
+        "h": 350
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-back-head.png": {
+      "frame": {
+        "x": 373,
+        "y": 771,
+        "w": 258,
+        "h": 270
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 191,
+        "y": 71,
+        "w": 258,
+        "h": 270
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-back-arm-right.png": {
+      "frame": {
+        "x": 635,
+        "y": 753,
+        "w": 150,
+        "h": 186
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 405,
+        "y": 377,
+        "w": 150,
+        "h": 186
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    },
+    "marta-back-arm-left.png": {
+      "frame": {
+        "x": 635,
+        "y": 943,
+        "w": 150,
+        "h": 190
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 85,
+        "y": 375,
+        "w": 150,
+        "h": 190
+      },
+      "sourceSize": {
+        "w": 640,
+        "h": 640
+      }
+    }
+  },
+  "animations": {},
+  "meta": {
+    "app": "http://github.com/pixijs/assetpack",
+    "version": "1.0",
+    "image": "marta@2x.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 907,
+      "h": 1173
+    },
+    "scale": 2,
+    "related_multi_packs": []
+  }
+}

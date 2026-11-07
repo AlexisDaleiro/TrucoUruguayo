@@ -1,0 +1,377 @@
+{
+  "reference": {
+    "width": 320,
+    "height": 320,
+    "origin": [
+      160,
+      110
+    ]
+  },
+  "parts": {
+    "face": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "torso": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "upper-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "upper-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "forearm-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "forearm-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "hand-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hand-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hair": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "back-head": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "back-torso": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "cards-hands": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "eyes-open": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-neutral": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-neutral-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-neutral-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-neutral": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "nose": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-half": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-closed": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-wink-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-wink-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "eyes-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-raised": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-raised-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-raised-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-furrowed": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-furrowed-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "brows-furrowed-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "nose-wrinkled": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "cheeks": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-smile": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-shout": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-o": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-kiss": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-bite": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-tongue": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-lick": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-half": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "mouth-angry": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "hand-grip": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hand-slam": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hand-chin": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hand-point": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "hand-mate": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "hands"
+    },
+    "back-arm-left": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "back-arm-right": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "nape": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    }
+  },
+  "hierarchy": {
+    "head": "root",
+    "torso": "root",
+    "arms": "root",
+    "hands": "root"
+  },
+  "atlas": "/assets/art/marta@2x.json",
+  "lowAtlas": "/assets/art/marta@1x.json"
+}

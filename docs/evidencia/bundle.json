@@ -1,70 +1,94 @@
 {
-  "allChunksGzipBytes": 340029,
+  "allChunksGzipBytes": 360377,
   "budgetBytes": 409600,
   "withinBudget": true,
   "files": [
     {
-      "name": "browserAll-CtmprMIi.js",
-      "gzipBytes": 11225
+      "name": "BitmapFont-BoIQBN7m.js",
+      "gzipBytes": 73
     },
     {
-      "name": "CanvasPool-BUzgqGVy.js",
-      "gzipBytes": 33936
+      "name": "browserAll-DQ0L2zfh.js",
+      "gzipBytes": 11200
     },
     {
-      "name": "CanvasRenderer-DpQQ3us9.js",
+      "name": "Cache-BLvqy-61.js",
+      "gzipBytes": 557
+    },
+    {
+      "name": "CanvasPool-D7opOFUa.js",
+      "gzipBytes": 22844
+    },
+    {
+      "name": "CanvasRenderer-DTM7JVik.js",
       "gzipBytes": 77
     },
     {
-      "name": "canvasUtils-C6on4wd3.js",
-      "gzipBytes": 2042
+      "name": "canvasUtils-DMxTMT1Q.js",
+      "gzipBytes": 2035
     },
     {
       "name": "dist-CVPAM7_G.js",
       "gzipBytes": 55253
     },
     {
-      "name": "getTexelRangeRects-wo62n20y.js",
-      "gzipBytes": 2988
+      "name": "Filter-Bie18jwJ.js",
+      "gzipBytes": 11956
     },
     {
-      "name": "getTextureBatchBindGroup-DyN79aOR.js",
-      "gzipBytes": 271
+      "name": "GCManagedHash-D6LODCBA.js",
+      "gzipBytes": 6251
     },
     {
-      "name": "index-BPWVbqhz.js",
-      "gzipBytes": 85026
+      "name": "getTexelRangeRects-6IVxCK0s.js",
+      "gzipBytes": 2998
     },
     {
-      "name": "index-CA8-_a7P.css",
-      "gzipBytes": 5097
+      "name": "getTextureBatchBindGroup-BcW_6oHb.js",
+      "gzipBytes": 269
     },
     {
-      "name": "init-BXT9BCXy.js",
-      "gzipBytes": 4603
+      "name": "GraphicsContext-Duj_GGSV.js",
+      "gzipBytes": 20499
     },
     {
-      "name": "RenderTargetSystem-mqRHZhTU.js",
-      "gzipBytes": 21906
+      "name": "index-Cv39ncRY.css",
+      "gzipBytes": 5067
+    },
+    {
+      "name": "index-D4C496Uj.js",
+      "gzipBytes": 87161
+    },
+    {
+      "name": "init-B2XNFNML.js",
+      "gzipBytes": 4577
+    },
+    {
+      "name": "RenderTargetSystem-CCE6_1wz.js",
+      "gzipBytes": 16337
     },
     {
       "name": "rolldown-runtime-XKyaHtl9.js",
       "gzipBytes": 429
     },
     {
-      "name": "SceneView-sfv-CTjU.js",
-      "gzipBytes": 116954
+      "name": "SceneView-D0EXeCVe.js",
+      "gzipBytes": 110510
     },
     {
-      "name": "WebGLRenderer-B48vUjLr.js",
+      "name": "VoiceGallery-gubhxbe8.js",
+      "gzipBytes": 2062
+    },
+    {
+      "name": "WebGLRenderer-BUs1DS-6.js",
       "gzipBytes": 76
     },
     {
-      "name": "WebGPURenderer-DxXHGWyu.js",
+      "name": "WebGPURenderer-DxjQW-48.js",
       "gzipBytes": 77
     },
     {
-      "name": "webworkerAll-Ch_9gfiF.js",
+      "name": "webworkerAll-ClMl2kqm.js",
       "gzipBytes": 69
     }
   ]

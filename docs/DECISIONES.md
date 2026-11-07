@@ -34,3 +34,11 @@ Sin claves, Accounts (Durable Object SQLite) conserva perfiles y sesiones opacas
 Con claves, el SDK oficial Supabase verifica `getClaims` (JWKS), issuer y audience; la vinculación usa `linkIdentity` sobre el invitado. No se usa metadata editable como autorización. Un UID ya vinculado a otro perfil se rechaza antes de unir saldos; alternativa descartada: acreditar varias bienvenidas al enlazar invitados repetidos. Producción contra Supabase requiere proyecto y migraciones aplicadas; no se declara probada con credenciales ausentes.
 
 Fuentes técnicas consultadas: https://developers.cloudflare.com/durable-objects/best-practices/websockets/ ; https://supabase.com/docs/guides/auth/auth-anonymous ; https://supabase.com/docs/guides/auth/jwts .
+
+## 2026-11-06 — Arte generado y pipeline
+Se usó ImageGen nativo para arte original del proyecto, sin copiar personajes, logo, assets ni composición de la referencia de estilo. Archivos originales en assets-src; prompts y mapas de celdas en docs/arte/PROMPTS_IMAGENES.md. Los outputs se copiaron al repo conservando originales de Codex.
+Sharp se declara como herramienta de desarrollo para recorte, limpieza de alpha, alineado y versiones1x/2x; complementa AssetPack, que ya lo usa internamente. No llega al runtime del juego. El script opcional cpu-features, transitivo del soporteSSH de AssetPack, se desactiva: no se usa SSH para producir atlas.
+## Fase4: alcance de arte y audio
+Se usó ImageGen nativo disponible para producir arte original sin esperar generación humana. Fondos y objetos combinan textura original con dibujo por código; no se convierten dibujos vectoriales terminados en placeholders por no provenir de un generador. Dos bases + cuatro hojas de expresiones y pared se conservan en assets-src. Las fuentes entregadas fueron1254px/1672px; el pipeline alinea @1x/@2x sin prometer detalle2048 inexistente.
+
+[REVISAR] La música y ambiente son composición/síntesis original procedural, no pistas descargadas. Se prioriza mezcla ligera y presupuesto. El shader de humo se omite por ahora; polvo, luz y CRT conservan el ambiente. Azure S0 requiere cuenta/facturación/key del humano; el pipeline no usa F0 ni otra API paga como sustituto. Se continúa con Fase5–8 sin declarar cumplida la aceptación «cero placeholders/voces finales».
