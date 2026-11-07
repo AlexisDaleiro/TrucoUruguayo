@@ -1,0 +1,29 @@
+{
+  "url": "https://truco-de-boliche.alexisdaleiro.workers.dev/?local=1",
+  "lighthouse": "13.6.0",
+  "fetchTime": "2026-11-07T22:19:04.439Z",
+  "settings": {
+    "formFactor": "mobile",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.5600000000002,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    }
+  },
+  "scores": {
+    "performance": 100,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first-contentful-paint": 785.655,
+    "largest-contentful-paint": 785.655,
+    "total-blocking-time": 21,
+    "speed-index": 1297.0062360010145,
+    "cumulative-layout-shift": 0
+  }
+}

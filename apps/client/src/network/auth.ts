@@ -1,7 +1,14 @@
 import type {SupabaseClient} from '@supabase/supabase-js';
 export interface Profile {id:string;nickname:string;character:'washington'|'marta';wallet:number;xp:number;mmr:number;loadout:Record<string,string>;regenAt:number;inventory?:string[];settings?:import('../state/preferences').Preferences;age13Confirmed?:boolean;tutorialDone?:boolean;wins?:number;losses?:number;passUntil?:number;}
+interface AuthConfig {mode:'local'|'supabase';url:string|null;key:string|null;profile?:Profile|null;}
+let configPromise:Promise<AuthConfig>|null=null;
+function authConfig(){return configPromise??=fetch('/api/auth/config?profile=1').then(async response=>{if(!response.ok)throw Error('SERVER');return response.json() as Promise<AuthConfig>;}).catch(error=>{configPromise=null;throw error;});}
+export async function initialProfile(){
+ const config=await authConfig();
+ return config.mode==='local'?config.profile??null:(await api<{profile:Profile|null}>('/api/auth/session')).profile;
+}
 let clientPromise:Promise<SupabaseClient|null>|null=null;
-export function authClient():Promise<SupabaseClient|null>{return clientPromise??= (async()=>{const config=await fetch('/api/auth/config').then(r=>r.json()) as {mode:string;url:string|null;key:string|null};if(config.mode!=='supabase'||!config.url||!config.key)return null;const {createClient}=await import('@supabase/supabase-js');return createClient(config.url,config.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});})();}
+export function authClient():Promise<SupabaseClient|null>{return clientPromise??= (async()=>{const config=await authConfig();if(config.mode!=='supabase'||!config.url||!config.key)return null;const {createClient}=await import('@supabase/supabase-js');return createClient(config.url,config.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});})().catch(error=>{clientPromise=null;throw error;});}
 export async function api<T>(path:string,body?:unknown):Promise<T>{const client=await authClient();const headers:Record<string,string>={};if(client){const {data,error}=await client.auth.getSession();if(error)throw error;if(data.session)headers.Authorization='Bearer '+data.session.access_token;}if(body!==undefined)headers['Content-Type']='application/json';const response=await fetch(path,{method:body===undefined?'GET':'POST',headers,credentials:'same-origin',body:body===undefined?undefined:JSON.stringify(body)});const data=await response.json() as T&{error?:string};if(!response.ok)throw new Error(data.error??'SERVER');return data;}
 let sessionPromise:Promise<Profile>|null=null;
 export function cacheProfile(profile:Profile){sessionPromise=Promise.resolve(profile);}

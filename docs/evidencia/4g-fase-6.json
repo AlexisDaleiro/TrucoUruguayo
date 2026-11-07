@@ -1,0 +1,21 @@
+{
+  "origin": "https://truco-de-boliche.alexisdaleiro.workers.dev",
+  "method": "Chromium CDP, caché fría, 150 ms RTT, 1.6 Mbps de descarga y CPU 4×. Tiempo hasta abrir el alta mediante el botón real.",
+  "results": [
+    {
+      "run": 1,
+      "interactiveMs": 1949,
+      "errors": []
+    },
+    {
+      "run": 2,
+      "interactiveMs": 1468,
+      "errors": []
+    },
+    {
+      "run": 3,
+      "interactiveMs": 1608,
+      "errors": []
+    }
+  ]
+}

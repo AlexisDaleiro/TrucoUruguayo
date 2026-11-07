@@ -406,5 +406,24 @@
   "environmentDefault": "Elección de cada jugador",
   "googleSignIn": "Ya tengo cuenta · Entrar con Google",
   "saveNickname": "Guardar apodo",
-  "motionSystem": "También respetamos las animaciones reducidas de tu dispositivo."
+  "motionSystem": "También respetamos las animaciones reducidas de tu dispositivo.",
+
+  "installApp": "Instalar el juego",
+  "offlineMenu": "Estás sin conexión. Podés practicar gratis.",
+  "offlineAge": "Confirmá que tenés 13 años o más para practicar.",
+  "offlineContinue": "Ir a la práctica",
+  "offlineFeature": "Disponible con conexión.",
+  "feedbackTitle": "Contanos cómo te fue",
+  "feedbackBody": "Mandanos una idea o contanos qué falló. No incluyas datos personales ni códigos de sala.",
+  "feedbackCategory": "Tema",
+  "feedbackTypes": {
+    "bug": "Algo falló",
+    "idea": "Tengo una idea",
+    "other": "Otro"
+  },
+  "feedbackMessage": "Tu comentario",
+  "feedbackSend": "Enviar comentario",
+  "feedbackSuccess": "Gracias. Recibimos tu comentario.",
+  "feedbackAuth": "Entrá al boliche con tu perfil para enviar un comentario.",
+  "feedbackLimit": "Ya nos escribiste hace poco. Probá más tarde."
 }

@@ -51,3 +51,12 @@ Se agrega PGlite solo como dependencia de desarrollo para ejecutar migraciones, 
 La CI Linux reveló @ffmpeg-installer/linux-x64 transitivo de la funcionalidad de video no usada de AssetPack. Su script se desactiva explícitamente (igual que cpu-features), sin aprobar scripts globalmente. El generador de voces usa ffmpeg/ffprobe del sistema, ya disponibles localmente.
 
 [REVISAR] El entorno inicial sigue la composición de la mesa (1vs1día/2vs2noche) hasta que el jugador equipa uno explícitamente. La elección queda en loadout con variante base y puede forzarse por anfitrión en privados, respetando desbloqueos. La práctica no acredita XP. Diagnóstico Sentry/PostHog exige consentimiento opcional; sin replay/autocaptura, con IDsesión efímero y filtrado de datos. Sentry11 usa dataCollection y se carga bajo demanda; PostHog usa su API pública nativa para evitar un SDK innecesario. No se aprovisiona otro hosting ni proveedor de comercio: el usuario fijó Cloudflare y compras solo Android y autorizó seguir sin cuentas.
+
+## Fase 6
+
+- La práctica offline guarda la declaración 13+ en el dispositivo y usa el mazo visual de baja resolución. El alta de una cuenta y las fichas requieren red.
+- El feedback pide un perfil habilitado, guarda el comentario 90 días y limita frecuencia por cuenta y en total. La consulta de mensajes requiere una clave operativa.
+- El matchmaking persiste los participantes y el código de sala antes del reparto. Repite la misma operación si pierde la respuesta. La pestaña conserva el ticket al recargar y los tickets simultáneos del mismo perfil comparten asiento.
+- Para abrir el WebSocket el cliente pide un permiso de 20 segundos de un solo uso. Así se conserva la verificación del usuario de Supabase en HTTP aunque el WebSocket del navegador no permita adjuntar el JWT.
+- Los bots ponderan las señas recibidas como evidencia parcial. Las declaraciones públicas de tantos, las flores anunciadas y las cartas conocidas son restricciones. La práctica calcula la decisión fuera del hilo de dibujo.
+- El menú conserva la tele animada, el personaje en reposo y el ambiente con una escena DOM/SVG. Pixi se carga al abrir la mesa, donde se necesitan las interacciones y el rig completo. Las fuentes conservan todos sus caracteres en WOFF2.

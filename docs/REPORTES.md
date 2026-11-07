@@ -54,3 +54,15 @@ Alta 13+, tutorial de seis pasos gratis, perfil y XP, ranking semanal, fichas co
 Verificación: 81 pruebas de código, motor con 100% líneas y 99,63% ramas. De 16 escenarios Playwright, 15 pasaron en la suite y el restante pasó al reejecutarlo con el alta que ahora requiere la UI. También se volvió a probar el borrado por API. Matrices y pasos del tutorial revisados visualmente en `docs/capturas/fase-5/`. CPU 4×: 60,22 FPS, p95 16,7 ms; build base 363,4 KiB gzip de JS/CSS contando todos los chunks.
 
 [REVISAR] Variantes elegibles de Washington/Marta, entorno por defecto según la mesa y cosméticos por nivel; la web queda como vitrina. Diagnóstico desactivado de origen; se verificaron consentimiento, anonimización y baja con destinos simulados. Supabase remoto, Google, proveedores de observabilidad y la identificación del responsable de privacidad quedan en pendientes humanos.
+
+CI de Fase 5 en main: 42335303695, verde.
+
+## Fase 6 — Beta web pública (2026-11-07)
+
+Beta desplegada en el Worker del proyecto. Versión Cloudflare `48c3f96a-8b3f-4812-86b2-63252d09c9e7`. Se verificó salud y una sala pública de prueba con dos cuentas temporales, una entrada por cuenta y cero errores de navegador. PWA instalable con práctica en frío sin red. El formulario de soporte guarda comentarios por 90 días. Búsqueda reanudable tras recargar y recuperable si se pierde la respuesta del reparto.
+
+`pnpm check` verde con 84 tests. Cobertura del motor 100% líneas y 99,64% ramas. Los 18 escenarios Playwright pasaron en la suite completa. Se volvieron a correr y pasaron los escenarios afectados por el menú liviano, WOFF2 y el alta. Matrices de menú, mesa, lobby, offline, soporte y cuenta revisadas en `docs/capturas/fase-6/`.
+
+Lighthouse móvil sobre producción dio 100 en rendimiento, accesibilidad, prácticas y SEO, con LCP 786 ms y TBT 21 ms. En 4G emulada con caché fría, las tres aperturas del alta tardaron 1,95 s, 1,47 s y 1,61 s, sin errores. Menú 158,4 KiB gzip incluyendo Auth opcional. En mesa con CPU 4× se midieron 59,76 FPS y p95 16,7 ms. Simuladas 100.000 manos, 844.672 acciones válidas y 14.083 partidas completas. Nivel alto ganó 64,1% contra el bajo. Evidencia en `docs/evidencia/`.
+
+[REVISAR] El menú anima la tele y el personaje con una escena liviana. Pixi carga al entrar a la mesa. En modo offline las fichas muestran «—» y solo se habilita la práctica. El balance y el umbral de errores menor a 1% se evaluarán con sesiones reales consentidas. El ajuste actual de bots proviene de simulación.

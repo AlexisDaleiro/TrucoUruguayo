@@ -5,7 +5,7 @@ Leer docs/PROMPT_MAESTRO.md. El usuario autorizó ejecutar fases 0 a 8 autónoma
 
 ## Estado actual
 
-Fases 0–4 en main; Fase 5 implementada y verificada. Seguir 6–8 en orden. Ver `docs/REPORTES.md` para evidencia y `docs/PENDIENTES_HUMANO.md` para pasos externos. La beta debe desplegarse al Worker existente truco-de-boliche; hoy no declarar actualizada la beta hasta verificar el deploy real. Fase 5: backend de fichas/XP/Elo/ranking transaccional con Accounts/DO local y migración Supabase validada en PGlite. Tutorial, tienda, perfil, ranking, opciones, legales y consentimiento en cliente. Worker autoritativo sobre toda mesa y ficha.
+Fases 0–6 verificadas. Beta Fase 6 en el Worker público truco-de-boliche, versión 48c3f96a-8b3f-4812-86b2-63252d09c9e7. Lighthouse 100, menú 158,4 KiB gzip, 4G emulada 1,47–1,95 s. 84 tests, 18 escenarios de navegador y 100.000 manos de simulación. Seguir Fases 7–8. Revisar docs/REPORTES.md y docs/PENDIENTES_HUMANO.md para criterios externos.
 
 ## Comandos
 Node24; pnpm11.25.0; pnpm i; pnpm dev (Vite5173 y Wrangler8787); pnpm check; pnpm test; pnpm test:coverage; pnpm test:e2e; pnpm build; pnpm sim --hands 100000; pnpm deploy; pnpm android:sync; pnpm art:build; node tools/art/verify.mjs; pnpm voices:plan (sin síntesis); pnpm voices:generate (requiere Azure S0/key y pago humano).
@@ -28,7 +28,7 @@ SwiftShader usa Canvas de Pixi; hardware usa WebGL. Mantener caché de fondo, me
 
 ## Próximas tareas
 
-Fase 6: PWA instalable con práctica sin conexión, feedback, simulación de bots con manos coherentes, matchmaking recuperable, auditoría Lighthouse móvil y producción Cloudflare. La tasa de errores con tráfico real depende del consentimiento, claves y participantes.
+La tasa de errores de beta con tráfico real depende del consentimiento, claves y participantes. La evidencia sintética está en docs/evidencia/.
 
 Fase 7: Capacitor Android API 36, ciclo de vida/App Links/haptics, callbacks AdMob SSV y RevenueCat idempotentes, AAB e instrucciones de firma. Fase 8: arte/capturas y textos de ficha, borradores IARC/Seguridad, prueba cerrada y lanzamiento. El humano configura cuentas y publica.
 

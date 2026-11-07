@@ -14,7 +14,7 @@ export class Scene {
  skin:'classica'|'celeste'='classica';environment:'auto'|'galpon'|'boliche'='auto';manualQuality:'auto'|'high'|'medium'|'low'='auto';
  async setCosmetics(skin:'classica'|'celeste',environment:'auto'|'galpon'|'boliche',quality:'auto'|'high'|'medium'|'low'){
   const skinChanged=skin!==this.skin,layoutChanged=environment!==this.environment;this.skin=skin;this.environment=environment;this.manualQuality=quality;this.quality=quality==='auto'?'high':quality;if(!this.ready)return;
-  if(skinChanged){const scale=devicePixelRatio>1?'2':'1';const sheet=await Assets.load<Spritesheet>(`/assets/art/cards-${skin}@${scale}x.json`);if(this.destroyed||skin!==this.skin)return;this.cardTextures=sheet.textures;this.renderCards();}if(layoutChanged)this.layout();for(const particle of this.dust)particle.visible=this.quality==='high';this.app.canvas.dataset.skin=this.skin;
+  if(skinChanged){const scale=navigator.onLine&&devicePixelRatio>1?'2':'1';const sheet=await Assets.load<Spritesheet>(`/assets/art/cards-${skin}@${scale}x.json`);if(this.destroyed||skin!==this.skin)return;this.cardTextures=sheet.textures;this.renderCards();}if(layoutChanged)this.layout();for(const particle of this.dust)particle.visible=this.quality==='high';this.app.canvas.dataset.skin=this.skin;
  }
  clearAnimation(){this.timeline?.kill();this.animationCleanup?.();this.animationCleanup=null;for(const item of this.transients)if(!item.destroyed)item.destroy({children:true});this.transients.clear();}
  transient(item:Container){this.effects.addChild(item);this.transients.add(item);}
@@ -22,7 +22,7 @@ export class Scene {
  async init(host:HTMLElement){
   await this.app.init({resizeTo:host,resolution:Math.min(devicePixelRatio,2),autoDensity:true,antialias:false,background:0x28211c,preference:rendererPreference(),powerPreference:'low-power'});
   if(this.destroyed){this.app.destroy(true,{children:true});return;}
-  const scale=devicePixelRatio>1?'2':'1';
+  const scale=navigator.onLine&&devicePixelRatio>1?'2':'1';
   await Promise.all(['washington','marta'].map(async character=>{try{const sheet=await Assets.load<Spritesheet>(`/assets/art/${character}@${scale}x.json`);this.art.set(character,Object.fromEntries(Object.entries(sheet.textures).map(([name,texture])=>[name.replace(`${character}-`,''),texture])));}catch(error){console.error('No se pudo cargar el rig',character,error);}}));
   try{this.wallTexture=await Assets.load<Texture>('/assets/art/wall.webp');}catch(error){console.error('No se pudo cargar la pared',error);}
   try{const sheet=await Assets.load<Spritesheet>(`/assets/art/cards-${this.skin}@${scale}x.json`);this.cardTextures=sheet.textures;}catch(error){console.error('No se pudieron cargar las cartas',error);}
