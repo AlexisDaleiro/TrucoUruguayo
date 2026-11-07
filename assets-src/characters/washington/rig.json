@@ -364,6 +364,34 @@
         110
       ],
       "parent": "torso"
+    },
+    "torso-red": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "back-torso-red": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "upper-left-red": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "upper-right-red": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
     }
   },
   "hierarchy": {

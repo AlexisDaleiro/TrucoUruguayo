@@ -1,0 +1,4 @@
+import {test,expect} from 'vitest';
+import {tutorialState} from './tutorial';
+import {act,viewFor,pieceOf,envido,flor} from '../../engine/src/index';
+test('tutorial usa mazos completos deterministas con pieza, envido y flor verdaderos',()=>{for(let step=0;step<6;step++){const state=tutorialState(step);expect(state).toEqual(tutorialState(step));expect(new Set([...state.original.flat(),state.sample,...state.deck]).size).toBe(40);}const piece=tutorialState(1);expect(pieceOf('2O',piece.sample)).toBe(2);expect(act(piece,0,{type:'PLAY_CARD',cardId:'2O'}).played[0]).toMatchObject({card:'2O',seat:0});const points=tutorialState(3);expect(envido(points.original[0],points.sample)).toBe(33);const flower=tutorialState(4);expect(flor(flower.original[0],flower.sample)).toBe(40);expect(viewFor(flower,0).events.some(event=>event.type==='FLOR')).toBe(true);expect(tutorialState(5).seats).toBe(4);});

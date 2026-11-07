@@ -42,3 +42,15 @@ Audio WebAudio original con seis buses, música procedural adaptativa, ambientes
 Checks:59tests, lint/typecheck/build verdes; cobertura motor100% líneas/99,63% ramas. Suite12e2e verde4,2min con partidas2/4contextos, privacidad, idempotencia, búsqueda y gracia45s; tras los últimos ajustes de encuadre/recortes, matriz y galerías2e2e nuevamente verdes. CPU4x60,18FPS/p9516,7ms. JS+CSS351,9KiB gzip contando todos los chunks. Atlas alta19,1MiBRGBA (sin pared/caché/renderer), validación automática de bounds/alpha/integridad incluida en build.
 
 [REVISAR] Música y ambientes por síntesis original; humo ruidoso omitido por presupuesto, se conserva luz/polvo/CRT. El arte vectorial original de objetos y figuras permanece como arte del producto. No se declara cumplido «cero placeholders/voces finales»: falta AzureS0/key/facturación y revisión de escucha humana. No se bloquea la siguiente fase por eso, conforme al modo autónomo. Android físico y mezcla final siguen pendientes de validación externa.
+
+CI remota Fase4 42329204153 detectó un script opcional de @ffmpeg-installer/linux-x64 transitivo de AssetPack que no aparecía en Windows. Se desactiva explícitamente: solo se usa AssetPack para imágenes y el pipeline de voces usa ffmpeg del PATH. No se autoriza descarga/ejecución de ese binario. La corrección se verifica en una rama puntual basada en Fase4; no se atribuye verde remoto hasta que termine.
+
+Corrección de CI Fase4 confirmada: ejecución42330529791 de codex/fase-4-ci finalizó en verde, también mergeada en main(a5f9de3).
+
+## Fase 5 — Meta y economía (2026-11-07)
+
+Alta 13+, tutorial de seis pasos gratis, perfil y XP, ranking semanal, fichas con regeneración, tienda de cosméticos y opciones persistidas. El servidor debita la entrada de todos los participantes de forma atómica. Los resultados se acreditan una vez y no dan fichas. El SQL de Supabase se ejecutó en Postgres local con pruebas de RLS, atomicidad, migración e idempotencia; producción puede seguir con el adaptador Durable Objects. Se agregaron documentos, borrado reintentable y telemetría opcional sin datos de cuenta en el cliente.
+
+Verificación: 81 pruebas de código, motor con 100% líneas y 99,63% ramas. De 16 escenarios Playwright, 15 pasaron en la suite y el restante pasó al reejecutarlo con el alta que ahora requiere la UI. También se volvió a probar el borrado por API. Matrices y pasos del tutorial revisados visualmente en `docs/capturas/fase-5/`. CPU 4×: 60,22 FPS, p95 16,7 ms; build base 363,4 KiB gzip de JS/CSS contando todos los chunks.
+
+[REVISAR] Variantes elegibles de Washington/Marta, entorno por defecto según la mesa y cosméticos por nivel; la web queda como vitrina. Diagnóstico desactivado de origen; se verificaron consentimiento, anonimización y baja con destinos simulados. Supabase remoto, Google, proveedores de observabilidad y la identificación del responsable de privacidad quedan en pendientes humanos.

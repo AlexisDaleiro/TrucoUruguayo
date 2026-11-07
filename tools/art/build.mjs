@@ -35,6 +35,7 @@ for(const character of ['washington','marta']){
    if(name.startsWith('brows-'))for(const side of ['left','right'])parts[`${name}-${side}`]={pivot:[160,110],parent:'head'};
   }
  }
+ for(const [suffix,color,partNames]of [[character==='washington'?'red':'blue',character==='washington'?'#a95043':'#477caa',['torso','back-torso','upper-left','upper-right']],[ 'gray','#b9b7b1',['hair','back-head']]])for(const part of partNames){if(suffix==='gray'&&character!=='marta')continue;const source=await readFile(`${target}/${character}-${part}.png`);await sharp(source).tint(color).png().toFile(`${target}/${character}-${part}-${suffix}.png`);parts[`${part}-${suffix}`]={pivot:[160,110],parent:part==='hair'||part==='back-head'?'head':part.startsWith('upper')?'arms':'torso'};}
  const rig={reference:manifest.reference,parts,hierarchy:{head:'root',torso:'root',arms:'root',hands:'root'},atlas:`/assets/art/${character}@2x.json`,lowAtlas:`/assets/art/${character}@1x.json`};
  await writeFile(`assets-src/characters/${character}/rig.json`,JSON.stringify(rig,null,2)+'\n');manifest.characters[character]=rig;
 }
@@ -47,6 +48,7 @@ for(const character of ['washington','marta','cards-classica','cards-celeste']){
  for(const scale of [1,2]){const image=await sharp(`${output}/${character}@${scale}x.png`).metadata();if(image.width<32||image.height<32)throw Error(`Atlas vacío: ${character}`);}
 }
 await sharp('assets-src/environments/galpon/wall.png').resize({width:1672}).webp({quality:87}).toFile(`${output}/wall.webp`);
+for(const character of ['washington','marta'])for(const variant of ['base',...(character==='washington'?['camisa_roja','sin_boina']:['cardigan_azul','pelo_gris'])]){let parts=['torso','face','hair','eyes-open','brows-neutral-left','brows-neutral-right','mouth-neutral','nose','upper-left','upper-right','forearm-left','forearm-right','hand-left','hand-right'];if(variant==='sin_boina')parts=parts.filter(part=>part!=='hair');if(variant==='pelo_gris')parts=parts.map(part=>part==='hair'?'hair-gray':part);if(variant==='camisa_roja'||variant==='cardigan_azul')parts=parts.map(part=>['torso','upper-left','upper-right'].includes(part)?`${part}-${variant==='camisa_roja'?'red':'blue'}`:part);const input=await Promise.all(parts.map(part=>readFile(`assets-src/prepared/${character}{tps}/${character}-${part}.png`)));const full=await sharp({create:{width:640,height:640,channels:4,background:'#00000000'}}).composite(input.map(input=>({input,left:0,top:0}))).png().toBuffer();await sharp(full).resize(320,320).webp({quality:90}).toFile(`${output}/${character}-${variant}-preview.webp`);}
 await writeFile(`${output}/rigs.json`,JSON.stringify(manifest)+'\n');
 // Retain the generator prompt history outside the compressed runtime output.
 await readFile(path.join(output,'rigs.json'));

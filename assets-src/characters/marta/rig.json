@@ -364,6 +364,48 @@
         110
       ],
       "parent": "torso"
+    },
+    "torso-blue": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "back-torso-blue": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "torso"
+    },
+    "upper-left-blue": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "upper-right-blue": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "arms"
+    },
+    "hair-gray": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
+    },
+    "back-head-gray": {
+      "pivot": [
+        160,
+        110
+      ],
+      "parent": "head"
     }
   },
   "hierarchy": {

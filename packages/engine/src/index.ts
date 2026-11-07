@@ -70,7 +70,7 @@ function autoFlor(s:State):void {
   for(const seat of flowers){if(!s.florAnnounced.includes(seat))s.events.push({type:'FLOR',seat});}
   s.florAnnounced=[...flowers];s.pending={kind:'florChoose',by:trigger,sequence:[]};
  }else{
-  s.florAnnounced.push(trigger);s.florPaid.push(trigger);s.events.push({type:'FLOR',seat:trigger});award(s,team(trigger),3);
+  s.florAnnounced.push(trigger);s.florPaid.push(trigger);s.revealSeats.push(trigger);s.events.push({type:'FLOR',seat:trigger});award(s,team(trigger),3);
   s.florDone=flowers.every(i=>s.florPaid.includes(i));
   if(s.winner===null){s.pending=s.suspended;s.suspended=null;}
  }
@@ -165,6 +165,6 @@ export function viewFor(s:State,seat:number){
  return {seq:s.seq,seats:s.seats,seat,config:{...s.config},dealer:s.dealer,mano:s.mano,turn:s.turn,handNo:s.handNo,scores:[...s.scores],sample:s.sample,
   hands:s.hands.map((h,i)=>i===seat?[...h]:h.map(()=>null)),played:s.played.map(p=>({...p})),trick:s.trick.map(p=>({...p})),tricks:[...s.tricks],value:s.value,pending:s.pending?structuredClone(s.pending):null,
   winner:s.winner,handWinner:s.handWinner,events:s.events.map(e=>structuredClone(e)),legal:legalActions(s,seat),
-  revealed:s.handWinner!==null?s.revealSeats.map(i=>({seat:i,cards:tantoCards(s,i)})):[]};
+  revealed:s.handWinner!==null||s.winner!==null?s.revealSeats.map(i=>({seat:i,cards:tantoCards(s,i)})):[]};
 }
 export type PlayerView=ReturnType<typeof viewFor>;

@@ -1,0 +1,99 @@
+{
+  "allChunksGzipBytes": 403059,
+  "budgetBytes": 409600,
+  "withinBudget": true,
+  "files": [
+    {
+      "name": "BitmapFont-CmzNoKNB.js",
+      "gzipBytes": 73
+    },
+    {
+      "name": "browserAll-DqiAj2N_.js",
+      "gzipBytes": 11200
+    },
+    {
+      "name": "Cache-BLvqy-61.js",
+      "gzipBytes": 557
+    },
+    {
+      "name": "CanvasPool-D7opOFUa.js",
+      "gzipBytes": 22844
+    },
+    {
+      "name": "CanvasRenderer-BLCyzCy-.js",
+      "gzipBytes": 77
+    },
+    {
+      "name": "canvasUtils-DMxTMT1Q.js",
+      "gzipBytes": 2035
+    },
+    {
+      "name": "dist-CVPAM7_G.js",
+      "gzipBytes": 55253
+    },
+    {
+      "name": "Filter-Bie18jwJ.js",
+      "gzipBytes": 11956
+    },
+    {
+      "name": "GCManagedHash-D6LODCBA.js",
+      "gzipBytes": 6251
+    },
+    {
+      "name": "getTexelRangeRects-6IVxCK0s.js",
+      "gzipBytes": 2998
+    },
+    {
+      "name": "getTextureBatchBindGroup-BcW_6oHb.js",
+      "gzipBytes": 269
+    },
+    {
+      "name": "GraphicsContext-Duj_GGSV.js",
+      "gzipBytes": 20499
+    },
+    {
+      "name": "index-CpQuZLKv.js",
+      "gzipBytes": 97338
+    },
+    {
+      "name": "index-DO8pGbyD.css",
+      "gzipBytes": 5593
+    },
+    {
+      "name": "init-6bNiJ9DS.js",
+      "gzipBytes": 4577
+    },
+    {
+      "name": "RenderTargetSystem-CCE6_1wz.js",
+      "gzipBytes": 16337
+    },
+    {
+      "name": "rolldown-runtime-XKyaHtl9.js",
+      "gzipBytes": 429
+    },
+    {
+      "name": "SceneView-DeU0YMNu.js",
+      "gzipBytes": 111122
+    },
+    {
+      "name": "telemetrySentry-Cq_JDyBY.js",
+      "gzipBytes": 31364
+    },
+    {
+      "name": "VoiceGallery-ImHpu1hS.js",
+      "gzipBytes": 2065
+    },
+    {
+      "name": "WebGLRenderer-B0NeJ8cG.js",
+      "gzipBytes": 76
+    },
+    {
+      "name": "WebGPURenderer-CfGZKvlH.js",
+      "gzipBytes": 77
+    },
+    {
+      "name": "webworkerAll-DkS48QIR.js",
+      "gzipBytes": 69
+    }
+  ]
+}

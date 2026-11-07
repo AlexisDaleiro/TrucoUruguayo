@@ -16,3 +16,4 @@ docs/evidencia/cpu-profile.json
 assets-src/prepared/
 .assetpack/
 assets-src/voices/cache/
+.worktrees/
