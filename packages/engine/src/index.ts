@@ -1,4 +1,4 @@
-import {type Card, deck, rank, flor, envido} from './cards';
+import {type Card, deck, rank, flor, envido,envidoCards} from './cards';
 const validCards=new Set(deck());
 export * from './cards';
 export interface RulesConfig {targetScore:30|40;florEnabled:boolean;florEnvido:boolean;faltaEnvidoMode:'leaderNeeds'|'malasGanaPartida';echarLosPerros:boolean;turnSeconds:number;senaCatchChance:number;pardaLead:'opener'|'mano';florBothMode:'comparison';}
@@ -52,7 +52,7 @@ function award(s:State,who:Team,points:number):void {
 }
 function closeHand(s:State,who:Team,points:number):void {
  s.handWinner=who;s.pending=null;s.suspended=null;
- for(const seat of s.revealSeats)s.events.push({type:'REVEAL',seat,cards:[...s.original[seat]]});
+ for(const seat of s.revealSeats)s.events.push({type:'REVEAL',seat,cards:tantoCards(s,seat)});
  award(s,who,points);s.events.push({type:'HAND_END',seat:who});
 }
 function flowerSeats(s:State):number[]{return s.config.florEnabled?order(s.mano,s.seats).filter(seat=>flor(s.original[seat],s.sample)!==null):[];}
@@ -101,10 +101,11 @@ export function legalActions(s:State,seat:number):Action[]{
 function canEnvido(s:State,seat:number):boolean{return !s.envidoDone&&s.tricks.length===0&&!s.played.some(p=>p.seat===seat)&&s.florAnnounced.length===0;}
 function bestTanto(s:State,kind:'envido'|'flor'):number {
  const seats=order(s.mano,s.seats).filter(i=>kind==='envido'||flor(s.original[i],s.sample)!==null);
- let best=seats[0],value=-1;
- for(const seat of seats){const n=kind==='envido'?envido(s.original[seat],s.sample):flor(s.original[seat],s.sample)!;s.events.push({type:'TANTO',seat,value:n,text:n>value?`Tengo ${n}`:'Son buenas'});if(n>value){value=n;best=seat;}}
+ let best=seats[0],value=-1;const teamValues=[-1,-1];
+ for(const seat of seats){const n=kind==='envido'?envido(s.original[seat],s.sample):flor(s.original[seat],s.sample)!;const declares=n>teamValues[1-team(seat)];s.events.push({type:'TANTO',seat,value:declares?n:undefined,text:declares?`Tengo ${n}`:'Son buenas'});teamValues[team(seat)]=Math.max(teamValues[team(seat)],n);if(n>value){value=n;best=seat;}}
  s.revealSeats.push(best);return best;
 }
+function tantoCards(s:State,seat:number):Card[]{return s.config.florEnabled&&flor(s.original[seat],s.sample)!==null?[...s.original[seat]]:envidoCards(s.original[seat],s.sample);}
 function finishBid(s:State,accept:boolean):void {
  const p=s.pending!;
  if(p.kind==='truco'){
@@ -164,6 +165,6 @@ export function viewFor(s:State,seat:number){
  return {seq:s.seq,seats:s.seats,seat,config:{...s.config},dealer:s.dealer,mano:s.mano,turn:s.turn,handNo:s.handNo,scores:[...s.scores],sample:s.sample,
   hands:s.hands.map((h,i)=>i===seat?[...h]:h.map(()=>null)),played:s.played.map(p=>({...p})),trick:s.trick.map(p=>({...p})),tricks:[...s.tricks],value:s.value,pending:s.pending?structuredClone(s.pending):null,
   winner:s.winner,handWinner:s.handWinner,events:s.events.map(e=>structuredClone(e)),legal:legalActions(s,seat),
-  revealed:s.handWinner!==null?s.revealSeats.map(i=>({seat:i,cards:[...s.original[i]]})):[]};
+  revealed:s.handWinner!==null?s.revealSeats.map(i=>({seat:i,cards:tantoCards(s,i)})):[]};
 }
 export type PlayerView=ReturnType<typeof viewFor>;

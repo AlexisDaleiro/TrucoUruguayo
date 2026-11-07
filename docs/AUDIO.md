@@ -1,5 +1,7 @@
 ## 13. Audio (Audio Bible) — prioridad alta
 
+Estado Fase 2: efectos de síntesis Web Audio provisoria, sin licencias externas. Unlock por gesto, seis buses (incluye master), paneo, controles, ducking y pausa por visibilidad. No confundir estos tonos de prueba con voces/música/ambientes finales: se producen en Fase 4 con manifest y claves externas. La galería `/dev/sonidos` permite disparar efectos individualmente.
+
 ### 13.1 Motor de audio
 
 **Web Audio API nativa**, con un `AudioManager` liviano:

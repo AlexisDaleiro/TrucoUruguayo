@@ -1,0 +1,67 @@
+{
+  "allChunksGzipBytes": 278696,
+  "budgetBytes": 409600,
+  "withinBudget": true,
+  "files": [
+    {
+      "name": "browserAll-CooForgq.js",
+      "gzipBytes": 11227
+    },
+    {
+      "name": "CanvasPool-BUzgqGVy.js",
+      "gzipBytes": 33936
+    },
+    {
+      "name": "CanvasRenderer-BSmEtK6s.js",
+      "gzipBytes": 77
+    },
+    {
+      "name": "canvasUtils-C6on4wd3.js",
+      "gzipBytes": 2042
+    },
+    {
+      "name": "getTexelRangeRects-wo62n20y.js",
+      "gzipBytes": 2988
+    },
+    {
+      "name": "getTextureBatchBindGroup-DyN79aOR.js",
+      "gzipBytes": 271
+    },
+    {
+      "name": "index-D5Az7BFW.js",
+      "gzipBytes": 80583
+    },
+    {
+      "name": "index-HviQf_XG.css",
+      "gzipBytes": 4515
+    },
+    {
+      "name": "init-CNakl37Q.js",
+      "gzipBytes": 4604
+    },
+    {
+      "name": "RenderTargetSystem-mqRHZhTU.js",
+      "gzipBytes": 21906
+    },
+    {
+      "name": "rolldown-runtime-XKyaHtl9.js",
+      "gzipBytes": 429
+    },
+    {
+      "name": "SceneView-Dnc8G6wO.js",
+      "gzipBytes": 115896
+    },
+    {
+      "name": "WebGLRenderer-BZao8sF2.js",
+      "gzipBytes": 76
+    },
+    {
+      "name": "WebGPURenderer-deToQnTE.js",
+      "gzipBytes": 77
+    },
+    {
+      "name": "webworkerAll-DUXdoaSO.js",
+      "gzipBytes": 69
+    }
+  ]
+}
