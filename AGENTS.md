@@ -3,7 +3,7 @@
 Fuente de verdad: docs/PROMPT_MAESTRO.md completo. Pedido del usuario: fases 0–8 autónomas, sin pedir aprobación entre fases; fase 9 excluida. Leer docs/REPORTES.md y docs/PENDIENTES_HUMANO.md para retomar. No declarar cumplidos criterios sin evidencia.
 
 ## Estado
-Fase 0 cerrada; CI 42315839548 verde, Worker nuevo desplegado y HTTP200. Capturas fase-0 revisadas. Siguiente: Fase 1 motor/bots, cobertura ≥95%, 100000 manos. No saltar criterios ni fingir completos. Referencias preservadas. Ver reportes para pendientes externos.
+Fases 0 y 1 integradas. Fase1: 39 tests verdes, cobertura 100% líneas y 99,57% ramas; 100000 manos sin errores, alto89,55% vsbajo. Capturas fases0/1 revisadas. CI 42316757113 pendiente terminar navegador (checks/cobertura verdes): consultar durante Fase2. Siguiente: Fase2 escena local 1v1 jugable, animaciones/audio y galerías, matriz responsive y rendimiento. No saltar criterios ni fingir completos. Ver reportes y pendientes.
 
 ## Stack y comandos
 pnpm workspaces; TypeScript strict; Vite/React 19, PixiJS 8, GSAP 3, Zustand, CSS Modules y Web Audio; motor puro sin dependencias; zod; Cloudflare Worker y Durable Objects SQLite; Supabase Auth/Postgres/RLS con adaptador local sin claves; Capacitor Android.
