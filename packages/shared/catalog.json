@@ -1,0 +1,8 @@
+[
+ {"id":"char_don_washington","category":"character","nameKey":"catalogWashington","unlock":{"type":"default"},"assets":"/assets/art/washington","variants":["base","camisa_roja","sin_boina"],"iapProductId":null},
+ {"id":"char_marta","category":"character","nameKey":"catalogMarta","unlock":{"type":"default"},"assets":"/assets/art/marta","variants":["base","cardigan_azul","pelo_gris"],"iapProductId":null},
+ {"id":"env_galpon","category":"environment","nameKey":"catalogGalpon","unlock":{"type":"default"},"assets":"/assets/art/wall.webp","variants":["base"],"iapProductId":null},
+ {"id":"env_boliche","category":"environment","nameKey":"catalogBoliche","unlock":{"type":"level","level":2},"assets":"/assets/art/wall.webp","variants":["base"],"iapProductId":null},
+ {"id":"cards_clasica","category":"cardSkin","nameKey":"catalogClassic","unlock":{"type":"default"},"assets":"/assets/art/cards-classica","variants":["base"],"iapProductId":null},
+ {"id":"cards_celeste","category":"cardSkin","nameKey":"catalogCeleste","unlock":{"type":"level","level":3},"assets":"/assets/art/cards-celeste","variants":["base"],"iapProductId":null}
+]

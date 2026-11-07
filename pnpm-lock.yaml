@@ -14,6 +14,9 @@ importers:
       '@cloudflare/workers-types':
         specifier: 5.20261104.1
         version: 5.20261104.1
+      '@electric-sql/pglite':
+        specifier: 0.5.15
+        version: 0.5.15
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.14.0(supports-color@10.2.2))
@@ -190,6 +193,9 @@ packages:
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
+
+  '@electric-sql/pglite@0.5.15':
+    resolution: {integrity: sha512-ERZWgaRTxueGV4cvL1tfpAOzFCWTXoUtbCBqnf2FhHDVs/so9eAKaanvrwWF9Dntx7BYsmFQujVQ0/B4S8Mmiw==}
 
   '@emnapi/core@1.11.3':
     resolution: {integrity: sha512-zLpS5asjEb7lq8jYLq37N6XKaE41DIexlY1rF/z4/tIl3wo13Sqm28fRyfIsKZD+NZ8mM5RoKkpW/rBcuoSZSg==}
@@ -3053,6 +3059,8 @@ snapshots:
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  '@electric-sql/pglite@0.5.15': {}
 
   '@emnapi/core@1.11.3':
     dependencies:
