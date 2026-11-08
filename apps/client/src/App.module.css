@@ -23,3 +23,22 @@
 .feedbackText{display:grid!important;grid-template-columns:minmax(0,1fr);justify-content:stretch!important;gap:8px;align-items:stretch!important}.feedbackText textarea{width:100%;resize:vertical;border:1px solid #8d7552;border-radius:8px;padding:12px;background:#211d18;color:#ffedc7;font:inherit}.feedbackText textarea:focus-visible{outline:3px solid #ffe095;outline-offset:3px}.offlineNotice{color:#ffe0a0;font-weight:800}
 
 .mobileCommerce{display:grid;gap:15px;margin:16px 0}.mobileReward{display:grid;gap:12px;border:1px solid #8d7552;border-radius:10px;background:#344239;padding:16px}.mobileReward h3,.mobileReward p{margin:0}.mobilePacks{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}.mobilePacks .shopCard{padding:12px}.mobilePacks button{width:100%;padding:8px}.mobileCommerce button:disabled{opacity:.6}.passStamps ul{display:flex;flex-wrap:wrap;gap:10px;padding:0;list-style:none}.passStamps li{padding:5px 10px;border-radius:12px;background:#534637;color:#ffe199}
+.sampleLabel{left:76%;top:calc(66.5% + clamp(24px,4.5vw,52px));transform:translateX(-50%);white-space:nowrap;padding:2px 7px;border-radius:5px;background:#33251ed9}
+.tableControls{display:contents}
+.bubble{pointer-events:none}
+.app[data-reduced-motion=true] .bubble{animation:none}
+.app[data-reduced-motion=true] .localHand>button{transition:none}
+@media(max-aspect-ratio:4/5){
+ .tableControls{position:absolute;inset:auto 16px max(65px,env(safe-area-inset-bottom));z-index:5;display:flex;flex-direction:column;align-items:center;gap:9px;pointer-events:none}
+ .tableControls .localHand,.tableControls .actionBar{position:relative;inset:auto;transform:none;pointer-events:auto}
+ .tableControls .actionBar{width:100%;min-height:48px}
+ .sampleLabel{left:calc(100% - 57px);top:calc(66.5% - 46px)}
+ .senaConfirmation{top:20%;right:16px;bottom:auto;left:auto;transform:none;max-width:45vw}
+}
+@media(max-height:740px) and (max-aspect-ratio:4/5){
+ .localHand>button{width:clamp(55px,18vw,69px)}
+ .sampleLabel{top:calc(60.5% - 43px)}
+ .rivalName{top:147px;right:16px;left:auto;transform:none}
+ .rivalName small{display:none}
+}
+@media(max-height:499px) and (min-aspect-ratio:4/5){.sampleLabel{left:73%;top:calc(60.5% - 45px)}}

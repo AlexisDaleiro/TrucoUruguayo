@@ -24,7 +24,8 @@ export function parseAppLink(input:string,origin:string){
   if(url.origin!==origin||url.username||url.password)return null;
   if(/^\/sala\/[A-Z2-9]{6}$/.test(url.pathname))return {kind:'room' as const,path:url.pathname};
   if(url.pathname==='/auth/callback'){
-   const code=url.searchParams.get('code');if(code&&code.length<256)return {kind:'auth' as const,code};
+   const code=url.searchParams.get('code'),flowId=url.searchParams.get('sb_flow_id');
+   if(code&&code.length<256)return {kind:'auth' as const,code,...(flowId?{flowId}:{})};
   }
  }catch{/* A malformed external URL has no destination. */}
  return null;

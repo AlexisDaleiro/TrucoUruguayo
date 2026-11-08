@@ -3,7 +3,7 @@ const ink=0x29201d;
 const outline={color:ink,width:5,join:'round' as const};
 /** Cutout structure: final transparent PNGs can replace each named part. */
 export class CharacterRig extends Container {
- textures:Record<string,Texture>|null=null;faceParts=new Map<string,Sprite>();nextBlink=2+Math.random()*4;blinkUntil=0;
+ textures:Record<string,Texture>|null=null;faceParts=new Map<string,Sprite>();nextBlink=2+Math.random()*4;blinkUntil=0;eyePose='eyes-open';
  torso=new Container();head=new Container();eyes=new Container();brows=new Container();mouth=new Container();arms=new Container();hands=new Container();baseScale=1;blinkClosed=false;
  constructor(public character:'washington'|'marta'='washington',back=false,color=0x487a76,textures?:Record<string,Texture>){
   super();this.label=back?'local-back':character;this.addChild(this.torso,this.arms,this.head,this.hands);
@@ -43,10 +43,28 @@ export class CharacterRig extends Container {
   else{add('face',this.head);add('hair',this.head);this.head.addChild(this.eyes,this.brows,this.mouth);add('eyes-open',this.eyes,'eyes');add('brows-neutral-left',this.brows,'brow-left');add('brows-neutral-right',this.brows,'brow-right');add('mouth-neutral',this.mouth,'mouth');add('nose',this.head,'nose');const cheeks=add('cheeks',this.head);if(cheeks)cheeks.visible=false;for(const part of ['upper-left','upper-right','forearm-left','forearm-right'])add(part,this.arms);}
   add('hand-left',this.hands);add('hand-right',this.hands);this.cacheParts();
  }
- setPart(key:string,part:string){const sprite=this.faceParts.get(key),texture=this.textures?.[`${part}.png`];if(sprite&&texture){sprite.texture=texture;sprite.width=320;sprite.height=320;}}
+ setPart(key:string,part:string){
+  if(key==='eyes'){
+   this.eyePose=part;
+   if(this.blinkClosed&&!part.includes('wink'))part='eyes-closed';
+  }
+  const sprite=this.faceParts.get(key),texture=this.textures?.[`${part}.png`];
+  if(sprite&&texture&&sprite.texture!==texture){sprite.texture=texture;sprite.width=320;sprite.height=320;}
+ }
  variant(value:string){if(!this.textures)return;if(value==='sin_boina'&&this.character==='washington'){const hair=this.faceParts.get('hair');if(hair)hair.visible=false;if(this.label==='local-back')this.setPart('back-head','face');}if(value==='pelo_gris'&&this.character==='marta'){this.setPart('hair','hair-gray');this.setPart('back-head','back-head-gray');}if(value==='camisa_roja'||value==='cardigan_azul'){const suffix=value==='camisa_roja'?'red':'blue';for(const part of ['torso','back-torso','upper-left','upper-right'])this.setPart(part,`${part}-${suffix}`);this.torso.tint=0xffffff;}for(const part of [this.torso,this.head,this.arms,this.hands])part.updateCacheTexture();}
  cacheParts(){for(const part of [this.torso,this.arms,this.hands,this.head])part.cacheAsTexture({resolution:2,antialias:false});}
- breathe(time:number,reduced:boolean){if(reduced||this.label==='local-back')return;this.torso.scale.y=1+Math.sin(time*1.6)*.009;this.head.y=Math.sin(time*1.6)*1.5;if(time>=this.nextBlink){this.blinkUntil=time+.12;this.nextBlink=time+2+Math.random()*4;}const closed=time<this.blinkUntil;if(closed!==this.blinkClosed){this.blinkClosed=closed;this.eyes.scale.y=closed?.08:1;this.head.updateCacheTexture();}}
+ breathe(time:number,reduced:boolean){
+  if(this.label==='local-back')return;
+  const breath=reduced?0:Math.sin(time*1.6);
+  this.torso.scale.y=1+breath*.009;this.head.y=breath*1.5;
+  if(!reduced&&time>=this.nextBlink){this.blinkUntil=time+.12;this.nextBlink=time+2+Math.random()*4;}
+  const closed=!reduced&&time<this.blinkUntil;
+  if(closed===this.blinkClosed)return;
+  this.blinkClosed=closed;
+  if(this.textures)this.setPart('eyes',this.eyePose);
+  else this.eyes.scale.y=closed?.08:1;
+  this.head.updateCacheTexture();
+ }
  gesture(kind:string){
   if(this.textures){if(this.label==='local-back')return;this.head.rotation=kind==='tic'?.045:0;
    const eyes=kind==='ojosCerrados'?'closed':kind==='guinoDerecho'?'wink-right':kind==='guinoIzquierdo'?'wink-left':'open';this.setPart('eyes',`eyes-${eyes}`);

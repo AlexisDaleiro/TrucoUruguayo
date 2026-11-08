@@ -28,6 +28,8 @@ SwiftShader usa Canvas de Pixi; hardware usa WebGL. Mantener caché de fondo, me
 
 ## Pendientes externos
 
+El usuario postergó Google Play. Al retomarlo, la preparación de firma y prueba interna está en `codex/prueba-interna` (commit 2cc8f5e).
+
 La tasa de errores de beta con tráfico real depende del consentimiento, claves y participantes. La evidencia sintética está en docs/evidencia/.
 
 Firmar, configurar proveedores y certificados, revisar con dispositivo físico, medir sesiones consentidas, generar voces finales y completar Play Console. Los pasos se mantienen en docs/PENDIENTES_HUMANO.md. No iniciar Fase 9 sin instrucción del usuario.

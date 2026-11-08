@@ -11,7 +11,12 @@ No pegar secretos en el chat ni en archivos versionados.
 ## Supabase
 Crear proyecto; activar login anónimo y proveedor Google. Copiar SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY y SUPABASE_SERVICE_ROLE_KEY en `.dev.vars` (solo servidor); aplicar migraciones con CLI tras vincular proyecto. Configurar URLs autorizadas y callback de OAuth. No activar producción hasta probar RLS y vinculación sin pérdida de progreso.
 
-Pasos de Auth: Supabase Dashboard → Authentication → Sign In/Providers → habilitar Anonymous Sign-Ins y Google. En Google Cloud crear cliente OAuth web y autorizar la URL de callback que muestra Supabase. En Supabase URL Configuration, registrar el origen público y `https://TU_DOMINIO/auth/callback`; para desarrollo `http://127.0.0.1:5173/auth/callback`. La app llama `linkIdentity({provider:'google'})` desde el invitado. Probar que el userId, fichas e inventario se conservan. No usar signInWithOAuth para sustituir al invitado en ese paso.
+1. En Supabase Dashboard → Authentication, habilitar Anonymous Sign-Ins, Google y [Manual Linking](https://supabase.com/docs/guides/auth/auth-identity-linking#manual-linking-beta).
+2. En Google Cloud, crear un cliente OAuth de tipo aplicación web. En **URI de redireccionamiento autorizados**, agregar el callback del proyecto que muestra Supabase. Cargar el ID y el secreto del cliente en el proveedor Google de Supabase. [Configuración de Google en Supabase](https://supabase.com/docs/guides/auth/social-sign-in/auth-google).
+3. En Supabase → URL Configuration, agregar la URL del entorno y autorizar su ruta `/auth/callback`. Para desarrollo usar `http://127.0.0.1:5173/auth/callback`. Para la beta usar `https://truco-de-boliche.alexisdaleiro.workers.dev/auth/callback` cuando se habilite ese entorno.
+4. En un entorno de prueba, crear primero un invitado con el adaptador local y guardar una sesión vigente. Tras activar Supabase, comprobar que al volver conserva ID de perfil, fichas, XP, inventario e historial. Vincular Google desde Opciones, cerrar sesión y recuperar el mismo perfil desde otro navegador. Probar también la cancelación de Google y el aislamiento entre dos cuentas.
+
+La beta responde `mode: local` en `/api/auth/config`. El acceso real queda pendiente de la configuración de Supabase y Google. Los escenarios Playwright usan respuestas simuladas para comprobar la interfaz, el retorno y la preparación de la sesión del invitado.
 
 ## Validación humana
 Revisar reglas [VALIDAR] en docs/REGLAS.md y validar diseño legal/textos con abogado uruguayo antes de publicar. No se declara clasificación legal por implementación técnica.

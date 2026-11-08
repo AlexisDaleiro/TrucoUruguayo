@@ -11,7 +11,7 @@ test('menú y partida en matriz responsive',async({page})=>{
  await page.goto('/');await page.getByRole('button',{name:/Tocá para entrar/}).click();await expect(page.getByTestId('menu-scene')).toBeVisible();await page.evaluate(()=>document.fonts.ready);
  for(const [width,height]of sizes){await page.setViewportSize({width,height});await page.screenshot({path:`${folder}/menu-${width}x${height}.png`});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);const b=await page.getByRole('button',{name:'Jugar',exact:false}).first().boundingBox();expect(b!.y+b!.height).toBeLessThanOrEqual(height);}
  await page.goto('/?local=1');await expect(page.locator('[data-card]').first()).toBeVisible();await expect(page.locator('canvas')).toBeVisible();
- for(const [width,height]of sizes){await page.setViewportSize({width,height});await page.screenshot({path:`${folder}/mesa-${width}x${height}.png`});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+ for(const [width,height]of sizes){await page.setViewportSize({width,height});await page.screenshot({path:`${folder}/mesa-${width}x${height}.png`});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);if(width/height<=.8){const hand=page.locator('[data-local-hand]');expect(await hand.evaluate(element=>element.getBoundingClientRect().bottom<=element.nextElementSibling!.getBoundingClientRect().top)).toBe(true);}}
  expect(errors).toEqual([]);
 });
 test('partida completa a 30 con entradas de la interfaz',async({page})=>{
@@ -38,4 +38,55 @@ test('un corte al cargar el dibujo no desmonta la mesa',async({page})=>{
  await failed;
  await expect(page.getByTestId('menu-scene')).toBeVisible();
  await expect(page.locator('[data-card]').first()).toBeVisible();
+});
+
+test('el fondo queda visible mientras carga el atlas de la mesa',async({page})=>{
+ let release!:()=>void;
+ const loading=new Promise<void>(resolve=>{release=resolve;});
+ await page.route(/\/assets\/art\/washington@\dx\.json$/,async route=>{await loading;await route.continue();});
+ try{
+  await page.goto('/?local=1',{waitUntil:'domcontentloaded'});
+  await expect(page.locator('[data-testid=scene]')).toHaveAttribute('data-drawn','false');
+  await expect(page.getByTestId('menu-scene')).toBeVisible();
+ }finally{release();}
+ await expect(page.locator('canvas')).toBeVisible();
+ await expect(page.getByTestId('menu-scene')).toHaveCount(0);
+});
+
+test('la animación respeta los asientos, conserva la baza y vuelve a reposo al interrumpirse',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/?local=1');
+ await expect(page.locator('canvas')).toBeVisible();
+ const result=await page.evaluate(async()=>{
+  const modulePath='/src/scene/Scene.ts';
+  const {Scene}=await import(modulePath) as typeof import('../apps/client/src/scene/Scene');
+  const host=document.createElement('div');
+  host.style.cssText='position:absolute;left:-400px;width:390px;height:844px';
+  document.documentElement.appendChild(host);
+  const scene=new Scene();
+  try{
+   await scene.init(host);
+   const base=window.bolicheDebug!.view()!;
+   const plays=[{seat:0,card:'7O'},{seat:1,card:'1E'}] as const;
+   scene.update({...base,seat:0,seq:1,played:[plays[0]],trick:[plays[0]]},2,false,false,false);
+   scene.update({...base,seat:0,seq:2,played:[...plays],trick:[]},2,false,false,false);
+   scene.timeline!.pause(0);
+   const card=scene.cards.children.find(child=>child.label==='played:1E')!;
+   const fromRival=Math.abs(card.y-scene.seatOrigin(1).y)<1;
+   scene.timeline!.progress(.2);
+   scene.clearAnimation();
+   const settledAt=card.y;
+   const trickCards=scene.cards.children.filter(child=>child.label?.startsWith('played:')).length;
+   scene.renderCards();
+   const settled=Math.abs(settledAt-scene.cards.children.find(child=>child.label==='played:1E')!.y)<1;
+   scene.update(null,4,false,false,false);
+   scene.animate('deal');
+   const dealt=scene.transients.size;
+   scene.timeline!.progress(.2);
+   scene.update(null,4,false,true,false);
+   const cleaned=scene.transients.size===0&&scene.cards.children.find(child=>child.label==='sample')!.visible;
+   return {fromRival,settled,trickCards,dealt,cleaned};
+  }finally{scene.destroy();host.remove();}
+ });
+ expect(result).toEqual({fromRival:true,settled:true,trickCards:2,dealt:12,cleaned:true});
 });

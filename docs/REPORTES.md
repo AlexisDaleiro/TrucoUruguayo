@@ -86,3 +86,11 @@ La entrega de `docs/entregas/play-store/` contiene ícono de 512 px, imagen dest
 Validación: 89 tests, lint, tipos y build en verde. La CI de main verificó los 21 escenarios Playwright sobre el código de juego. Los diez archivos gráficos cumplen medidas y formato, los tres textos respetan los límites y no aparece vocabulario prohibido en la ficha ni en el juego. Privacidad, borrado, términos y soporte respondieron HTTP 200 y mostraron su título y controles en el navegador.
 
 [REVISAR] Uruguay como mercado inicial, textos y respuestas regulatorias. El humano verifica titular/contacto, SDK activos, avisos y borrado para invitados sin acceso al dispositivo, realiza la prueba cerrada y completa Play Console. La publicación depende de cuenta, firma, validación en dispositivo y proveedores. Los pasos exactos están en `docs/PENDIENTES_HUMANO.md`.
+
+## Pulido de escena y acceso con Google (2026-11-08)
+
+[REVISAR] Pared sin estiramiento, cartas del personaje del menú ligadas a su movimiento, muestra despejada y mano separada de los botones en vertical. La mesa se mantiene ilustrada mientras carga el dibujo. El reparto vuela a todos los asientos, las cartas jugadas salen de su jugador y la baza cerrada queda a la vista hasta la próxima. Al interrumpir un efecto se recupera la posición de reposo. Capturas revisadas en `docs/capturas/pulido-escena-google/`.
+
+[REVISAR] El alta ofrece Google cuando el servidor usa Supabase. En el modo local se conserva el alta de invitado y Opciones muestra el estado de Google. Playwright verificó recuperación de perfil, cancelación y preparación de la sesión del invitado con un proveedor simulado. La prueba real requiere habilitar Google en el proyecto Supabase y comprobar la conservación de cuentas en un entorno de prueba.
+
+Lint, tipos y 89 tests Vitest verdes. La prueba de práctica sin conexión espera el turno y comprueba que se dibuje la mesa. Se aisló el almacenamiento de Wrangler de las pruebas para evitar que el ranking de ejecuciones anteriores afecte a la suite.

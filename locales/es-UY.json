@@ -212,7 +212,8 @@
   "errors": {
     "SERVER": "No pudimos completar la acción. Probá de nuevo.",
     "AUTH": "Volvé a entrar para seguir jugando.",
-    "AUTH_CONFIG": "La vinculación con Google todavía no está disponible.",
+    "AUTH_CONFIG": "El acceso con Google todavía no está disponible en esta versión.",
+    "GOOGLE_AUTH": "No se pudo completar el acceso con Google. Podés volver a intentarlo o seguir como invitado.",
     "BALANCE": "Te faltan fichas para entrar a esta partida.",
     "NOT_FOUND": "Esa sala no existe o ya cerró.",
     "FULL": "La mesa ya está completa.",
