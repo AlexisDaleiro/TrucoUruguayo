@@ -3,7 +3,7 @@ import {Browser} from '@capacitor/browser';
 import {SplashScreen} from '@capacitor/splash-screen';
 import {StatusBar,Style} from '@capacitor/status-bar';
 import {audio} from './audio/AudioManager';
-import {authClient,ensureSession} from './network/auth';
+import {completeGoogleSignIn} from './network/auth';
 import {publicSite} from './platform';
 import {parseAppLink} from '../../../packages/shared/src/mobile';
 
@@ -12,9 +12,9 @@ async function open(input:string){
  if(link?.kind==='room'){
   if(location.pathname!==link.path)location.assign(link.path);
  }else if(link?.kind==='auth'){
-  const client=await authClient();if(!client)return;
-  const {error}=await client.auth.exchangeCodeForSession(link.code);
-  if(!error){await ensureSession();await Browser.close().catch(()=>{});location.assign('/?entrar=1');}
+  const destination=await completeGoogleSignIn(link.code,link.flowId).then(()=> '/?entrar=1',()=> '/?entrar=1&google-error=1');
+  await Browser.close().catch(()=>{});
+  location.assign(destination);
  }
 }
 export async function startNative(){

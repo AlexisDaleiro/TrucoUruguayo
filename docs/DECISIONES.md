@@ -67,3 +67,8 @@ La CI Linux reveló @ffmpeg-installer/linux-x64 transitivo de la funcionalidad d
 - Los anuncios requieren declaración 18+ solo al pedir un anuncio, sin guardar fecha de nacimiento. No se solicitan anuncios en una mesa activa.
 - El cosmético mensual del Pase es un sello coleccionable en el perfil. La suscripción no modifica el saldo y la entrada se registra con valor cero mientras esté vigente.
 - El webhook de compras deduplica consumibles por transacción de Play y el Pase por evento de RevenueCat. El servidor reconoce exclusivamente los productos y el entorno configurados.
+
+## Pulido de escena y Google
+
+- La última baza permanece sobre la mesa hasta que empieza la siguiente o se reparte otra mano. Esto mantiene visible la carta de cierre y permite animarla aunque el motor ya haya vaciado la baza activa.
+- La portada conserva el acceso de invitado. El alta muestra Google cuando la configuración del servidor habilita Supabase. Opciones explica su ausencia en el modo local. El retorno cancelado muestra un aviso y permite seguir desde la portada.

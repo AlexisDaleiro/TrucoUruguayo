@@ -58,6 +58,7 @@ test('RevenueCat filtra aplicación, tienda, entorno y producto. El libro usa la
 test('App Links aceptan solo el dominio y las rutas esperadas',()=>{
  expect(parseAppLink(publicOrigin+'/sala/ABCD23',publicOrigin)).toEqual({kind:'room',path:'/sala/ABCD23'});
  expect(parseAppLink(publicOrigin+'/auth/callback?code=abc',publicOrigin)).toEqual({kind:'auth',code:'abc'});
+ expect(parseAppLink(publicOrigin+'/auth/callback?code=abc&sb_flow_id=flow-1',publicOrigin)).toEqual({kind:'auth',code:'abc',flowId:'flow-1'});
  expect(parseAppLink('https://otro.invalid/sala/ABCD23',publicOrigin)).toBeNull();
  expect(parseAppLink(publicOrigin+'/sala/../../privacidad',publicOrigin)).toBeNull();
 });

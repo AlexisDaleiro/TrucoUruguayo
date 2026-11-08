@@ -28,8 +28,9 @@ export function MenuScene({mode=2,ambient=true}:{mode?:2|4;ambient?:boolean}){
    <i/><b/>
   </div>
   <div className={s.table}/>
-  <img className={s.rival} src={night?'/assets/art/marta-base-preview.webp':'/assets/art/washington-base-preview.webp'} width="320" height="320" alt=""/>
-  <div className={s.hand}><span/><span/><span/></div>
+  <div className={s.rival}><img src={night?'/assets/art/marta-base-preview.webp':'/assets/art/washington-base-preview.webp'} width="320" height="320" alt=""/>
+   <div className={s.hand}><span/><span/><span/></div>
+  </div>
   <div className={s.mate}><span/></div>
   <div className={s.cards}><div className={s.back}/><div className={s.face}><CardArt card="7O"/></div></div>
  </div>;
