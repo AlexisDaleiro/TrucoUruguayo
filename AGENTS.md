@@ -5,7 +5,9 @@ Leer docs/PROMPT_MAESTRO.md. El usuario autorizó ejecutar fases 0 a 8 autónoma
 
 ## Estado actual
 
-Fases 0–8 implementadas y verificadas en el alcance que admite el entorno. Beta pública en Cloudflare versión f019d7a2-bb5c-426a-97d1-9fc03ffb1393. Fase 6 Lighthouse 100 y 4G 1,47–1,95 s. Fase 7 AAB sin firma y APK debug de GitHub Actions 42421740690, SDK 36. Merge Android 15cbd52 con 89 tests y 21 escenarios Playwright verdes en 42422232155. Fase 8 material en docs/entregas/play-store/ y matriz en docs/capturas/fase-8/. Ver docs/REPORTES.md y docs/PENDIENTES_HUMANO.md. Publicación en Play Console y pruebas con cuentas y hardware dependen del humano.
+Fases 0–8 implementadas y verificadas en el alcance que admite el entorno. Fase 6 Lighthouse 100 y 4G 1,47–1,95 s. Fase 7 AAB sin firma y APK debug de GitHub Actions 42421740690, SDK 36. Merge Android 15cbd52 con 89 tests y 21 escenarios Playwright verdes en 42422232155. Fase 8 material en docs/entregas/play-store/ y matriz en docs/capturas/fase-8/. Ver docs/REPORTES.md y docs/PENDIENTES_HUMANO.md. Publicación en Play Console y pruebas con cuentas y hardware dependen del humano.
+
+Beta pública de Cloudflare actualizada a `1a4cf11d-019d-4f59-a4f1-ae631f325b5b` tras el pulido de escena. Verificados 89 tests Vitest, 26 escenarios Playwright y la práctica sin red sobre el Worker público. Google permanece en modo invitado hasta conectar Supabase y su proveedor Google. Las pruebas actuales de OAuth usan un proveedor simulado. Capturas en docs/capturas/pulido-escena-google/.
 
 ## Comandos
 Node24; pnpm11.25.0; pnpm i; pnpm dev (Vite5173 y Wrangler8787); pnpm check; pnpm test; pnpm test:coverage; pnpm test:e2e; pnpm build; pnpm sim --hands 100000; pnpm deploy; pnpm android:sync; pnpm art:build; node tools/art/verify.mjs; pnpm voices:plan (sin síntesis); pnpm voices:generate (requiere Azure S0/key y pago humano).

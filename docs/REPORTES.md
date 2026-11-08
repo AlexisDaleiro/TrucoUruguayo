@@ -94,3 +94,5 @@ Validación: 89 tests, lint, tipos y build en verde. La CI de main verificó los
 [REVISAR] El alta ofrece Google cuando el servidor usa Supabase. En el modo local se conserva el alta de invitado y Opciones muestra el estado de Google. Playwright verificó recuperación de perfil, cancelación y preparación de la sesión del invitado con un proveedor simulado. La prueba real requiere habilitar Google en el proyecto Supabase y comprobar la conservación de cuentas en un entorno de prueba.
 
 Lint, tipos y 89 tests Vitest verdes. La prueba de práctica sin conexión espera el turno y comprueba que se dibuje la mesa. Se aisló el almacenamiento de Wrangler de las pruebas para evitar que el ranking de ejecuciones anteriores afecte a la suite.
+
+Los 26 escenarios Playwright pasaron con almacenamiento aislado, incluidas partidas completas 1 vs 1 y 2 vs 2 y reconexión. La escena midió 60,24 FPS con CPU emulada 4× en Chromium, con p95 de 16,8 ms. El menú compilado pesa 165,4 KiB gzip. El Worker público `1a4cf11d-019d-4f59-a4f1-ae631f325b5b` sirvió el build nuevo y permitió abrir la práctica sin red con la mesa dibujada. El endpoint de Auth confirmó `mode: local`.
